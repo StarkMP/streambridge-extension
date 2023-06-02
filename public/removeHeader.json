@@ -34,5 +34,17 @@
       ]
     },
     "condition": { "urlFilter": "kick.com", "resourceTypes": ["main_frame","sub_frame"] }
+  },
+  {
+    "id": 4,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        { "header": "x-frame-options", "operation": "remove" },
+        { "header": "content-security-policy", "operation": "remove" }
+      ]
+    },
+    "condition": { "urlFilter": "trovo.live", "resourceTypes": ["main_frame","sub_frame"] }
   }
 ]

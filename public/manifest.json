@@ -26,7 +26,8 @@
     "https://www.twitch.tv/",
     "https://kick.com/",
     "https://wasd.tv/",
-    "https://vkplay.live/"
+    "https://vkplay.live/",
+    "https://trovo.live/"
   ],
   "content_scripts": [
     {

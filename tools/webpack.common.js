@@ -8,7 +8,6 @@ const isProduction = process.env.node_env === 'production';
 module.exports = {
   entry: {
     index: path.resolve(__dirname, '../src/index.ts'),
-    background: path.resolve(__dirname, '../src/background.ts'),
   },
   output: {
     filename: '[name].js',
