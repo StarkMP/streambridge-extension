@@ -1,4 +1,4 @@
-import { Streamer } from '../types';
+import { Channel } from '../types';
 import { hostname } from '../utils/constants';
 
 const selectors = {
@@ -8,7 +8,7 @@ const selectors = {
   iframe: '#twitch-union',
 };
 
-const overrideTwitchDOM = (streamer: Streamer): void => {
+const overrideTwitchDOM = (channel: Channel): void => {
   const iframeElement = document.querySelector(selectors.iframe) as HTMLElement;
 
   if (iframeElement) {
@@ -26,7 +26,7 @@ const overrideTwitchDOM = (streamer: Streamer): void => {
       video.pause();
     }
 
-    const link = `${streamer.source.url}?twitch=${streamer.twitch}`;
+    const link = `${channel.source.url}?twitch=${channel.twitch}`;
     const iframe = document.createElement('iframe');
 
     iframe.width = '100%';
@@ -39,16 +39,16 @@ const overrideTwitchDOM = (streamer: Streamer): void => {
   }
 };
 
-export const initTwitchExtension = (db: Streamer[]): void => {
+export const initTwitchExtension = (db: Channel[]): void => {
   if (window.location.hostname !== hostname) {
     return;
   }
 
   const href = window.location.href.toLowerCase();
 
-  const streamer = db.find((item) => href.includes(`/${item.twitch}`));
+  const channel = db.find((item) => href.includes(`/${item.twitch}`));
 
-  if (!streamer) {
+  if (!channel) {
     const iframe = document.querySelector(selectors.iframe) as HTMLElement;
     const wrapper = document.querySelector(selectors.wrapper) as HTMLElement;
 
@@ -68,5 +68,5 @@ export const initTwitchExtension = (db: Streamer[]): void => {
     return;
   }
 
-  overrideTwitchDOM(streamer);
+  overrideTwitchDOM(channel);
 };

@@ -1,9 +1,14 @@
-import { StreamingService } from '../types';
+import { ChannelStatus, StreamingService } from '../types';
 import { findElement } from '../utils/dom';
 
-export default {
+const vkPlay: StreamingService = {
   id: 'vkplay',
-  render: (): void => {
+  getInfo: () => {
+    return {
+      status: ChannelStatus.Offline,
+    };
+  },
+  render: () => {
     const topMenu = document.querySelector('#topMenu') as HTMLElement;
 
     if (topMenu) {
@@ -24,4 +29,6 @@ export default {
       chat.style.top = '0';
     }
   },
-} as StreamingService;
+};
+
+export default vkPlay;

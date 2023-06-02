@@ -1,5 +1,5 @@
 import services from '../streaming-services';
-import { Streamer } from '../types';
+import { Channel } from '../types';
 
 const overrideFrameDOM = (serviceId: string): void => {
   services.forEach((item) => {
@@ -9,7 +9,7 @@ const overrideFrameDOM = (serviceId: string): void => {
   });
 };
 
-export const initServiceFrame = (db: Streamer[]): void => {
+export const initServiceFrame = (db: Channel[]): void => {
   if (!window.top) {
     return;
   }
@@ -17,11 +17,11 @@ export const initServiceFrame = (db: Streamer[]): void => {
   const params = new URLSearchParams(window.location.search);
   const twitch = params.get('twitch');
 
-  const streamer = db.find((item) => item.twitch === twitch);
+  const channel = db.find((item) => item.twitch === twitch);
 
-  if (!streamer) {
+  if (!channel) {
     return;
   }
 
-  overrideFrameDOM(streamer.source.id);
+  overrideFrameDOM(channel.source.id);
 };

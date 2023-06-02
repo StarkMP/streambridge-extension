@@ -1,12 +1,12 @@
 import { initServiceFrame } from './core/frame';
 import { initTwitchExtension } from './core/twitch';
-import streamersDb from './db/streamers.json';
+import channelsDb from './db/channels.json';
 import { isFrame } from './utils/dom';
 
 if (isFrame()) {
-  initServiceFrame(streamersDb);
+  initServiceFrame(channelsDb);
 } else {
-  initTwitchExtension(streamersDb);
+  initTwitchExtension(channelsDb);
 
   let previousUrl = '';
 
@@ -14,7 +14,7 @@ if (isFrame()) {
     if (location.href !== previousUrl) {
       previousUrl = location.href;
 
-      initTwitchExtension(streamersDb);
+      initTwitchExtension(channelsDb);
     }
   });
 
