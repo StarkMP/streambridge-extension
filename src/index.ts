@@ -7,4 +7,16 @@ if (isFrame()) {
   initServiceFrame(streamersDb);
 } else {
   initTwitchExtension(streamersDb);
+
+  let previousUrl = '';
+
+  const observer = new MutationObserver(() => {
+    if (location.href !== previousUrl) {
+      previousUrl = location.href;
+
+      initTwitchExtension(streamersDb);
+    }
+  });
+
+  observer.observe(document, { subtree: true, childList: true });
 }
