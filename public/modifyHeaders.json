@@ -46,5 +46,16 @@
       ]
     },
     "condition": { "urlFilter": "trovo.live", "resourceTypes": ["main_frame","sub_frame"] }
+  },
+  {
+    "id": 5,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        { "header": "Access-Control-Allow-Origin", "operation": "set", "value": "*" }
+      ]
+    },
+    "condition": { "urlFilter": "api.vkplay.live" }
   }
 ]

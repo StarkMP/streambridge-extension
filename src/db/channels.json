@@ -3,7 +3,16 @@
     "twitch": "sadd0ta",
     "source": {
       "id": "vkplay",
+      "channelId": "saddota",
       "url": "https://vkplay.live/saddota"
+    }
+  },
+  {
+    "twitch": "wfliq",
+    "source": {
+      "id": "vkplay",
+      "channelId": "wfliq",
+      "url": "https://vkplay.live/wfliq"
     }
   }
 ]

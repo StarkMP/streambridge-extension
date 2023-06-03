@@ -17,6 +17,10 @@ export const initPlatformFrame = (db: Channel[]): void => {
   const params = new URLSearchParams(window.location.search);
   const twitch = params.get('twitch');
 
+  if (!twitch) {
+    return;
+  }
+
   const channel = db.find((item) => item.twitch === twitch);
 
   if (!channel) {

@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Twitch Union",
+  "name": "Stream Bridge",
   "description": "Watch your favorite streamers from another streaming services on Twitch",
   "version": "0.1",
   "icons": {
@@ -17,9 +17,9 @@
   ],
   "declarative_net_request" : {
     "rule_resources" : [{
-      "id": "removeHeader",
+      "id": "modifyHeaders",
       "enabled": true,
-      "path": "removeHeader.json"
+      "path": "modifyHeaders.json"
     }]
   },
   "host_permissions": [
@@ -27,7 +27,8 @@
     "https://kick.com/",
     "https://wasd.tv/",
     "https://vkplay.live/",
-    "https://trovo.live/"
+    "https://trovo.live/",
+    "https://api.vkplay.live/"
   ],
   "content_scripts": [
     {

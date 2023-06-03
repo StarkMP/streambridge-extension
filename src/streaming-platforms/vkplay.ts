@@ -1,10 +1,10 @@
-import { StreamingPlatform } from '../types';
+import { Channel, StreamingPlatform } from '../types';
 import { findElement } from '../utils/dom';
 
 const vkPlay: StreamingPlatform = {
   id: 'vkplay',
-  getInfo: async (channelId: string) => {
-    const apiUrl = `https://api.vkplay.live/v1/blog/${channelId}/public_video_stream`;
+  getInfo: async (channel: Channel) => {
+    const apiUrl = `https://api.vkplay.live/v1/blog/${channel.source.channelId}/public_video_stream`;
 
     try {
       const response = await fetch(apiUrl, {
@@ -12,12 +12,16 @@ const vkPlay: StreamingPlatform = {
         cache: 'no-store',
       });
 
-      const json = response.json();
-
-      console.log(json);
+      const data = await response.json();
 
       return {
-        isOnline: false,
+        twitch: channel.twitch,
+        isOnline: data.isOnline,
+        category: data.category.title,
+        viewers: data.count.viewers,
+        title: data.title,
+        nickname: data.user.displayName,
+        avatar: data.user.avatarUrl,
       };
     } catch (e) {
       return null;
@@ -42,6 +46,19 @@ const vkPlay: StreamingPlatform = {
 
     if (chat) {
       chat.style.top = '0';
+    }
+
+    const player = document.querySelector('vk-video-player');
+
+    if (player) {
+      // @ts-ignore
+      const video = player.shadowRoot.firstChild.querySelector(
+        'video'
+      ) as HTMLVideoElement;
+
+      video.onloadeddata = (): void => {
+        video.muted = false;
+      };
     }
   },
 };
