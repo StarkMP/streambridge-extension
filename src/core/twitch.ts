@@ -52,7 +52,7 @@ const renderChannel = (db: Channel[]): void => {
 
     iframe.width = '100%';
     iframe.height = '100%';
-    iframe.allow = 'autoplay';
+    iframe.allow = 'autoplay; fullscreen';
     iframe.style.position = 'absolute';
     iframe.id = 'stream-bridge';
     iframe.setAttribute('src', link);

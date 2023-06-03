@@ -1,9 +1,9 @@
-import { Channel, StreamingPlatform } from '../types';
+import { StreamingPlatform } from '../types';
 import { findElement } from '../utils/dom';
 
 const vkPlay: StreamingPlatform = {
   id: 'vkplay',
-  getInfo: async (channel: Channel) => {
+  getInfo: async (channel) => {
     const apiUrl = `https://api.vkplay.live/v1/blog/${channel.source.channelId}/public_video_stream`;
 
     try {
