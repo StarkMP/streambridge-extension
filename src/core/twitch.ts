@@ -61,7 +61,7 @@ const renderChannel = (db: Channel[]): void => {
   }
 };
 
-const renderSidebar = async (db: Channel[]): Promise<void> => {
+export const renderSidebar = async (db: Channel[]): Promise<void> => {
   const channelsInfo: ChannelInfo[] = [];
 
   for await (const channel of db) {
@@ -104,9 +104,4 @@ export const initTwitchExtension = (db: Channel[]): void => {
   }
 
   renderChannel(db);
-  renderSidebar(db).catch(() => {});
-
-  setInterval(() => {
-    renderSidebar(db).catch(() => {});
-  }, 60000);
 };

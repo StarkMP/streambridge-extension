@@ -1,5 +1,5 @@
 import { initPlatformFrame } from './core/frame';
-import { initTwitchExtension } from './core/twitch';
+import { initTwitchExtension, renderSidebar } from './core/twitch';
 import channelsDb from './db/channels.json';
 import { hostname } from './utils/constants';
 import { isFrame } from './utils/dom';
@@ -9,6 +9,12 @@ if (isFrame()) {
 } else {
   if (window.location.hostname === hostname) {
     initTwitchExtension(channelsDb);
+
+    renderSidebar(channelsDb).catch(() => {});
+
+    setInterval(() => {
+      renderSidebar(channelsDb).catch(() => {});
+    }, 60000);
 
     // SPA handling
     let previousUrl = '';
