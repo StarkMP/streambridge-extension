@@ -1,10 +1,10 @@
-import { initServiceFrame } from './core/frame';
+import { initPlatformFrame } from './core/frame';
 import { initTwitchExtension } from './core/twitch';
 import channelsDb from './db/channels.json';
 import { isFrame } from './utils/dom';
 
 if (isFrame()) {
-  initServiceFrame(channelsDb);
+  initPlatformFrame(channelsDb);
 } else {
   initTwitchExtension(channelsDb);
 

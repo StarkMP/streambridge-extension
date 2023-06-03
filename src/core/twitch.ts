@@ -1,5 +1,6 @@
 import { Channel } from '../types';
 import { hostname } from '../utils/constants';
+import { getPlatform } from '../utils/getPlatform';
 
 const selectors = {
   root: '.root-scrollable__content',
@@ -66,6 +67,13 @@ export const initTwitchExtension = (db: Channel[]): void => {
     }
 
     return;
+  }
+
+  const platform = getPlatform(channel.twitch);
+
+  if (platform) {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    platform.getInfo(channel.twitch);
   }
 
   overrideTwitchDOM(channel);

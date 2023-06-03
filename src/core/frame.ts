@@ -1,15 +1,15 @@
-import services from '../streaming-services';
+import platforms from '../streaming-platforms';
 import { Channel } from '../types';
 
-const overrideFrameDOM = (serviceId: string): void => {
-  services.forEach((item) => {
-    if (item.id === serviceId) {
+const overrideFrameDOM = (platformId: string): void => {
+  platforms.forEach((item) => {
+    if (item.id === platformId) {
       item.render();
     }
   });
 };
 
-export const initServiceFrame = (db: Channel[]): void => {
+export const initPlatformFrame = (db: Channel[]): void => {
   if (!window.top) {
     return;
   }

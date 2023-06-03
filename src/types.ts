@@ -1,7 +1,7 @@
-export type StreamingService = {
+export type StreamingPlatform = {
   id: string;
   render: () => void;
-  getInfo: () => ChannelInfo;
+  getInfo: (channelId: string) => Promise<ChannelInfo | null>;
 };
 
 export type Channel = {
@@ -12,11 +12,6 @@ export type Channel = {
   };
 };
 
-export enum ChannelStatus {
-  Offline = 0,
-  Online,
-}
-
 export type ChannelInfo = {
-  status: ChannelStatus;
+  isOnline: boolean;
 };
