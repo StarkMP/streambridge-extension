@@ -1,6 +1,5 @@
 import Sidebar from '../components/Sidebar';
 import { Channel, ChannelInfo } from '../types';
-import { hostname } from '../utils/constants';
 import { getPlatform } from '../utils/db';
 
 const selectors = {
@@ -47,7 +46,7 @@ const renderChannel = (db: Channel[]): void => {
       video.pause();
     }
 
-    const link = `${channel.source.url}?twitch=${channel.twitch}`;
+    const link = channel.source.url;
     const iframe = document.createElement('iframe');
 
     iframe.width = '100%';
@@ -99,9 +98,25 @@ export const renderSidebar = async (db: Channel[]): Promise<void> => {
 };
 
 export const initTwitchExtension = (db: Channel[]): void => {
-  if (window.location.hostname !== hostname) {
-    return;
-  }
+  // SPA handling
+  let previousUrl = '';
 
+  const observer = new MutationObserver(() => {
+    if (location.href !== previousUrl) {
+      previousUrl = location.href;
+
+      renderChannel(db);
+    }
+  });
+
+  observer.observe(document, { subtree: true, childList: true });
+
+  // render DOM
   renderChannel(db);
+  renderSidebar(db).catch(() => {});
+
+  // update DOM
+  setInterval(() => {
+    renderSidebar(db).catch(() => {});
+  }, 60000);
 };

@@ -1,7 +1,7 @@
 import platforms from '../streaming-platforms';
 import { Channel } from '../types';
 
-const overrideFrameDOM = (platformId: string): void => {
+const renderFrame = (platformId: string): void => {
   platforms.forEach((item) => {
     if (item.id === platformId) {
       item.render();
@@ -10,22 +10,27 @@ const overrideFrameDOM = (platformId: string): void => {
 };
 
 export const initPlatformFrame = (db: Channel[]): void => {
-  if (!window.top) {
-    return;
-  }
-
-  const params = new URLSearchParams(window.location.search);
-  const twitch = params.get('twitch');
-
-  if (!twitch) {
-    return;
-  }
-
-  const channel = db.find((item) => item.twitch === twitch);
+  const channel = db.find((item) =>
+    window.location.hostname.includes(item.source.id)
+  );
 
   if (!channel) {
     return;
   }
 
-  overrideFrameDOM(channel.source.id);
+  // SPA handling
+  let previousUrl = '';
+
+  const observer = new MutationObserver(() => {
+    if (location.href !== previousUrl) {
+      previousUrl = location.href;
+
+      renderFrame(channel.source.id);
+    }
+  });
+
+  observer.observe(document, { subtree: true, childList: true });
+
+  // render DOM
+  renderFrame(channel.source.id);
 };

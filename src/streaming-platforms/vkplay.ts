@@ -2,7 +2,7 @@ import { StreamingPlatform } from '../types';
 import { findElement } from '../utils/dom';
 
 const vkPlay: StreamingPlatform = {
-  id: 'vkplay',
+  id: 'vkplay.live',
   getInfo: async (channel) => {
     const apiUrl = `https://api.vkplay.live/v1/blog/${channel.source.channelId}/public_video_stream`;
 
@@ -43,6 +43,8 @@ const vkPlay: StreamingPlatform = {
     }
 
     const chat = findElement('div', 'StreamChatToggler_root');
+
+    console.log('chat', chat);
 
     if (chat) {
       chat.style.top = '0';

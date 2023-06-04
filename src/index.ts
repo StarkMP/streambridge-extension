@@ -1,32 +1,21 @@
 import { initPlatformFrame } from './core/frame';
-import { initTwitchExtension, renderSidebar } from './core/twitch';
+import { initTwitchExtension } from './core/twitch';
 import channelsDb from './db/channels.json';
 import { hostname } from './utils/constants';
-import { isFrame } from './utils/dom';
+import { isTwitchChildFrame } from './utils/frame';
 
-if (isFrame()) {
-  initPlatformFrame(channelsDb);
-} else {
+const init = (): void => {
   if (window.location.hostname === hostname) {
     initTwitchExtension(channelsDb);
 
-    renderSidebar(channelsDb).catch(() => {});
-
-    setInterval(() => {
-      renderSidebar(channelsDb).catch(() => {});
-    }, 60000);
-
-    // SPA handling
-    let previousUrl = '';
-
-    const observer = new MutationObserver(() => {
-      if (location.href !== previousUrl) {
-        previousUrl = location.href;
-
-        initTwitchExtension(channelsDb);
-      }
-    });
-
-    observer.observe(document, { subtree: true, childList: true });
+    return;
   }
-}
+
+  if (!isTwitchChildFrame()) {
+    return;
+  }
+
+  initPlatformFrame(channelsDb);
+};
+
+init();

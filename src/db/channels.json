@@ -2,7 +2,7 @@
   {
     "twitch": "sadd0ta",
     "source": {
-      "id": "vkplay",
+      "id": "vkplay.live",
       "channelId": "saddota",
       "url": "https://vkplay.live/saddota"
     }
@@ -10,7 +10,7 @@
   {
     "twitch": "wfliq",
     "source": {
-      "id": "vkplay",
+      "id": "vkplay.live",
       "channelId": "wfliq",
       "url": "https://vkplay.live/wfliq"
     }
