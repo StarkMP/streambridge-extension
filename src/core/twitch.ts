@@ -1,6 +1,7 @@
 import Sidebar from '../components/Sidebar';
 import { Channel, ChannelInfo } from '../types';
 import { getPlatform } from '../utils/db';
+import { onElementLoaded } from '../utils/dom';
 
 const selectors = {
   root: '.root-scrollable__content',
@@ -75,26 +76,15 @@ export const renderSidebar = async (db: Channel[]): Promise<void> => {
     }
   }
 
-  const intervalCb = (): void => {
-    const twitchChannels = document.querySelector(
-      '.side-nav-section:nth-of-type(2)'
-    );
+  const sidebar = document.querySelector('#stream-bridge-sidebar');
 
-    if (!twitchChannels) {
-      return;
-    }
+  if (sidebar) {
+    sidebar.remove();
+  }
 
-    const sidebar = document.querySelector('#stream-bridge-sidebar');
-
-    if (sidebar) {
-      sidebar.remove();
-    }
-
-    twitchChannels.insertAdjacentHTML('afterend', Sidebar(channelsInfo));
-    clearInterval(interval);
-  };
-
-  const interval = setInterval(intervalCb, 250);
+  onElementLoaded('.side-nav-section:nth-of-type(2)', (el) => {
+    el.insertAdjacentHTML('afterend', Sidebar(channelsInfo));
+  });
 };
 
 export const initTwitchExtension = (db: Channel[]): void => {

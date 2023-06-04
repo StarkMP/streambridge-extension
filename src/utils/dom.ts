@@ -18,4 +18,53 @@ export const findElement = (
   return null; // If no element is found
 };
 
-export const isFrame = (): boolean => window !== window.top;
+export const onElementLoaded = (
+  selector: string,
+  callback: (el: HTMLElement) => void
+): void => {
+  const existsElement = document.querySelector(selector) as HTMLElement;
+
+  if (existsElement) {
+    callback(existsElement);
+
+    return;
+  }
+
+  const observer = new MutationObserver((mutations) => {
+    let found = false;
+
+    for (const mutation of mutations) {
+      if (!mutation.addedNodes) {
+        return;
+      }
+
+      for (let i = 0; i < mutation.addedNodes.length; i++) {
+        const node = mutation.addedNodes[i];
+
+        if (node.nodeType !== Node.ELEMENT_NODE) {
+          continue;
+        }
+
+        const element = (node as HTMLElement).matches(selector)
+          ? (node as HTMLElement)
+          : ((node as HTMLElement).querySelector(selector) as HTMLElement);
+
+        if (element) {
+          callback(element);
+          observer.disconnect();
+          found = true;
+          break;
+        }
+      }
+
+      if (found) {
+        break;
+      }
+    }
+  });
+
+  observer.observe(document.documentElement, {
+    childList: true,
+    subtree: true,
+  });
+};

@@ -1,5 +1,5 @@
 import { StreamingPlatform } from '../types';
-import { findElement } from '../utils/dom';
+import { onElementLoaded } from '../utils/dom';
 
 const vkPlay: StreamingPlatform = {
   id: 'vkplay.live',
@@ -42,13 +42,9 @@ const vkPlay: StreamingPlatform = {
       sidebar.style.display = 'none';
     }
 
-    const chat = findElement('div', 'StreamChatToggler_root');
-
-    console.log('chat', chat);
-
-    if (chat) {
-      chat.style.top = '0';
-    }
+    onElementLoaded('[data-test-id="StreamPage:root"] > div + div', (el) => {
+      el.style.top = '0';
+    });
 
     const player = document.querySelector('vk-video-player');
 
