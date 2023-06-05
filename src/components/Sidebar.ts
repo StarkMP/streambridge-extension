@@ -10,7 +10,15 @@ const Sidebar = (channels: ChannelInfo[]): string => {
       <div class="InjectLayout-sc-1i43xsx-0 eptOJT tw-transition-group">
         ${
           channels.length > 0
-            ? channels.map((item) => SidebarItem(item)).join('')
+            ? channels
+                .sort(
+                  (a, b) =>
+                    Number(b.isOnline) +
+                    Number(b.viewers) -
+                    (Number(a.isOnline) + Number(a.viewers))
+                )
+                .map((item) => SidebarItem(item))
+                .join('')
             : 'No channels'
         }
       </div>

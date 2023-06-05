@@ -5,6 +5,7 @@ import { onElementLoaded } from '../utils/dom';
 
 const selectors = {
   root: '.root-scrollable__content',
+  homeRoot: '.home__scrollable-content',
   wrapper: '.root-scrollable__wrapper',
   video: '.persistent-player video',
   iframe: '#stream-bridge',
@@ -37,11 +38,21 @@ const renderChannel = (db: Channel[]): void => {
     iframe.remove();
   }
 
-  const root = document.querySelector(selectors.root) as HTMLElement;
+  const root = (document.querySelector(selectors.root) ||
+    document.querySelector(selectors.homeRoot)) as HTMLElement;
   const video = document.querySelector(selectors.video) as HTMLVideoElement;
 
   if (root && wrapper) {
     wrapper.style.display = 'none';
+    root.style.overflow = 'hidden';
+
+    const sidebars = document.querySelectorAll('.simplebar-track');
+
+    if (sidebars.length > 0) {
+      sidebars.forEach((el) => {
+        (el as HTMLElement).style.display = 'none';
+      });
+    }
 
     if (video) {
       video.pause();

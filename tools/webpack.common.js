@@ -8,6 +8,7 @@ const isProduction = process.env.node_env === 'production';
 module.exports = {
   entry: {
     index: path.resolve(__dirname, '../src/index.ts'),
+    'service-worker': path.resolve(__dirname, '../src/service-worker.ts'),
   },
   output: {
     filename: '[name].js',

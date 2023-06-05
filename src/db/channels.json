@@ -14,5 +14,21 @@
       "channelId": "wfliq",
       "url": "https://vkplay.live/wfliq"
     }
+  },
+  {
+    "twitch": "evelone192",
+    "source": {
+      "id": "kick.com",
+      "channelId": "evelone",
+      "url": "https://kick.com/evelone"
+    }
+  },
+  {
+    "twitch": "jenna",
+    "source": {
+      "id": "kick.com",
+      "channelId": "jenna",
+      "url": "https://kick.com/jenna"
+    }
   }
 ]
