@@ -29,11 +29,12 @@
     "https://wasd.tv/",
     "https://vkplay.live/",
     "https://trovo.live/",
-    "https://api.vkplay.live/"
+    "https://api.vkplay.live/",
+    "https://api-web.trovo.live/"
   ],
   "content_scripts": [
     {
-      "matches": ["https://www.twitch.tv/*", "https://vkplay.live/*", "https://kick.com/*"],
+      "matches": ["https://www.twitch.tv/*", "https://vkplay.live/*", "https://kick.com/*", "https://trovo.live/*"],
       "all_frames": true,
       "js": ["index.js"]
     }

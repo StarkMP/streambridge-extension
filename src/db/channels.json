@@ -30,5 +30,13 @@
       "channelId": "jenna",
       "url": "https://kick.com/jenna"
     }
+  },
+  {
+    "twitch": "saneking",
+    "source": {
+      "id": "trovo.live",
+      "channelId": "saneking",
+      "url": "https://trovo.live/s/saneking"
+    }
   }
 ]
