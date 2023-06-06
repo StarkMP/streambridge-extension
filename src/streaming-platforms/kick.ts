@@ -27,7 +27,7 @@ const kick: StreamingPlatform = {
       return null;
     }
   },
-  render: () => {
+  render: (channel) => {
     onElementLoaded('nav', (el) => {
       el.style.display = 'none';
     });
@@ -41,7 +41,7 @@ const kick: StreamingPlatform = {
 
       el.addEventListener('click', () => {
         window.open(
-          'https://kick.com/loochy/chatroom',
+          `https://kick.com/${channel.source.channelId}/chatroom`,
           'mywindow',
           `width=340,height=${window.innerHeight},top=0,left=${
             window.innerWidth - 340

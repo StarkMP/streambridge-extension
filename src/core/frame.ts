@@ -1,17 +1,19 @@
 import platforms from '../streaming-platforms';
 import { Channel } from '../types';
 
-const renderFrame = (platformId: string): void => {
+const renderFrame = (channel: Channel, platformId: string): void => {
   platforms.forEach((item) => {
     if (item.id === platformId) {
-      item.render();
+      item.render(channel);
     }
   });
 };
 
 export const initPlatformFrame = (db: Channel[]): void => {
-  const channel = db.find((item) =>
-    window.location.hostname.includes(item.source.id)
+  const channel = db.find(
+    (item) =>
+      window.location.hostname.includes(item.source.id) &&
+      window.location.href.includes(item.source.channelId)
   );
 
   if (!channel) {
@@ -25,12 +27,12 @@ export const initPlatformFrame = (db: Channel[]): void => {
     if (location.href !== previousUrl) {
       previousUrl = location.href;
 
-      renderFrame(channel.source.id);
+      renderFrame(channel, channel.source.id);
     }
   });
 
   observer.observe(document, { subtree: true, childList: true });
 
   // render DOM
-  renderFrame(channel.source.id);
+  renderFrame(channel, channel.source.id);
 };
