@@ -1,6 +1,6 @@
 {
   "name": "twitch-chrome-extension",
-  "version": "0.1.0",
+  "version": "0.4.10",
   "scripts": {
     "build": "webpack --mode production --node-env production --config tools/webpack.common.js",
     "typecheck": "tsc",
