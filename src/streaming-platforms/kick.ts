@@ -35,6 +35,28 @@ const kick: StreamingPlatform = {
     onElementLoaded('nav + div > div', (el) => {
       el.style.display = 'none';
     });
+
+    onElementLoaded('.send-row > button', (el) => {
+      (el as HTMLButtonElement).disabled = false;
+
+      el.addEventListener('click', () => {
+        window.open(
+          'https://kick.com/loochy/chatroom',
+          'mywindow',
+          `width=340,height=${window.innerHeight},top=0,left=${
+            window.innerWidth - 340
+          }`
+        );
+      });
+    });
+
+    onElementLoaded('.send-row > button .inner-label', (el) => {
+      el.innerHTML = 'Open in new window';
+    });
+
+    onElementLoaded('#message-input', (el) => {
+      el.setAttribute('data-placeholder', 'Usable only in new window');
+    });
   },
 };
 
