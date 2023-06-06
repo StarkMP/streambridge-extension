@@ -2,7 +2,7 @@ import { initPlatformFrame } from './core/frame';
 import { initTwitchExtension } from './core/twitch';
 import channelsDb from './db/channels.json';
 import { hostname } from './utils/constants';
-import { isTwitchChildFrame } from './utils/frame';
+import { isFrame } from './utils/frame';
 
 const init = (): void => {
   if (window.location.hostname === hostname) {
@@ -11,7 +11,7 @@ const init = (): void => {
     return;
   }
 
-  if (!isTwitchChildFrame()) {
+  if (!isFrame()) {
     return;
   }
 
