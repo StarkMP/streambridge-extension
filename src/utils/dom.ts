@@ -20,7 +20,8 @@ export const findElement = (
 
 export const onElementLoaded = (
   selector: string,
-  callback: (el: HTMLElement) => void
+  callback: (el: HTMLElement) => void,
+  keepObserver?: boolean
 ): void => {
   const existsElement = document.querySelector(selector) as HTMLElement;
 
@@ -51,7 +52,11 @@ export const onElementLoaded = (
 
         if (element) {
           callback(element);
-          observer.disconnect();
+
+          if (!keepObserver) {
+            observer.disconnect();
+          }
+
           found = true;
           break;
         }

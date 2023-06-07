@@ -8,19 +8,19 @@
     }
   },
   {
-    "twitch": "wfliq",
+    "twitch": "serality",
     "source": {
-      "id": "vkplay.live",
-      "channelId": "wfliq",
-      "url": "https://vkplay.live/wfliq"
+      "id": "kick.com",
+      "channelId": "serality",
+      "url": "https://kick.com/serality"
     }
   },
   {
-    "twitch": "evelone192",
+    "twitch": "lilphillboy",
     "source": {
-      "id": "kick.com",
-      "channelId": "evelone",
-      "url": "https://kick.com/evelone"
+      "id": "vkplay.live",
+      "channelId": "lilphillboy",
+      "url": "https://vkplay.live/lilphillboy"
     }
   },
   {
