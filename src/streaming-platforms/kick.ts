@@ -18,7 +18,7 @@ const kick: StreamingPlatform = {
         twitch: channel.twitch,
         isOnline: !!data.livestream,
         category: data.livestream ? data.livestream.categories[0].name : null,
-        viewers: data.livestream ? data.livestream.viewer_count : null,
+        viewers: data.livestream ? data.livestream.viewer_count : 0,
         title: data.livestream ? data.livestream.session_title : null,
         nickname: data.user.username,
         avatar: data.user.profile_pic,
