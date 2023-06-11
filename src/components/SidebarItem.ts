@@ -1,7 +1,9 @@
 import { ChannelInfo } from '../types';
+import { formatNumber } from '../utils/format';
 
 const SidebarItem = (channel: ChannelInfo): string => {
   const isOnline = channel.isOnline;
+  const viewers = formatNumber(channel.viewers || 0);
 
   return `
     <div class="ScTransitionBase-sc-hx4quq-0 bIklSd tw-transition" aria-hidden="false" style="transition-property: transform, opacity; transition-timing-function: ease;">
@@ -64,8 +66,8 @@ const SidebarItem = (channel: ChannelInfo): string => {
                 <div class="ScChannelStatusIndicator-sc-bjn067-0 dMXHmM tw-channel-status-indicator"></div>
                 <p class="CoreText-sc-1txzju1-0 InjectLayout-sc-1i43xsx-0 cixGyF">Live</p>
                 <div class="Layout-sc-1xcs6mc-0 kaXoQh">
-                  <span aria-hidden="true" class="CoreText-sc-1txzju1-0 grGUPN">${channel.viewers}</span>
-                  <p class="CoreText-sc-1txzju1-0 InjectLayout-sc-1i43xsx-0 cixGyF">${channel.viewers}</p>
+                  <span aria-hidden="true" class="CoreText-sc-1txzju1-0 grGUPN">${viewers}</span>
+                  <p class="CoreText-sc-1txzju1-0 InjectLayout-sc-1i43xsx-0 cixGyF">${viewers}</p>
                 </div>
               </div>
             </div>

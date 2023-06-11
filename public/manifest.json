@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Stream Bridge",
   "description": "Watch your favorite streamers from another streaming services on Twitch",
-  "version": "0.4.15",
+  "version": "0.4.16",
   "icons": {
     "16": "images/icon16.png",
     "32": "images/icon32.png",
