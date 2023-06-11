@@ -1,3 +1,5 @@
+import './styles/twitch.scss';
+
 import { initPlatformFrame } from './core/frame';
 import { initTwitchExtension } from './core/twitch';
 import channelsDb from './db/channels.json';

@@ -93,8 +93,34 @@ export const renderSidebar = async (db: Channel[]): Promise<void> => {
     sidebar.remove();
   }
 
-  onElementLoaded('.side-nav-section:nth-of-type(2)', (el) => {
-    el.insertAdjacentHTML('afterend', Sidebar(channelsInfo));
+  onElementLoaded('#side-nav > div > div > div', (el) => {
+    const sidebar = Sidebar(channelsInfo);
+
+    if (el.classList.contains('side-nav__title')) {
+      (el.nextElementSibling as HTMLElement).insertAdjacentHTML(
+        'afterend',
+        sidebar
+      );
+
+      return;
+    }
+
+    const child = el.firstElementChild as HTMLElement;
+
+    if (
+      (child.firstElementChild as HTMLElement).classList.contains(
+        'followed-side-nav-header'
+      )
+    ) {
+      (child.parentElement as HTMLElement).insertAdjacentHTML(
+        'afterend',
+        sidebar
+      );
+
+      return;
+    }
+
+    child.insertAdjacentHTML('afterend', sidebar);
   });
 };
 
