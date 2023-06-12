@@ -22,7 +22,7 @@ export const onElementLoaded = (
   selector: string,
   callback: (el: HTMLElement) => void,
   keepObserver?: boolean
-): void => {
+): MutationObserver | void => {
   const existsElement = document.querySelector(selector) as HTMLElement;
 
   if (existsElement) {
@@ -72,4 +72,6 @@ export const onElementLoaded = (
     childList: true,
     subtree: true,
   });
+
+  return observer;
 };

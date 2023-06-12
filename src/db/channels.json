@@ -8,11 +8,11 @@
     }
   },
   {
-    "twitch": "serality",
+    "twitch": "neonjade-kick",
     "source": {
       "id": "kick.com",
-      "channelId": "serality",
-      "url": "https://kick.com/serality"
+      "channelId": "neonjade",
+      "url": "https://kick.com/neonjade"
     }
   },
   {
@@ -24,7 +24,7 @@
     }
   },
   {
-    "twitch": "ak47whiskeyshott",
+    "twitch": "ak47whiskeyshott-kick",
     "source": {
       "id": "kick.com",
       "channelId": "ak47whiskeyshott",
@@ -32,7 +32,7 @@
     }
   },
   {
-    "twitch": "saneking",
+    "twitch": "saneking-trovo",
     "source": {
       "id": "trovo.live",
       "channelId": "saneking",

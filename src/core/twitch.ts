@@ -9,7 +9,10 @@ const selectors = {
   wrapper: '.root-scrollable__wrapper',
   video: '.persistent-player video',
   iframe: '#stream-bridge',
+  errorWrapper: '.core-error',
 };
+
+let channelStatusObserver: MutationObserver | void;
 
 const renderChannel = (db: Channel[]): void => {
   const href = window.location.href.toLowerCase();
@@ -38,38 +41,44 @@ const renderChannel = (db: Channel[]): void => {
     iframe.remove();
   }
 
-  const root = (document.querySelector(selectors.root) ||
-    document.querySelector(selectors.homeRoot)) as HTMLElement;
-  const video = document.querySelector(selectors.video) as HTMLVideoElement;
-
-  if (root && wrapper) {
-    wrapper.style.display = 'none';
-    root.style.overflow = 'hidden';
-
-    const sidebars = document.querySelectorAll('.simplebar-track');
-
-    if (sidebars.length > 0) {
-      sidebars.forEach((el) => {
-        (el as HTMLElement).style.display = 'none';
-      });
-    }
-
-    if (video) {
-      video.pause();
-    }
-
-    const link = channel.source.url;
-    const iframe = document.createElement('iframe');
-
-    iframe.width = '100%';
-    iframe.height = '100%';
-    iframe.allow = 'autoplay; fullscreen';
-    iframe.style.position = 'absolute';
-    iframe.id = 'stream-bridge';
-    iframe.setAttribute('src', link);
-
-    root.appendChild(iframe);
+  if (channelStatusObserver) {
+    channelStatusObserver.disconnect();
   }
+
+  channelStatusObserver = onElementLoaded(selectors.errorWrapper, () => {
+    const root = document.querySelector(selectors.root) as HTMLElement;
+    const video = document.querySelector(selectors.video) as HTMLVideoElement;
+
+    if (root && wrapper) {
+      wrapper.style.display = 'none';
+      root.style.overflow = 'hidden';
+
+      const sidebars = document.querySelectorAll('.simplebar-track');
+
+      if (sidebars.length > 0) {
+        sidebars.forEach((el) => {
+          (el as HTMLElement).style.display = 'none';
+        });
+      }
+
+      if (video) {
+        video.pause();
+      }
+
+      const link = channel.source.url;
+      const iframe = document.createElement('iframe');
+
+      iframe.width = '100%';
+      iframe.height = '100%';
+      iframe.allow = 'autoplay; fullscreen';
+      iframe.style.position = 'absolute';
+      iframe.id = 'stream-bridge';
+      iframe.setAttribute('src', link);
+
+      root.appendChild(iframe);
+      channelStatusObserver = void 0;
+    }
+  });
 };
 
 export const renderSidebar = async (db: Channel[]): Promise<void> => {
