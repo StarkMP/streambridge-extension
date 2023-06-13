@@ -110,7 +110,11 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
     >
       <ScrollableWrapper>
         {channels
-          .filter((item) => item.twitch.includes(search))
+          .filter(
+            (item) =>
+              item.twitch.includes(search) ||
+              item.source.channelId.includes(search)
+          )
           .map((item, index) => (
             <List.Item
               key={index}
