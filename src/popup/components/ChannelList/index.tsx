@@ -1,5 +1,5 @@
 import { Input, List as ListComponent, Switch } from 'antd';
-import React, { JSX } from 'react';
+import React, { JSX, useState } from 'react';
 import styled from 'styled-components';
 
 import { Channel, PlatformId } from '../../../types';
@@ -83,35 +83,55 @@ const platformsIcons: Record<string, React.ReactNode> = {
   [PlatformId.Trovo]: <TrovoIcon />,
 };
 
-const ChannelList = ({ channels }: ChannelListProps): JSX.Element => (
-  <List
-    header={
-      <ListHeader>
-        <Search placeholder='Search by nickname...' allowClear />
-        <ListHeaderColumns>
-          <b>Channel</b>
-          <b>Followed</b>
-        </ListHeaderColumns>
-      </ListHeader>
-    }
-    itemLayout='horizontal'
-  >
-    <ScrollableWrapper>
-      {channels.map((item, index) => (
-        <List.Item key={index} actions={[<Switch key={index} size='small' />]}>
-          <ListItemWrapper>
-            {platformsIcons[item.source.id] || null}
-            <ListItemText>
-              <ListItemTwitch>{item.twitch}</ListItemTwitch>
-              <ListItemSourceUrl target='_blank' href={item.source.url}>
-                {item.source.url.replace('https://', '').replace('www.', '')}
-              </ListItemSourceUrl>
-            </ListItemText>
-          </ListItemWrapper>
-        </List.Item>
-      ))}
-    </ScrollableWrapper>
-  </List>
-);
+const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
+  const [search, setSearch] = useState<string>('');
+
+  const onSearch: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+    setSearch(e.currentTarget.value);
+  };
+
+  return (
+    <List
+      header={
+        <ListHeader>
+          <Search
+            value={search}
+            onChange={onSearch}
+            placeholder='Search by nickname...'
+            allowClear
+          />
+          <ListHeaderColumns>
+            <b>Channel</b>
+            <b>Followed</b>
+          </ListHeaderColumns>
+        </ListHeader>
+      }
+      itemLayout='horizontal'
+    >
+      <ScrollableWrapper>
+        {channels
+          .filter((item) => item.twitch.includes(search))
+          .map((item, index) => (
+            <List.Item
+              key={index}
+              actions={[<Switch key={index} size='small' />]}
+            >
+              <ListItemWrapper>
+                {platformsIcons[item.source.id] || null}
+                <ListItemText>
+                  <ListItemTwitch>{item.twitch}</ListItemTwitch>
+                  <ListItemSourceUrl target='_blank' href={item.source.url}>
+                    {item.source.url
+                      .replace('https://', '')
+                      .replace('www.', '')}
+                  </ListItemSourceUrl>
+                </ListItemText>
+              </ListItemWrapper>
+            </List.Item>
+          ))}
+      </ScrollableWrapper>
+    </List>
+  );
+};
 
 export default ChannelList;
