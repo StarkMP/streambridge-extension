@@ -38,5 +38,13 @@
       "channelId": "saneking",
       "url": "https://trovo.live/s/saneking"
     }
+  },
+  {
+    "twitch": "arthas",
+    "source": {
+      "id": "trovo.live",
+      "channelId": "arthas",
+      "url": "https://trovo.live/s/arthas"
+    }
   }
 ]

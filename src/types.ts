@@ -22,3 +22,15 @@ export type ChannelInfo = {
   nickname: string;
   avatar?: string;
 };
+
+export type UserStorage = {
+  following: string[];
+};
+
+export enum PlatformId {
+  Kick = 'kick.com',
+  Trovo = 'trovo.live',
+  VKPlayLive = 'vkplay.live',
+  WASD = 'wasd.tv',
+  YouTube = 'youtube.com',
+}

@@ -1,8 +1,8 @@
-import { StreamingPlatform } from '../types';
+import { PlatformId, StreamingPlatform } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
 const trovo: StreamingPlatform = {
-  id: 'trovo.live',
+  id: PlatformId.Trovo,
   getInfo: async (channel) => {
     const apiUrl = 'https://api-web.trovo.live/graphql?qid=0';
 

@@ -15,12 +15,26 @@ module.exports = {
         useBuiltIns: 'usage',
       },
     ],
+    [
+      'babel-plugin-styled-components',
+      {
+        ssr: false,
+        displayName: process.env.NODE_ENV === 'development',
+      },
+    ],
   ],
   presets: [
     [
       '@babel/preset-typescript',
       {
+        isTSX: true,
         allExtensions: true,
+      },
+    ],
+    [
+      '@babel/preset-react',
+      {
+        useBuiltIns: 'usage',
       },
     ],
     ['@babel/preset-env'],

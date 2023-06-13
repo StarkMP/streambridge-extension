@@ -1,8 +1,8 @@
-import { StreamingPlatform } from '../types';
+import { PlatformId, StreamingPlatform } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
 const kick: StreamingPlatform = {
-  id: 'kick.com',
+  id: PlatformId.Kick,
   getInfo: async (channel) => {
     const apiUrl = `https://kick.com/api/v2/channels/${channel.source.channelId}`;
 

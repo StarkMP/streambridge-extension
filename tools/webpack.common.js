@@ -1,15 +1,15 @@
-// const HTMLWebpackPlugin = require('html-webpack-plugin');
 const MiniCSSExtactPlugin = require('mini-css-extract-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const HTMLWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 
 const isProduction = process.env.node_env === 'production';
 
-module.exports = {
+const config = {
   entry: {
     index: path.resolve(__dirname, '../src/index.ts'),
-    // 'service-worker': path.resolve(__dirname, '../src/service-worker.ts'),
+    popup: path.resolve(__dirname, '../src/popup/index.tsx'),
   },
   output: {
     filename: '[name].js',
@@ -18,10 +18,6 @@ module.exports = {
     publicPath: '/',
   },
   plugins: [
-    // new HTMLWebpackPlugin({
-    //   template: path.resolve(__dirname, '../public/index.html'),
-    //   // favicon: path.resolve(__dirname, '../public/favicon.ico'),
-    // }),
     new CleanWebpackPlugin(),
     new MiniCSSExtactPlugin({
       filename: '[name].css',
@@ -59,13 +55,37 @@ module.exports = {
         ],
         sideEffects: true,
       },
+      {
+        test: /\.css$/i,
+        use: [
+          MiniCSSExtactPlugin.loader,
+          'css-loader',
+        ],
+        sideEffects: true,
+      },
     ],
   },
   resolve: {
-    extensions: ['.ts', '.json'],
+    extensions: ['.ts', '.tsx', '.json', '.js'],
   },
   devtool: isProduction ? false : 'source-map',
   optimization: {
     minimize: isProduction,
   },
+  devServer: {
+    contentBase: path.join(__dirname, '../dist'),
+    compress: true,
+    port: 8080,
+    watchContentBase: true,
+    progress: true,
+    historyApiFallback: true,
+  },
 };
+
+if (!isProduction) {
+  config.plugins.push(new HTMLWebpackPlugin({
+    template: path.resolve(__dirname, '../public/popup.html'),
+  }));
+}
+
+module.exports = config;
