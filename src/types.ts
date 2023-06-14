@@ -24,7 +24,7 @@ export type ChannelInfo = {
 };
 
 export type UserStorage = {
-  following: string[];
+  followed: string[];
 };
 
 export enum PlatformId {

@@ -6,6 +6,7 @@ import { createGlobalStyle } from 'styled-components';
 import channels from '../db/channels.json';
 import ChannelList from './components/ChannelList';
 import Header from './components/Header';
+import { StorageProvider } from './context/StorageContext';
 
 const GlobalStyle = createGlobalStyle`
   * {
@@ -37,12 +38,14 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const App = (): JSX.Element => (
-  <>
-    <GlobalStyle />
-    <Header />
-    <ChannelList channels={channels} />
-  </>
-);
+const App = (): JSX.Element => {
+  return (
+    <StorageProvider>
+      <GlobalStyle />
+      <Header />
+      <ChannelList channels={channels} />
+    </StorageProvider>
+  );
+};
 
 export default App;

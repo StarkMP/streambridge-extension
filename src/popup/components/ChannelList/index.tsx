@@ -3,6 +3,7 @@ import React, { JSX, useState } from 'react';
 import styled from 'styled-components';
 
 import { Channel, PlatformId } from '../../../types';
+import { useStorage } from '../../context/StorageContext';
 import { KickIcon, TrovoIcon, VKPlayIcon } from '../Icons';
 
 type ChannelListProps = {
@@ -86,8 +87,28 @@ const platformsIcons: Record<string, React.ReactNode> = {
 const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
   const [search, setSearch] = useState<string>('');
 
+  const { storage, updateStorage } = useStorage();
+
   const onSearch: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearch(e.currentTarget.value);
+  };
+
+  const handleFollow = (checked: boolean, twitch: string): void => {
+    const followed = storage.followed.slice();
+
+    if (checked && followed.length >= 5) {
+      return;
+    }
+
+    if (checked) {
+      followed.push(twitch);
+    } else {
+      const index = followed.findIndex((item) => item === twitch);
+
+      followed.splice(index, 1);
+    }
+
+    updateStorage({ ...storage, followed });
   };
 
   return (
@@ -118,7 +139,20 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
           .map((item, index) => (
             <List.Item
               key={index}
-              actions={[<Switch key={index} size='small' />]}
+              actions={[
+                <Switch
+                  key={index}
+                  size='small'
+                  checked={storage.followed.includes(item.twitch)}
+                  disabled={
+                    !storage.followed.includes(item.twitch) &&
+                    storage.followed.length >= 5
+                  }
+                  onChange={(checked): void =>
+                    handleFollow(checked, item.twitch)
+                  }
+                />,
+              ]}
             >
               <ListItemWrapper>
                 {platformsIcons[item.source.id] || null}
