@@ -3,6 +3,7 @@ import React, { JSX, useState } from 'react';
 import styled from 'styled-components';
 
 import { Channel, PlatformId } from '../../../types';
+import { maxFollowedChannels } from '../../../utils/constants';
 import { useStorage } from '../../context/StorageContext';
 import { KickIcon, TrovoIcon, VKPlayIcon } from '../Icons';
 
@@ -96,7 +97,7 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
   const handleFollow = (checked: boolean, twitch: string): void => {
     const followed = storage.followed.slice();
 
-    if (checked && followed.length >= 5) {
+    if (checked && followed.length >= maxFollowedChannels) {
       return;
     }
 

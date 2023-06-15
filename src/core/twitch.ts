@@ -1,6 +1,6 @@
 import Sidebar from '../components/Sidebar';
-import { Channel, ChannelInfo } from '../types';
-import { getPlatform } from '../utils/db';
+import { Channel, ChannelInfo, UserStorage } from '../types';
+import { getChannel, getPlatform } from '../utils/db';
 import { onElementLoaded } from '../utils/dom';
 
 const selectors = {
@@ -84,10 +84,22 @@ const renderChannel = (db: Channel[]): void => {
 export const renderSidebar = async (db: Channel[]): Promise<void> => {
   const channelsInfo: ChannelInfo[] = [];
 
-  for await (const channel of db) {
-    const platform = getPlatform(db, channel.twitch);
+  const storage = (await chrome.storage.local.get()) as UserStorage;
 
-    if (channel && platform) {
+  if (storage.followed) {
+    for await (const twitch of storage.followed) {
+      const platform = getPlatform(db, twitch);
+
+      if (!platform) {
+        continue;
+      }
+
+      const channel = getChannel(db, twitch);
+
+      if (!channel) {
+        continue;
+      }
+
       const info = await platform.getInfo(channel);
 
       if (info) {
@@ -102,34 +114,10 @@ export const renderSidebar = async (db: Channel[]): Promise<void> => {
     sidebar.remove();
   }
 
-  onElementLoaded('#side-nav > div > div > div', (el) => {
+  onElementLoaded('[role="group"]', (el) => {
     const sidebar = Sidebar(channelsInfo);
 
-    if (el.classList.contains('side-nav__title')) {
-      (el.nextElementSibling as HTMLElement).insertAdjacentHTML(
-        'afterend',
-        sidebar
-      );
-
-      return;
-    }
-
-    const child = el.firstElementChild as HTMLElement;
-
-    if (
-      (child.firstElementChild as HTMLElement).classList.contains(
-        'followed-side-nav-header'
-      )
-    ) {
-      (child.parentElement as HTMLElement).insertAdjacentHTML(
-        'afterend',
-        sidebar
-      );
-
-      return;
-    }
-
-    child.insertAdjacentHTML('afterend', sidebar);
+    el.insertAdjacentHTML('afterend', sidebar);
   });
 };
 
