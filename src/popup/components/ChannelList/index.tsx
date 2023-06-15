@@ -1,4 +1,4 @@
-import { Input, List as ListComponent, Switch } from 'antd';
+import { Input, List as ListComponent, Switch, Tooltip } from 'antd';
 import React, { JSX, useState } from 'react';
 import styled from 'styled-components';
 
@@ -137,37 +137,48 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
               item.twitch.includes(search) ||
               item.source.channelId.includes(search)
           )
-          .map((item, index) => (
-            <List.Item
-              key={index}
-              actions={[
-                <Switch
-                  key={index}
-                  size='small'
-                  checked={storage.followed.includes(item.twitch)}
-                  disabled={
-                    !storage.followed.includes(item.twitch) &&
-                    storage.followed.length >= 5
-                  }
-                  onChange={(checked): void =>
-                    handleFollow(checked, item.twitch)
-                  }
-                />,
-              ]}
-            >
-              <ListItemWrapper>
-                {platformsIcons[item.source.id] || null}
-                <ListItemText>
-                  <ListItemTwitch>{item.twitch}</ListItemTwitch>
-                  <ListItemSourceUrl target='_blank' href={item.source.url}>
-                    {item.source.url
-                      .replace('https://', '')
-                      .replace('www.', '')}
-                  </ListItemSourceUrl>
-                </ListItemText>
-              </ListItemWrapper>
-            </List.Item>
-          ))}
+          .map((item, index) => {
+            const checked = storage.followed.includes(item.twitch);
+            const disabled =
+              !checked && storage.followed.length >= maxFollowedChannels;
+
+            return (
+              <List.Item
+                key={index}
+                actions={[
+                  <Tooltip
+                    key={index}
+                    title={
+                      disabled
+                        ? `You cannot be subscribed to more than ${maxFollowedChannels} channels`
+                        : ''
+                    }
+                  >
+                    <Switch
+                      size='small'
+                      checked={checked}
+                      disabled={disabled}
+                      onChange={(checked): void =>
+                        handleFollow(checked, item.twitch)
+                      }
+                    />
+                  </Tooltip>,
+                ]}
+              >
+                <ListItemWrapper>
+                  {platformsIcons[item.source.id] || null}
+                  <ListItemText>
+                    <ListItemTwitch>{item.twitch}</ListItemTwitch>
+                    <ListItemSourceUrl target='_blank' href={item.source.url}>
+                      {item.source.url
+                        .replace('https://', '')
+                        .replace('www.', '')}
+                    </ListItemSourceUrl>
+                  </ListItemText>
+                </ListItemWrapper>
+              </List.Item>
+            );
+          })}
       </ScrollableWrapper>
     </List>
   );
