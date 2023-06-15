@@ -7,7 +7,7 @@ import React, {
   useState,
 } from 'react';
 
-import { UserStorage } from '../../types';
+import { Channel, UserStorage } from '../../types';
 
 type StorageContextProps = {
   storage: UserStorage;
@@ -16,6 +16,7 @@ type StorageContextProps = {
 
 type StorageProviderProps = {
   children: ReactNode;
+  channels: Channel[];
 };
 
 const Context = createContext<StorageContextProps>({} as StorageContextProps);
@@ -28,6 +29,7 @@ const initialValue: UserStorage = { followed: [] };
 
 export const StorageProvider = ({
   children,
+  channels,
 }: StorageProviderProps): JSX.Element => {
   const [storage, setStorage] = useState<UserStorage>(initialValue);
 
@@ -42,7 +44,11 @@ export const StorageProvider = ({
       if (!storage.followed) {
         updateStorage(initialValue);
       } else {
-        setStorage(storage);
+        const followed = storage.followed.filter((twitch) =>
+          channels.find((channel) => channel.twitch === twitch)
+        );
+
+        updateStorage({ ...storage, followed });
       }
     } catch (err) {
       console.error(err);

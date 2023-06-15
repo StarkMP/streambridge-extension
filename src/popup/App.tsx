@@ -41,7 +41,7 @@ const GlobalStyle = createGlobalStyle`
 
 const App = (): JSX.Element => {
   return (
-    <StorageProvider>
+    <StorageProvider channels={channels as Channel[]}>
       <GlobalStyle />
       <Header />
       <ChannelList channels={channels as Channel[]} />
