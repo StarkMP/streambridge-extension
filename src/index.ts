@@ -1,14 +1,17 @@
 import './styles/twitch.scss';
 
-import { initPlatformFrame } from './core/frame';
-import { initTwitchExtension } from './core/twitch';
-import channelsDb from './db/channels.json';
-import { hostname } from './utils/constants';
+import { hostname } from './constants';
+import Content from './core/content';
+import IFrame from './core/iframe';
+import Sidebar from './core/sidebar';
+import db from './db/channels.json';
+import { Channel } from './types';
 import { isFrame } from './utils/frame';
 
-const init = (): void => {
+const init = (channelsData: Channel[]): void => {
   if (window.location.hostname === hostname) {
-    initTwitchExtension(channelsDb);
+    new Content(channelsData);
+    new Sidebar({ channelsData, updateInterval: 60000 });
 
     return;
   }
@@ -17,7 +20,17 @@ const init = (): void => {
     return;
   }
 
-  initPlatformFrame(channelsDb);
+  const channel = channelsData.find(
+    (item) =>
+      window.location.hostname.includes(item.source.id) &&
+      window.location.href.includes(item.source.channelId)
+  );
+
+  if (!channel) {
+    return;
+  }
+
+  new IFrame(channel);
 };
 
-init();
+init(db as Channel[]);

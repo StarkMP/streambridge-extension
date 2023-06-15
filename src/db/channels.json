@@ -8,30 +8,6 @@
     }
   },
   {
-    "twitch": "neonjade-kick",
-    "source": {
-      "id": "kick.com",
-      "channelId": "neonjade",
-      "url": "https://kick.com/neonjade"
-    }
-  },
-  {
-    "twitch": "lilphillboy",
-    "source": {
-      "id": "vkplay.live",
-      "channelId": "lilphillboy",
-      "url": "https://vkplay.live/lilphillboy"
-    }
-  },
-  {
-    "twitch": "ak47whiskeyshott-kick",
-    "source": {
-      "id": "kick.com",
-      "channelId": "ak47whiskeyshott",
-      "url": "https://kick.com/ak47whiskeyshott"
-    }
-  },
-  {
     "twitch": "saneking-trovo",
     "source": {
       "id": "trovo.live",
@@ -45,6 +21,70 @@
       "id": "trovo.live",
       "channelId": "arthas",
       "url": "https://trovo.live/s/arthas"
+    }
+  },
+  {
+    "twitch": "kuplinov-vkplay",
+    "source": {
+      "id": "vkplay.live",
+      "channelId": "kuplinov",
+      "url": "https://vkplay.live/kuplinov"
+    }
+  },
+  {
+    "twitch": "serega_pirat",
+    "source": {
+      "id": "trovo.live",
+      "channelId": "serega_pirat",
+      "url": "https://trovo.live/s/serega_pirat"
+    }
+  },
+  {
+    "twitch": "evelone192",
+    "source": {
+      "id": "kick.com",
+      "channelId": "evelone",
+      "url": "https://kick.com/evelone"
+    }
+  },
+  {
+    "twitch": "zakviel-trovo",
+    "source": {
+      "id": "trovo.live",
+      "channelId": "zakviel",
+      "url": "https://trovo.live/s/zakviel"
+    }
+  },
+  {
+    "twitch": "egorkreed",
+    "source": {
+      "id": "kick.com",
+      "channelId": "egorkreed58",
+      "url": "https://kick.com/egorkreed58"
+    }
+  },
+  {
+    "twitch": "mokrivskiy",
+    "source": {
+      "id": "kick.com",
+      "channelId": "mokrivskiy1",
+      "url": "https://kick.com/mokrivskiy1"
+    }
+  },
+  {
+    "twitch": "zxcursed",
+    "source": {
+      "id": "kick.com",
+      "channelId": "zxcursed",
+      "url": "https://kick.com/zxcursed"
+    }
+  },
+  {
+    "twitch": "rinlar",
+    "source": {
+      "id": "kick.com",
+      "channelId": "rinlar",
+      "url": "https://kick.com/rinlar"
     }
   }
 ]

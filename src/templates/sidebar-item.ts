@@ -6,7 +6,9 @@ const SidebarItem = (channel: ChannelInfo): string => {
   const viewers = formatNumber(channel.viewers || 0);
 
   return `
-    <div class="ScTransitionBase-sc-hx4quq-0 bIklSd tw-transition" aria-hidden="false" style="transition-property: transform, opacity; transition-timing-function: ease;">
+    <div class="ScTransitionBase-sc-hx4quq-0 bIklSd tw-transition" data-channel="${
+      channel.twitch
+    }" aria-hidden="false" style="transition-property: transform, opacity; transition-timing-function: ease;">
       <div>
         <div class="Layout-sc-1xcs6mc-0 bZVrjx side-nav-card sb-sidebar-card--collapsed" data-test-selector="side-nav-card-collapsed">
           <a class="ScCoreLink-sc-16kq0mq-0 jSrrlW InjectLayout-sc-1i43xsx-0 fKMgEV side-nav-card tw-link" href="/${

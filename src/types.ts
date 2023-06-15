@@ -7,7 +7,7 @@ export type StreamingPlatform = {
 export type Channel = {
   twitch: string;
   source: {
-    id: string;
+    id: PlatformId;
     channelId: string;
     url: string;
   };

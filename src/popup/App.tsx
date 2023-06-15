@@ -4,6 +4,7 @@ import React, { JSX } from 'react';
 import { createGlobalStyle } from 'styled-components';
 
 import channels from '../db/channels.json';
+import { Channel } from '../types';
 import ChannelList from './components/ChannelList';
 import Header from './components/Header';
 import { StorageProvider } from './context/StorageContext';
@@ -43,7 +44,7 @@ const App = (): JSX.Element => {
     <StorageProvider>
       <GlobalStyle />
       <Header />
-      <ChannelList channels={channels} />
+      <ChannelList channels={channels as Channel[]} />
     </StorageProvider>
   );
 };

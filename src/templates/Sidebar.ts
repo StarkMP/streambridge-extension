@@ -1,5 +1,5 @@
 import { ChannelInfo } from '../types';
-import SidebarItem from './SidebarItem';
+import SidebarItem from './sidebar-item';
 
 const Sidebar = (channels: ChannelInfo[]): string => {
   const items =

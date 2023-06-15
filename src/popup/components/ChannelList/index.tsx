@@ -1,9 +1,9 @@
 import { Input, List as ListComponent, Switch, Tooltip } from 'antd';
-import React, { JSX, useEffect, useMemo, useRef, useState } from 'react';
+import React, { JSX, useRef, useState } from 'react';
 import styled from 'styled-components';
 
+import { maxFollowedChannels } from '../../../constants';
 import { Channel, PlatformId } from '../../../types';
-import { maxFollowedChannels } from '../../../utils/constants';
 import { useStorage } from '../../context/StorageContext';
 import { KickIcon, TrovoIcon, VKPlayIcon } from '../Icons';
 
