@@ -1,5 +1,6 @@
 import Sidebar from '../components/Sidebar';
 import { Channel, ChannelInfo, UserStorage } from '../types';
+import { maxFollowedChannels } from '../utils/constants';
 import { getChannel, getPlatform } from '../utils/db';
 import { onElementLoaded } from '../utils/dom';
 
@@ -87,7 +88,7 @@ export const renderSidebar = async (db: Channel[]): Promise<void> => {
   const storage = (await chrome.storage.local.get()) as UserStorage;
 
   if (storage.followed) {
-    for await (const twitch of storage.followed) {
+    for await (const twitch of storage.followed.slice(0, maxFollowedChannels)) {
       const platform = getPlatform(db, twitch);
 
       if (!platform) {
