@@ -13,7 +13,7 @@ const Sidebar = (channels: ChannelInfo[]): string => {
           )
           .map((item) => SidebarItem(item))
           .join('')
-      : 'No channels';
+      : '<span class="sb-sidebar__empty">Use extension to add channels</span>';
 
   return `
     <div id="stream-bridge-sidebar" aria-label="Stream Bridge" class="Layout-sc-1xcs6mc-0 bSoSIm side-nav-section sb-sidebar" role="group">

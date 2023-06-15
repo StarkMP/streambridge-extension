@@ -1,3 +1,9 @@
+.sb-sidebar__empty {
+  margin: 1rem;
+  margin-top: 0;
+  color: var(--color-text-alt-2) !important;
+}
+
 .side-nav--collapsed {
   .sb-sidebar__header {
     display: none !important;
@@ -5,6 +11,10 @@
 
   .sb-sidebar-card--expanded {
     display: none !important;
+  }
+
+  .sb-sidebar__empty {
+    display: none;
   }
 }
 
