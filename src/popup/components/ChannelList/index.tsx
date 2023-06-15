@@ -1,5 +1,5 @@
 import { Input, List as ListComponent, Switch, Tooltip } from 'antd';
-import React, { JSX, useState } from 'react';
+import React, { JSX, useEffect, useMemo, useRef, useState } from 'react';
 import styled from 'styled-components';
 
 import { Channel, PlatformId } from '../../../types';
@@ -86,9 +86,22 @@ const platformsIcons: Record<string, React.ReactNode> = {
 };
 
 const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
-  const [search, setSearch] = useState<string>('');
-
   const { storage, updateStorage } = useStorage();
+  const [search, setSearch] = useState<string>('');
+  const isFollowedChanged = useRef<boolean>(false);
+  const sortedChannels = useRef<Channel[]>(channels.slice());
+
+  const getSortedChannels = (): Channel[] => {
+    if (!isFollowedChanged.current) {
+      sortedChannels.current = sortedChannels.current.sort(
+        (a, b) =>
+          Number(storage.followed.includes(b.twitch)) -
+          Number(storage.followed.includes(a.twitch))
+      );
+    }
+
+    return sortedChannels.current;
+  };
 
   const onSearch: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setSearch(e.currentTarget.value);
@@ -109,6 +122,7 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
       followed.splice(index, 1);
     }
 
+    isFollowedChanged.current = true;
     updateStorage({ ...storage, followed });
   };
 
@@ -131,7 +145,7 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
       itemLayout='horizontal'
     >
       <ScrollableWrapper>
-        {channels
+        {getSortedChannels()
           .filter(
             (item) =>
               item.twitch.includes(search) ||
@@ -150,7 +164,7 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
                     key={index}
                     title={
                       disabled
-                        ? `You cannot be subscribed to more than ${maxFollowedChannels} channels`
+                        ? `You can't subscribe to more than ${maxFollowedChannels} channels`
                         : ''
                     }
                   >
