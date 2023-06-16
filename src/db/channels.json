@@ -86,5 +86,21 @@
       "channelId": "rinlar",
       "url": "https://kick.com/rinlar"
     }
+  },
+  {
+    "twitch": "ambience-wasd",
+    "source": {
+      "id": "wasd.tv",
+      "channelId": "ambience",
+      "url": "https://wasd.tv/ambience"
+    }
+  },
+  {
+    "twitch": "zakvielboss-wasd",
+    "source": {
+      "id": "wasd.tv",
+      "channelId": "zakvielboss",
+      "url": "https://wasd.tv/zakvielboss"
+    }
   }
 ]

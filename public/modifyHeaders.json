@@ -79,5 +79,16 @@
       ]
     },
     "condition": { "urlFilter": "api-web.trovo.live", "initiatorDomains" : ["twitch.tv"] }
+  },
+  {
+    "id": 8,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        { "header": "Access-Control-Allow-Origin", "operation": "set", "value": "*" }
+      ]
+    },
+    "condition": { "urlFilter": "wasd.tv" }
   }
 ]
