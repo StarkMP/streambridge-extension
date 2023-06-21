@@ -4,13 +4,13 @@
   "description": "Watch your favorite streamers from other streaming services on Twitch",
   "version": "0.7.28",
   "icons": {
-    "16": "images/icon16.png",
-    "32": "images/icon32.png",
-    "48": "images/icon48.png",
-    "128": "images/icon128.png"
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
   },
   "action": {
-    "default_popup": "popup.html"
+    "default_popup": "popup/index.html"
   },
   "permissions": [
     "declarativeNetRequest",
@@ -40,12 +40,12 @@
     {
       "matches": ["https://www.twitch.tv/*", "https://vkplay.live/*", "https://kick.com/*", "https://trovo.live/*", "https://wasd.tv/*", "https://www.youtube.com/*"],
       "all_frames": true,
-      "js": ["index.js"]
+      "js": ["content/index.js"]
     },
     {
       "matches": ["https://www.twitch.tv/*"],
       "all_frames": true,
-      "css": ["index.css"]
+      "css": ["content/index.css"]
     }
   ]
 }
