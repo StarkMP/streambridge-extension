@@ -5,7 +5,13 @@ import styled from 'styled-components';
 import { maxFollowedChannels } from '../../../constants';
 import { Channel, PlatformId } from '../../../types';
 import { useStorage } from '../../context/StorageContext';
-import { KickIcon, TrovoIcon, VKPlayIcon, WASDIcon } from '../Icons';
+import {
+  KickIcon,
+  TrovoIcon,
+  VKPlayIcon,
+  WASDIcon,
+  YouTubeIcon,
+} from '../Icons';
 
 type ChannelListProps = {
   channels: Channel[];
@@ -84,6 +90,7 @@ const platformsIcons: Record<string, React.ReactNode> = {
   [PlatformId.VKPlayLive]: <VKPlayIcon />,
   [PlatformId.Trovo]: <TrovoIcon />,
   [PlatformId.WASD]: <WASDIcon />,
+  [PlatformId.YouTube]: <YouTubeIcon />,
 };
 
 const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {

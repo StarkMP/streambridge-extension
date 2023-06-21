@@ -16,7 +16,7 @@
     }
   },
   {
-    "twitch": "arthas",
+    "twitch": "arthas-trovo",
     "source": {
       "id": "trovo.live",
       "channelId": "arthas",
@@ -101,6 +101,14 @@
       "id": "wasd.tv",
       "channelId": "zakvielboss",
       "url": "https://wasd.tv/zakvielboss"
+    }
+  },
+  {
+    "twitch": "arthas",
+    "source": {
+      "id": "youtube.com",
+      "channelId": "SpitefulDick",
+      "url": "https://www.youtube.com/@SpitefulDick/live"
     }
   }
 ]

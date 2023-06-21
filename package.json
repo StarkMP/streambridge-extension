@@ -1,6 +1,6 @@
 {
   "name": "twitch-chrome-extension",
-  "version": "0.6.28",
+  "version": "0.7.28",
   "scripts": {
     "dev": "webpack serve --mode development --node-env development --config tools/webpack.common.js",
     "build": "webpack --mode production --node-env production --config tools/webpack.common.js",
@@ -54,6 +54,7 @@
   ],
   "dependencies": {
     "antd": "^5.6.1",
+    "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "styled-components": "^5.3.10"

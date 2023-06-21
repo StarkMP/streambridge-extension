@@ -90,5 +90,28 @@
       ]
     },
     "condition": { "urlFilter": "wasd.tv" }
+  },
+  {
+    "id": 9,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        { "header": "x-frame-options", "operation": "remove" },
+        { "header": "content-security-policy", "operation": "remove" }
+      ]
+    },
+    "condition": { "urlFilter": "youtube.com", "resourceTypes": ["main_frame","sub_frame"] }
+  },
+  {
+    "id": 10,
+    "priority": 1,
+    "action": {
+      "type": "modifyHeaders",
+      "responseHeaders": [
+        { "header": "Access-Control-Allow-Origin", "operation": "set", "value": "*" }
+      ]
+    },
+    "condition": { "urlFilter": "youtube.com" }
   }
 ]
