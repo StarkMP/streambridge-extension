@@ -10,9 +10,19 @@ export const translations: Record<string, Record<Languages, string>> = {
   ...locales,
   ...Object.keys(untranslatable as { [key: string]: string }).reduce(
     (memo: Locales, key) => {
-      memo[key] = {
-        [defaultLocale]: (untranslatable as { [key: string]: string })[key],
-      };
+      memo[key] = Object.values(Languages).reduce(
+        (
+          memo: {
+            [language: string]: string;
+          },
+          language
+        ) => {
+          memo[language] = (untranslatable as { [key: string]: string })[key];
+
+          return memo;
+        },
+        {}
+      );
 
       return memo;
     },

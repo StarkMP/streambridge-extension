@@ -17,9 +17,9 @@ const Sidebar = (channels: ChannelInfo[], language: Languages): string => {
       : `<span class="sb-sidebar__empty">${translations['content.sidebar.empty-description'][language]}</span>`;
 
   return `
-    <div id="stream-bridge-sidebar" aria-label="${translations['project.name'].en}" class="Layout-sc-1xcs6mc-0 bSoSIm side-nav-section sb-sidebar" role="group">
+    <div id="stream-bridge-sidebar" aria-label="${translations['project.name'][language]}" class="Layout-sc-1xcs6mc-0 bSoSIm side-nav-section sb-sidebar" role="group">
       <div class="Layout-sc-1xcs6mc-0 lmQRGZ side-nav-header sb-sidebar__header">
-        <h2 class="CoreText-sc-1txzju1-0 lnnKUr">${translations['project.name'].en}</h2>
+        <h2 class="CoreText-sc-1txzju1-0 lnnKUr">${translations['project.name'][language]}</h2>
       </div>
       <div class="InjectLayout-sc-1i43xsx-0 dVOhMf sb-sidebar__header--collapsed">
         <div class="Layout-sc-1xcs6mc-0 eYvyCM followed-side-nav-header" data-a-target="side-nav-header-collapsed">
