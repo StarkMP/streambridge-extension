@@ -9,11 +9,11 @@ export default class Sidebar {
 
   private cachedChannelsInfo: ChannelInfo[];
 
-  private channelsData: Channel[];
+  private readonly channelsData: Channel[];
 
-  private updateInterval: number;
+  private readonly updateInterval: number;
 
-  private selectors = {
+  private readonly selectors = {
     sidebar: '#stream-bridge-sidebar',
     sidebarElement: '[role="group"]',
   };

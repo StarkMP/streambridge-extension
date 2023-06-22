@@ -1,7 +1,6 @@
 import axios from 'axios';
 
 import { PlatformId, StreamingPlatform } from '../types';
-import { onElementLoaded } from '../utils/dom';
 
 const youtube: StreamingPlatform = {
   id: PlatformId.YouTube,
@@ -13,21 +12,12 @@ const youtube: StreamingPlatform = {
       const pageData: string = response.data;
 
       let initData: { [key: string]: any } = {};
-      let apiToken = null;
       let context = null;
 
       const ytInitData = pageData.split('var ytInitialData =');
 
       if (ytInitData && ytInitData.length > 1) {
         const data = ytInitData[1].split('</script>')[0].slice(0, -1);
-
-        if (pageData.split('innertubeApiKey').length > 0) {
-          apiToken = pageData
-            .split('innertubeApiKey')[1]
-            .trim()
-            .split(',')[0]
-            .split('"')[2];
-        }
 
         if (pageData.split('INNERTUBE_CONTEXT').length > 0) {
           context = JSON.parse(
@@ -41,17 +31,28 @@ const youtube: StreamingPlatform = {
       }
 
       const isOnline =
-        initData.contents.twoColumnWatchNextResults !== undefined;
+        initData.contents.twoColumnWatchNextResults !== undefined &&
+        initData?.contents?.twoColumnWatchNextResults?.results?.results
+          ?.contents[0].videoPrimaryInfoRenderer?.viewCount
+          ?.videoViewCountRenderer?.isLive;
 
-      return {
-        twitch: channel.twitch,
-        isOnline,
-        category: isOnline
+      let category;
+
+      try {
+        category = isOnline
           ? initData?.contents?.twoColumnWatchNextResults?.results?.results
               ?.contents[1].videoSecondaryInfoRenderer?.metadataRowContainer
               ?.metadataRowContainerRenderer?.rows[0].richMetadataRowRenderer
               ?.contents[0].richMetadataRenderer?.title?.simpleText
-          : null,
+          : null;
+      } catch (err) {
+        category = undefined;
+      }
+
+      return {
+        twitch: channel.twitch,
+        isOnline,
+        category,
         viewers: isOnline
           ? Number(
               initData?.contents?.twoColumnWatchNextResults?.results?.results
@@ -76,10 +77,16 @@ const youtube: StreamingPlatform = {
             ),
       };
     } catch (e) {
+      console.log('yt fetch error', e);
+
       return null;
     }
   },
-  render: () => {},
+  render: () => {
+    (document.querySelector('html') as HTMLElement).classList.add(
+      'stream-bridge-page'
+    );
+  },
 };
 
 export default youtube;

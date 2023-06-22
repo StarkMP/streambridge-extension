@@ -40,11 +40,7 @@
     {
       "matches": ["https://www.twitch.tv/*", "https://vkplay.live/*", "https://kick.com/*", "https://trovo.live/*", "https://wasd.tv/*", "https://www.youtube.com/*"],
       "all_frames": true,
-      "js": ["content/index.js"]
-    },
-    {
-      "matches": ["https://www.twitch.tv/*"],
-      "all_frames": true,
+      "js": ["content/index.js"],
       "css": ["content/index.css"]
     }
   ]

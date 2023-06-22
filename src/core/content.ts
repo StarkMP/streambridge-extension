@@ -2,11 +2,11 @@ import { Channel } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
 export default class Content {
-  private channelsData: Channel[];
+  private readonly channelsData: Channel[];
 
   private channelStatusObserver!: MutationObserver | void;
 
-  private selectors = {
+  private readonly selectors = {
     root: '.root-scrollable__content',
     homeRoot: '.home__scrollable-content',
     wrapper: '.root-scrollable__wrapper',

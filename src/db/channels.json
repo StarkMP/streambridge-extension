@@ -110,5 +110,13 @@
       "channelId": "SpitefulDick",
       "url": "https://www.youtube.com/@SpitefulDick/live"
     }
+  },
+  {
+    "twitch": "meisio-yt",
+    "source": {
+      "id": "youtube.com",
+      "channelId": "Meisio",
+      "url": "https://www.youtube.com/@Meisio/live"
+    }
   }
 ]

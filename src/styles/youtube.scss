@@ -1,0 +1,17 @@
+.stream-bridge-page {
+  body {
+    overflow-y: auto !important;
+  }
+
+  #masthead-container {
+    display: none !important;
+  }
+
+  #page-manager {
+    margin-top: 0 !important;
+  }
+
+  #related {
+    display: none !important;
+  }
+}

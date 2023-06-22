@@ -1,4 +1,5 @@
 import './styles/twitch.scss';
+import './styles/youtube.scss';
 
 import { hostname } from './constants';
 import Content from './core/content';

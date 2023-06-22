@@ -2,7 +2,7 @@ import platforms from '../streaming-platforms';
 import { Channel } from '../types';
 
 export default class IFrame {
-  private channel: Channel;
+  private readonly channel: Channel;
 
   constructor(channel: Channel) {
     this.channel = channel;

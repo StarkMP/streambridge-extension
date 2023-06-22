@@ -51,7 +51,7 @@ const SidebarItem = (channel: ChannelInfo): string => {
   }</p>
                 </div>
                 ${
-                  isOnline
+                  isOnline && channel.category
                     ? `
                 <div class="Layout-sc-1xcs6mc-0 fFENuB side-nav-card__metadata">
                   <p title="${channel.category}" class="CoreText-sc-1txzju1-0 bApHMU">${channel.category}</p>
