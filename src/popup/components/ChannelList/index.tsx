@@ -101,11 +101,13 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
 
   const getSortedChannels = (): Channel[] => {
     if (!isFollowedChanged.current) {
-      sortedChannels.current = sortedChannels.current.sort(
-        (a, b) =>
-          Number(storage.followed.includes(b.twitch)) -
-          Number(storage.followed.includes(a.twitch))
-      );
+      sortedChannels.current = sortedChannels.current
+        .sort((a, b) => a.twitch.localeCompare(b.twitch))
+        .sort(
+          (a, b) =>
+            Number(storage.followed.includes(b.twitch)) -
+            Number(storage.followed.includes(a.twitch))
+        );
     }
 
     return sortedChannels.current;
@@ -141,7 +143,7 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
           <Search
             value={search}
             onChange={onSearch}
-            placeholder='Search by nickname...'
+            placeholder='Search...'
             allowClear
           />
           <ListHeaderColumns>
@@ -156,8 +158,7 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
         {getSortedChannels()
           .filter(
             (item) =>
-              item.twitch.includes(search) ||
-              item.source.channelId.includes(search)
+              item.twitch.includes(search) || item.source.url.includes(search)
           )
           .map((item, index) => {
             const checked = storage.followed.includes(item.twitch);

@@ -1,6 +1,6 @@
 {
   "name": "twitch-chrome-extension",
-  "version": "0.7.28",
+  "version": "0.7.29",
   "scripts": {
     "dev": "vite -c tools/vite.popup.ts",
     "build": "vite build -c tools/vite.content.ts && vite build -c tools/vite.popup.ts",
