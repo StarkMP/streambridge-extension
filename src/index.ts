@@ -6,13 +6,21 @@ import Content from './core/content';
 import IFrame from './core/iframe';
 import Sidebar from './core/sidebar';
 import db from './db/channels.json';
-import { Channel } from './types';
+import { detectLanguage } from './translations';
+import { Channel, UserStorage } from './types';
 import { isFrame } from './utils/frame';
+import { getLocalStorage } from './utils/storage';
 
-const init = (channelsData: Channel[]): void => {
+const init = async (channelsData: Channel[]): Promise<void> => {
+  const storage = (await getLocalStorage()) as UserStorage;
+
   if (window.location.hostname === hostname) {
     new Content(channelsData);
-    new Sidebar({ channelsData, updateInterval: 60000 });
+    new Sidebar({
+      channelsData,
+      updateInterval: 60000,
+      language: storage.language || detectLanguage(),
+    });
 
     return;
   }
@@ -34,4 +42,4 @@ const init = (channelsData: Channel[]): void => {
   new IFrame(channel);
 };
 
-init(db as Channel[]);
+init(db as Channel[]).catch((err) => console.error(err));

@@ -1,6 +1,6 @@
 {
   "name": "twitch-chrome-extension",
-  "version": "0.7.29",
+  "version": "0.8.30",
   "scripts": {
     "dev": "vite -c tools/vite.popup.ts",
     "build": "vite build -c tools/vite.content.ts && vite build -c tools/vite.popup.ts",
@@ -37,10 +37,12 @@
     "not ie < 9"
   ],
   "dependencies": {
+    "@ant-design/icons": "^5.1.4",
     "antd": "^5.6.1",
     "axios": "^1.4.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "reactjs-localizer": "^1.1.1",
     "styled-components": "^5.3.10"
   }
 }

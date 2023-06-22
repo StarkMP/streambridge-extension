@@ -25,6 +25,7 @@ export type ChannelInfo = {
 
 export type UserStorage = {
   followed: string[];
+  language: Languages;
 };
 
 export enum PlatformId {
@@ -33,4 +34,14 @@ export enum PlatformId {
   VKPlayLive = 'vkplay.live',
   WASD = 'wasd.tv',
   YouTube = 'youtube.com',
+}
+
+export enum Languages {
+  English = 'en',
+  Russian = 'ru',
+}
+
+export enum Pages {
+  Main = 0,
+  Settings,
 }

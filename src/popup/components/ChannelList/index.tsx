@@ -1,5 +1,6 @@
 import { Input, List as ListComponent, Switch, Tooltip } from 'antd';
 import React, { JSX, useRef, useState } from 'react';
+import { useLocalizer } from 'reactjs-localizer';
 import styled from 'styled-components';
 
 import { maxFollowedChannels } from '../../../constants';
@@ -98,6 +99,7 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
   const [search, setSearch] = useState<string>('');
   const isFollowedChanged = useRef<boolean>(false);
   const sortedChannels = useRef<Channel[]>(channels.slice());
+  const { localize } = useLocalizer();
 
   const getSortedChannels = (): Channel[] => {
     if (!isFollowedChanged.current) {
@@ -143,12 +145,12 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
           <Search
             value={search}
             onChange={onSearch}
-            placeholder='Search...'
+            placeholder={localize('popup.channel-list.search')}
             allowClear
           />
           <ListHeaderColumns>
-            <b>Channel</b>
-            <b>Followed</b>
+            <b>{localize('popup.channel-list.channel')}</b>
+            <b>{localize('popup.channel-list.followed')}</b>
           </ListHeaderColumns>
         </ListHeader>
       }
@@ -173,7 +175,9 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
                     key={index}
                     title={
                       disabled
-                        ? `You can't subscribe to more than ${maxFollowedChannels} channels`
+                        ? localize('popup.channel-list.limit', {
+                            maxCount: maxFollowedChannels,
+                          })
                         : ''
                     }
                   >

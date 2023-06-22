@@ -1,0 +1,38 @@
+{
+  "content.sidebar.empty-description": {
+    "en": "Use extension to add channels",
+    "ru": "Добавьте каналы в меню расширения"
+  },
+  "popup.header.back": {
+    "en": "Back",
+    "ru": "Назад"
+  },
+  "popup.header.report": {
+    "en": "Report",
+    "ru": "Сообщить о проблеме"
+  },
+  "popup.header.settings": {
+    "en": "Settings",
+    "ru": "Настройки"
+  },
+  "popup.channel-list.channel": {
+    "en": "Channel",
+    "ru": "Канал"
+  },
+  "popup.channel-list.followed": {
+    "en": "Followed",
+    "ru": "В подписках"
+  },
+  "popup.channel-list.search": {
+    "en": "Search...",
+    "ru": "Поиск..."
+  },
+  "popup.channel-list.limit": {
+    "en": "You can't subscribe to more than %maxCount% channels",
+    "ru": "Количество подписок не может быть больше %maxCount%"
+  },
+  "popup.settings.language": {
+    "en": "Language",
+    "ru": "Язык интерфейса"
+  }
+}

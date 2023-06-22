@@ -6,8 +6,11 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+import { useLocalizer } from 'reactjs-localizer';
 
+import { detectLanguage } from '../../translations';
 import { Channel, UserStorage } from '../../types';
+import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 
 type StorageContextProps = {
   storage: UserStorage;
@@ -25,13 +28,14 @@ export const useStorage = (): StorageContextProps => useContext(Context);
 
 export const StorageContext = Context;
 
-const initialValue: UserStorage = { followed: [] };
+const initialValue: UserStorage = { followed: [], language: detectLanguage() };
 
 export const StorageProvider = ({
   children,
   channels,
 }: StorageProviderProps): JSX.Element => {
   const [storage, setStorage] = useState<UserStorage>(initialValue);
+  const { setLanguage } = useLocalizer();
 
   useEffect(() => {
     initStorage().catch(() => {});
@@ -39,24 +43,24 @@ export const StorageProvider = ({
 
   const initStorage = async (): Promise<void> => {
     try {
-      const storage = (await chrome.storage.local.get()) as UserStorage;
+      const storage = {
+        ...initialValue,
+        ...(await getLocalStorage()),
+      } as UserStorage;
 
-      if (!storage.followed) {
-        updateStorage(initialValue);
-      } else {
-        const followed = storage.followed.filter((twitch) =>
-          channels.find((channel) => channel.twitch === twitch)
-        );
+      const followed = storage.followed.filter((twitch) =>
+        channels.find((channel) => channel.twitch === twitch)
+      );
 
-        updateStorage({ ...storage, followed });
-      }
+      setLanguage(storage.language);
+      updateStorage({ ...storage, followed });
     } catch (err) {
       console.error(err);
     }
   };
 
   const updateStorage = (data: UserStorage): void => {
-    chrome.storage.local.set(data).catch((err) => console.error(err));
+    setLocalStorage(data).catch((err) => console.error(err));
     setStorage(data);
   };
 

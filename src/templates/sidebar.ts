@@ -1,7 +1,8 @@
-import { ChannelInfo } from '../types';
+import { translations } from '../translations';
+import { ChannelInfo, Languages } from '../types';
 import SidebarItem from './sidebar-item';
 
-const Sidebar = (channels: ChannelInfo[]): string => {
+const Sidebar = (channels: ChannelInfo[], language: Languages): string => {
   const items =
     channels.length > 0
       ? channels
@@ -13,12 +14,12 @@ const Sidebar = (channels: ChannelInfo[]): string => {
           )
           .map((item) => SidebarItem(item))
           .join('')
-      : '<span class="sb-sidebar__empty">Use extension to add channels</span>';
+      : `<span class="sb-sidebar__empty">${translations['content.sidebar.empty-description'][language]}</span>`;
 
   return `
-    <div id="stream-bridge-sidebar" aria-label="Stream Bridge" class="Layout-sc-1xcs6mc-0 bSoSIm side-nav-section sb-sidebar" role="group">
+    <div id="stream-bridge-sidebar" aria-label="${translations['project.name'].en}" class="Layout-sc-1xcs6mc-0 bSoSIm side-nav-section sb-sidebar" role="group">
       <div class="Layout-sc-1xcs6mc-0 lmQRGZ side-nav-header sb-sidebar__header">
-        <h2 class="CoreText-sc-1txzju1-0 lnnKUr">Stream Bridge</h2>
+        <h2 class="CoreText-sc-1txzju1-0 lnnKUr">${translations['project.name'].en}</h2>
       </div>
       <div class="InjectLayout-sc-1i43xsx-0 dVOhMf sb-sidebar__header--collapsed">
         <div class="Layout-sc-1xcs6mc-0 eYvyCM followed-side-nav-header" data-a-target="side-nav-header-collapsed">

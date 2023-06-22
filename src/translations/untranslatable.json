@@ -1,0 +1,12 @@
+{
+  "project.name": "Stream Bridge",
+
+  "platform.twitch.name": "Twitch",
+  "platform.kick.name": "Kick",
+  "platform.trovo.name": "Trovo",
+  "platform.vkplay.name": "VKPlay Live",
+  "platform.youtube.name": "YouTube",
+
+  "language.en": "English",
+  "language.ru": "Русский"
+}

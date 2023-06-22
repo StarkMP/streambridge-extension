@@ -1,8 +1,9 @@
 import { maxFollowedChannels } from '../constants';
 import SidebarTemplate from '../templates/sidebar';
-import { Channel, ChannelInfo, UserStorage } from '../types';
+import { Channel, ChannelInfo, Languages, UserStorage } from '../types';
 import { getChannel, getPlatform } from '../utils/db';
 import { onElementLoaded } from '../utils/dom';
+import { getLocalStorage } from '../utils/storage';
 
 export default class Sidebar {
   private followedChannelsInfo: ChannelInfo[];
@@ -13,6 +14,8 @@ export default class Sidebar {
 
   private readonly updateInterval: number;
 
+  private readonly language: Languages;
+
   private readonly selectors = {
     sidebar: '#stream-bridge-sidebar',
     sidebarElement: '[role="group"]',
@@ -21,12 +24,15 @@ export default class Sidebar {
   constructor({
     channelsData,
     updateInterval,
+    language,
   }: {
     channelsData: Channel[];
     updateInterval: number;
+    language: Languages;
   }) {
     this.channelsData = channelsData;
     this.updateInterval = updateInterval;
+    this.language = language;
     this.followedChannelsInfo = [];
     this.cachedChannelsInfo = [];
 
@@ -110,7 +116,7 @@ export default class Sidebar {
   }
 
   private async fetchFollowedChannelsInfo(): Promise<ChannelInfo[]> {
-    const storage = (await chrome.storage.local.get()) as UserStorage;
+    const storage = (await getLocalStorage()) as UserStorage;
     const followed = storage.followed;
 
     if (!followed) {
@@ -172,7 +178,10 @@ export default class Sidebar {
     }
 
     onElementLoaded(this.selectors.sidebarElement, (el) => {
-      const template = SidebarTemplate(this.followedChannelsInfo);
+      const template = SidebarTemplate(
+        this.followedChannelsInfo,
+        this.language
+      );
 
       el.insertAdjacentHTML('afterend', template);
     });
