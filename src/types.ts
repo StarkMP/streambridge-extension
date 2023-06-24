@@ -29,11 +29,11 @@ export type UserStorage = {
 };
 
 export enum PlatformId {
-  Kick = 'kick.com',
-  Trovo = 'trovo.live',
-  VKPlayLive = 'vkplay.live',
-  WASD = 'wasd.tv',
-  YouTube = 'youtube.com',
+  Kick = 'kick',
+  Trovo = 'trovo',
+  VKPlayLive = 'vkplay',
+  WASD = 'wasd',
+  YouTube = 'youtube',
 }
 
 export enum Languages {

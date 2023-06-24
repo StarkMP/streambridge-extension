@@ -3,6 +3,14 @@
     "en": "Use extension to add channels",
     "ru": "Добавьте каналы в меню расширения"
   },
+  "content.notification.title": {
+    "en": "You're watching this channel from <a href=\"%url%\" target=\"_blank\">%name%</a>",
+    "ru": "Вы просматриваете этот канал с <a href=\"%url%\" target=\"_blank\">%name%</a>"
+  },
+  "content.notification.description": {
+    "en": "If you want to log in or use other functional (except chatting and viewing), please use <a href=\"%url%\" target=\"_blank\">source website</a>",
+    "ru": "Перейдите на <a href=\"%url%\" target=\"_blank\">сайт платформы</a>, если хотите авторизоваться или использовать другие функции, кроме просмотра и чата"
+  },
   "popup.header.back": {
     "en": "Back",
     "ru": "Назад"

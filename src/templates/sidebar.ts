@@ -1,8 +1,11 @@
 import { translations } from '../translations';
 import { ChannelInfo, Languages } from '../types';
-import SidebarItem from './sidebar-item';
+import SidebarItemTemplate from './sidebar-item';
 
-const Sidebar = (channels: ChannelInfo[], language: Languages): string => {
+const SidebarTemplate = (
+  channels: ChannelInfo[],
+  language: Languages
+): string => {
   const items =
     channels.length > 0
       ? channels
@@ -12,7 +15,7 @@ const Sidebar = (channels: ChannelInfo[], language: Languages): string => {
               Number(b.viewers) -
               (Number(a.isOnline) + Number(a.viewers))
           )
-          .map((item) => SidebarItem(item))
+          .map((item) => SidebarItemTemplate(item))
           .join('')
       : `<span class="sb-sidebar__empty">${translations['content.sidebar.empty-description'][language]}</span>`;
 
@@ -38,4 +41,4 @@ const Sidebar = (channels: ChannelInfo[], language: Languages): string => {
   `;
 };
 
-export default Sidebar;
+export default SidebarTemplate;

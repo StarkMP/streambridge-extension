@@ -1,7 +1,7 @@
 import { ChannelInfo } from '../types';
 import { formatNumber } from '../utils/format';
 
-const SidebarItem = (channel: ChannelInfo): string => {
+const SidebarItemTemplate = (channel: ChannelInfo): string => {
   const isOnline = channel.isOnline;
   const viewers = formatNumber(channel.viewers || 0);
 
@@ -85,4 +85,4 @@ const SidebarItem = (channel: ChannelInfo): string => {
   `;
 };
 
-export default SidebarItem;
+export default SidebarItemTemplate;

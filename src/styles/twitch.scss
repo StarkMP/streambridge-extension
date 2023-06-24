@@ -28,3 +28,107 @@
     display: none !important;
   }
 }
+
+.sb-notification {
+  box-sizing: border-box;
+  width: 450px;
+  display: flex;
+  padding: 16px 22px;
+  background-color: #1F1F23;
+  color: #ffffff;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: notification-show 0.75s;
+  animation-iteration-count: 1;
+  top: 120px;
+  z-index: 10;
+  opacity: 0.9;
+
+  a {
+    text-decoration: none;
+  }
+
+  &--vkplay a {
+    color: #0077FF;
+  }
+
+  &--trovo a {
+    color: #30B373;
+  }
+
+  &--wasd a {
+    color: #3A5DF4;
+  }
+
+  &--kick a {
+    color: #53FC18;
+  }
+
+  &--youtube a {
+    color: #FF0000;
+  }
+
+  svg {
+    flex: 1 0 auto;
+    margin-right: 15px;
+    width: 64px;
+    height: 64px;
+  }
+
+  &__text-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+
+  &__description {
+    font-size: 13px;
+    color: #999999;
+  }
+
+  &__close-btn {
+    position: absolute;
+    right: 12px;
+    top: 14px;
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+    cursor: pointer;
+    background: transparent;
+    outline: none;
+    border: none;
+  
+    &:hover {
+      opacity: 1;
+    }
+  
+    &:before, &:after {
+      position: absolute;
+      left: 5px;
+      top: -2px;
+      content: ' ';
+      height: 17px;
+      width: 2px;
+      background-color: #ffffff;
+    }
+  
+    &:before {
+      transform: rotate(45deg);
+    }
+  
+    &:after {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+@keyframes notification-show {
+  from {top: 50px;}
+  to {top: 120px;}
+}

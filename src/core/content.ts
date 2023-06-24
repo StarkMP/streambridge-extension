@@ -1,8 +1,11 @@
-import { Channel } from '../types';
+import NotificationTemplate from '../templates/notification';
+import { Channel, Languages } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
 export default class Content {
   private readonly channelsData: Channel[];
+
+  private readonly language: Languages;
 
   private channelStatusObserver!: MutationObserver | void;
 
@@ -15,10 +18,19 @@ export default class Content {
     errorWrapper: '.core-error',
     sidebar: '#stream-bridge-sidebar',
     scrollbar: '.simplebar-track',
+    notification: '.sb-notification',
+    notificationCloseButton: '#sb-notification-close',
   };
 
-  constructor(channelsData: Channel[]) {
+  constructor({
+    channelsData,
+    language,
+  }: {
+    channelsData: Channel[];
+    language: Languages;
+  }) {
     this.channelsData = channelsData;
+    this.language = language;
 
     this.initRouteObserver();
     this.renderChannel();
@@ -44,6 +56,14 @@ export default class Content {
       this.selectors.wrapper
     ) as HTMLElement;
     const channel = this.findChannelByLocation();
+
+    const prevNotification = document.querySelector(
+      this.selectors.notification
+    );
+
+    if (prevNotification) {
+      prevNotification.remove();
+    }
 
     if (!channel) {
       if (iframe && wrapper) {
@@ -107,6 +127,24 @@ export default class Content {
           iframe.setAttribute('src', link);
 
           root.appendChild(iframe);
+
+          setTimeout(() => {
+            document.body.insertAdjacentHTML(
+              'beforeend',
+              NotificationTemplate(channel, this.language)
+            );
+
+            onElementLoaded(this.selectors.notification, (notification) => {
+              (
+                notification.querySelector(
+                  this.selectors.notificationCloseButton
+                ) as HTMLButtonElement
+              ).addEventListener('click', (e) => {
+                notification.style.display = 'none';
+              });
+            });
+          }, 2000);
+
           this.channelStatusObserver = undefined;
         }
       }

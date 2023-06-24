@@ -2,7 +2,7 @@
   {
     "twitch": "sadd0ta",
     "source": {
-      "id": "vkplay.live",
+      "id": "vkplay",
       "channelId": "saddota",
       "url": "https://vkplay.live/saddota"
     }
@@ -10,7 +10,7 @@
   {
     "twitch": "saneking-trovo",
     "source": {
-      "id": "trovo.live",
+      "id": "trovo",
       "channelId": "saneking",
       "url": "https://trovo.live/s/saneking"
     }
@@ -18,7 +18,7 @@
   {
     "twitch": "arthas-trovo",
     "source": {
-      "id": "trovo.live",
+      "id": "trovo",
       "channelId": "arthas",
       "url": "https://trovo.live/s/arthas"
     }
@@ -26,7 +26,7 @@
   {
     "twitch": "kuplinov-vkplay",
     "source": {
-      "id": "vkplay.live",
+      "id": "vkplay",
       "channelId": "kuplinov",
       "url": "https://vkplay.live/kuplinov"
     }
@@ -34,7 +34,7 @@
   {
     "twitch": "serega_pirat",
     "source": {
-      "id": "trovo.live",
+      "id": "trovo",
       "channelId": "serega_pirat",
       "url": "https://trovo.live/s/serega_pirat"
     }
@@ -42,7 +42,7 @@
   {
     "twitch": "evelone192",
     "source": {
-      "id": "kick.com",
+      "id": "kick",
       "channelId": "evelone",
       "url": "https://kick.com/evelone"
     }
@@ -50,7 +50,7 @@
   {
     "twitch": "zakviel-trovo",
     "source": {
-      "id": "trovo.live",
+      "id": "trovo",
       "channelId": "zakviel",
       "url": "https://trovo.live/s/zakviel"
     }
@@ -58,7 +58,7 @@
   {
     "twitch": "egorkreed",
     "source": {
-      "id": "kick.com",
+      "id": "kick",
       "channelId": "egorkreed58",
       "url": "https://kick.com/egorkreed58"
     }
@@ -66,7 +66,7 @@
   {
     "twitch": "mokrivskiy",
     "source": {
-      "id": "kick.com",
+      "id": "kick",
       "channelId": "mokrivskiy1",
       "url": "https://kick.com/mokrivskiy1"
     }
@@ -74,7 +74,7 @@
   {
     "twitch": "zxcursed",
     "source": {
-      "id": "kick.com",
+      "id": "kick",
       "channelId": "zxcursed",
       "url": "https://kick.com/zxcursed"
     }
@@ -82,7 +82,7 @@
   {
     "twitch": "rinlar",
     "source": {
-      "id": "kick.com",
+      "id": "kick",
       "channelId": "rinlar",
       "url": "https://kick.com/rinlar"
     }
@@ -90,7 +90,7 @@
   {
     "twitch": "ambience-wasd",
     "source": {
-      "id": "wasd.tv",
+      "id": "wasd",
       "channelId": "ambience",
       "url": "https://wasd.tv/ambience"
     }
@@ -98,7 +98,7 @@
   {
     "twitch": "zakvielboss-wasd",
     "source": {
-      "id": "wasd.tv",
+      "id": "wasd",
       "channelId": "zakvielboss",
       "url": "https://wasd.tv/zakvielboss"
     }
@@ -106,7 +106,7 @@
   {
     "twitch": "arthas",
     "source": {
-      "id": "youtube.com",
+      "id": "youtube",
       "channelId": "SpitefulDick",
       "url": "https://www.youtube.com/@SpitefulDick/live"
     }
@@ -114,9 +114,17 @@
   {
     "twitch": "meisio-yt",
     "source": {
-      "id": "youtube.com",
+      "id": "youtube",
       "channelId": "Meisio",
       "url": "https://www.youtube.com/@Meisio/live"
+    }
+  },
+  {
+    "twitch": "feyginlive-yt",
+    "source": {
+      "id": "youtube",
+      "channelId": "FeyginLive",
+      "url": "https://www.youtube.com/@FeyginLive/live"
     }
   }
 ]

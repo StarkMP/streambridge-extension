@@ -13,13 +13,14 @@ import { getLocalStorage } from './utils/storage';
 
 const init = async (channelsData: Channel[]): Promise<void> => {
   const storage = (await getLocalStorage()) as UserStorage;
+  const language = storage.language || detectLanguage();
 
   if (window.location.hostname === hostname) {
-    new Content(channelsData);
+    new Content({ channelsData, language });
     new Sidebar({
       channelsData,
       updateInterval: 60000,
-      language: storage.language || detectLanguage(),
+      language,
     });
 
     return;
