@@ -42,5 +42,13 @@
   "popup.settings.language": {
     "en": "Language",
     "ru": "Язык интерфейса"
+  },
+  "iframe.kick.open-chat-btn": {
+    "en": "Open in new window",
+    "ru": "Открыть"
+  },
+  "iframe.kick.open-chat-description": {
+    "en": "Usable only in new window",
+    "ru": "Доступно только в новом окне"
   }
 }

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+import { translations } from '../translations';
 import { PlatformId, StreamingPlatform } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
@@ -25,7 +26,7 @@ const kick: StreamingPlatform = {
       return null;
     }
   },
-  render: (channel) => {
+  render: ({ channel, language }) => {
     onElementLoaded('nav', (el) => {
       el.style.display = 'none';
     });
@@ -55,7 +56,7 @@ const kick: StreamingPlatform = {
     onElementLoaded(
       '.send-row > button .inner-label',
       (el) => {
-        el.innerHTML = 'Open in new window';
+        el.innerHTML = translations['iframe.kick.open-chat-btn'][language];
       },
       true
     );
@@ -63,7 +64,10 @@ const kick: StreamingPlatform = {
     onElementLoaded(
       '#message-input',
       (el) => {
-        el.setAttribute('data-placeholder', 'Usable only in new window');
+        el.setAttribute(
+          'data-placeholder',
+          translations['iframe.kick.open-chat-description'][language]
+        );
       },
       true
     );

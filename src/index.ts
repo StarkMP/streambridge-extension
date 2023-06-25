@@ -1,25 +1,23 @@
 import './styles/twitch.scss';
 import './styles/youtube.scss';
 
-import { hostname } from './constants';
+import { hostname, sidebarUpdateInterval } from './constants';
 import Content from './core/content';
 import IFrame from './core/iframe';
 import Sidebar from './core/sidebar';
+import { getLocalStorage } from './core/storage';
 import db from './db/channels.json';
-import { detectLanguage } from './translations';
-import { Channel, UserStorage } from './types';
+import { Channel } from './types';
 import { isFrame } from './utils/frame';
-import { getLocalStorage } from './utils/storage';
 
 const init = async (channelsData: Channel[]): Promise<void> => {
-  const storage = (await getLocalStorage()) as UserStorage;
-  const language = storage.language || detectLanguage();
+  const { language } = await getLocalStorage();
 
   if (window.location.hostname === hostname) {
     new Content({ channelsData, language });
     new Sidebar({
       channelsData,
-      updateInterval: 60000,
+      updateInterval: sidebarUpdateInterval,
       language,
     });
 
@@ -40,7 +38,7 @@ const init = async (channelsData: Channel[]): Promise<void> => {
     return;
   }
 
-  new IFrame(channel);
+  new IFrame({ channel, language });
 };
 
 init(db as Channel[]).catch((err) => console.error(err));

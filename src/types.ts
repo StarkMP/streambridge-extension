@@ -1,6 +1,6 @@
 export type StreamingPlatform = {
   id: string;
-  render: (channel: Channel) => void;
+  render: (data: { channel: Channel; language: Languages }) => void;
   getInfo: (channel: Channel) => Promise<ChannelInfo | null>;
 };
 

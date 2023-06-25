@@ -8,9 +8,12 @@ import React, {
 } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
-import { detectLanguage } from '../../translations';
+import {
+  getLocalStorage,
+  initialStorageValue,
+  setLocalStorage,
+} from '../../core/storage';
 import { Channel, UserStorage } from '../../types';
-import { getLocalStorage, setLocalStorage } from '../../utils/storage';
 
 type StorageContextProps = {
   storage: UserStorage;
@@ -28,13 +31,11 @@ export const useStorage = (): StorageContextProps => useContext(Context);
 
 export const StorageContext = Context;
 
-const initialValue: UserStorage = { followed: [], language: detectLanguage() };
-
 export const StorageProvider = ({
   children,
   channels,
 }: StorageProviderProps): JSX.Element => {
-  const [storage, setStorage] = useState<UserStorage>(initialValue);
+  const [storage, setStorage] = useState<UserStorage>(initialStorageValue);
   const { setLanguage } = useLocalizer();
 
   useEffect(() => {
@@ -43,10 +44,7 @@ export const StorageProvider = ({
 
   const initStorage = async (): Promise<void> => {
     try {
-      const storage = {
-        ...initialValue,
-        ...(await getLocalStorage()),
-      } as UserStorage;
+      const storage = await getLocalStorage();
 
       const followed = storage.followed.filter((twitch) =>
         channels.find((channel) => channel.twitch === twitch)

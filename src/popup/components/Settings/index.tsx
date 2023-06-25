@@ -4,8 +4,8 @@ import React, { JSX } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 import styled from 'styled-components';
 
-import { Languages, UserStorage } from '../../../types';
-import { getLocalStorage, setLocalStorage } from '../../../utils/storage';
+import { getLocalStorage, setLocalStorage } from '../../../core/storage';
+import { Languages } from '../../../types';
 
 const { Title, Text } = Typography;
 
@@ -31,7 +31,7 @@ const Settings = (): JSX.Element => {
     getLocalStorage()
       .then((storage) => {
         setLocalStorage({
-          ...(storage as UserStorage),
+          ...storage,
           language: value as Languages,
         }).catch(() => {});
       })

@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 import { PlatformId, StreamingPlatform } from '../types';
 import { onElementLoaded } from '../utils/dom';
 

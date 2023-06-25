@@ -1,9 +1,9 @@
 import { maxFollowedChannels } from '../constants';
 import SidebarTemplate from '../templates/sidebar';
-import { Channel, ChannelInfo, Languages, UserStorage } from '../types';
+import { Channel, ChannelInfo, Languages } from '../types';
 import { getChannel, getPlatform } from '../utils/db';
 import { onElementLoaded } from '../utils/dom';
-import { getLocalStorage } from '../utils/storage';
+import { getLocalStorage } from './storage';
 
 export default class Sidebar {
   private followedChannelsInfo: ChannelInfo[];
@@ -116,10 +116,9 @@ export default class Sidebar {
   }
 
   private async fetchFollowedChannelsInfo(): Promise<ChannelInfo[]> {
-    const storage = (await getLocalStorage()) as UserStorage;
-    const followed = storage.followed;
+    const { followed } = await getLocalStorage();
 
-    if (!followed) {
+    if (followed.length === 0) {
       return [];
     }
 

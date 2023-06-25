@@ -1,11 +1,20 @@
 import platforms from '../streaming-platforms';
-import { Channel } from '../types';
+import { Channel, Languages } from '../types';
 
 export default class IFrame {
   private readonly channel: Channel;
 
-  constructor(channel: Channel) {
+  private readonly language: Languages;
+
+  constructor({
+    channel,
+    language,
+  }: {
+    channel: Channel;
+    language: Languages;
+  }) {
     this.channel = channel;
+    this.language = language;
 
     this.initRouteObserver();
     this.render();
@@ -28,7 +37,7 @@ export default class IFrame {
   private render(): void {
     for (const platform of platforms) {
       if (platform.id === this.channel.source.id) {
-        platform.render(this.channel);
+        platform.render({ channel: this.channel, language: this.language });
       }
     }
   }
