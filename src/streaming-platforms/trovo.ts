@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { PlatformId, StreamingPlatform } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
@@ -19,6 +21,8 @@ const trovo: StreamingPlatform = {
     ]);
 
     try {
+      // we should use fetch instead of axios
+      // because we get CORS error
       const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {

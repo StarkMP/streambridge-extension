@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { PlatformId, StreamingPlatform } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
@@ -7,12 +9,8 @@ const wasd: StreamingPlatform = {
     const apiUrl = `https://wasd.tv/api/v2/broadcasts/public?channel_name=${channel.source.channelId}`;
 
     try {
-      const response = await fetch(apiUrl, {
-        headers: { Accept: 'application/json' },
-        cache: 'no-store',
-      });
-
-      const data = await response.json();
+      const response = await axios.get(apiUrl);
+      const data = response.data;
 
       const isOnline = data.result.channel.channel_is_live;
 

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import { PlatformId, StreamingPlatform } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
@@ -7,12 +9,8 @@ const kick: StreamingPlatform = {
     const apiUrl = `https://kick.com/api/v2/channels/${channel.source.channelId}`;
 
     try {
-      const response = await fetch(apiUrl, {
-        headers: { Accept: 'application/json' },
-        cache: 'no-store',
-      });
-
-      const data = await response.json();
+      const response = await axios.get(apiUrl);
+      const data = response.data;
 
       return {
         twitch: channel.twitch,
