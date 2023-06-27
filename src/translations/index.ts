@@ -1,6 +1,6 @@
 import { Locales } from 'reactjs-localizer';
 
-import { defaultLocale } from '../constants';
+import { defaultLanguage } from '../constants';
 import { Languages } from '../types';
 import { formatLanguage } from '../utils/format';
 import locales from './locales.json';
@@ -37,5 +37,5 @@ export const detectLanguage = (): Languages => {
     return browserLanguage as Languages;
   }
 
-  return defaultLocale;
+  return defaultLanguage;
 };

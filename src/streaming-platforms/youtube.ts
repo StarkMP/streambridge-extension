@@ -55,9 +55,10 @@ const youtube: StreamingPlatform = {
         category,
         viewers: isOnline
           ? Number(
-              initData?.contents?.twoColumnWatchNextResults?.results?.results
-                ?.contents[0].videoPrimaryInfoRenderer?.viewCount
-                ?.videoViewCountRenderer?.viewCount?.runs[0].text
+              initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.viewCount?.runs[0].text.replace(
+                ',',
+                ''
+              )
             )
           : 0,
         title: '',

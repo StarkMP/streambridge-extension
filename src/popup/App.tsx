@@ -4,7 +4,7 @@ import React, { JSX, useState } from 'react';
 import { LocalizerProvider } from 'reactjs-localizer';
 import { createGlobalStyle } from 'styled-components';
 
-import { defaultLocale } from '../constants';
+import { defaultLanguage } from '../constants';
 import channels from '../db/channels.json';
 import { translations } from '../translations';
 import { Channel, Pages } from '../types';
@@ -63,8 +63,8 @@ const App = (): JSX.Element => {
 
   return (
     <LocalizerProvider
-      defaultLanguage={defaultLocale}
-      currentLanguage={defaultLocale}
+      defaultLanguage={defaultLanguage}
+      currentLanguage={defaultLanguage}
       locales={translations}
     >
       <StorageProvider channels={channels as Channel[]}>
