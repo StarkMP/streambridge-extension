@@ -76,8 +76,7 @@ export default class Content {
         ) as HTMLVideoElement;
 
         if (video) {
-          // eslint-disable-next-line @typescript-eslint/no-floating-promises
-          video.play();
+          video.play().catch(() => {});
         }
       }
 

@@ -18,12 +18,12 @@ export const findElement = (
   return null; // If no element is found
 };
 
-export const onElementLoaded = (
+export const onElementLoaded = <T extends HTMLElement>(
   selector: string,
-  callback: (el: HTMLElement) => void,
+  callback: (el: T) => void,
   keepObserver?: boolean
 ): MutationObserver | void => {
-  const existsElement = document.querySelector(selector) as HTMLElement;
+  const existsElement = document.querySelector<T>(selector);
 
   if (existsElement) {
     callback(existsElement);
@@ -46,9 +46,9 @@ export const onElementLoaded = (
           continue;
         }
 
-        const element = (node as HTMLElement).matches(selector)
-          ? (node as HTMLElement)
-          : ((node as HTMLElement).querySelector(selector) as HTMLElement);
+        const element = (node as T).matches(selector)
+          ? (node as T)
+          : (node as T).querySelector<T>(selector);
 
         if (element) {
           callback(element);
