@@ -1,8 +1,7 @@
+import { translations } from '@sdk/translations';
+import { PlatformId, StreamingPlatform } from '@sdk/types';
+import { onElementLoaded } from '@sdk/utils/dom';
 import axios from 'axios';
-
-import { translations } from '../translations';
-import { PlatformId, StreamingPlatform } from '../types';
-import { onElementLoaded } from '../utils/dom';
 
 const kick: StreamingPlatform = {
   id: PlatformId.Kick,

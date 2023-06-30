@@ -1,5 +1,6 @@
-import { translations } from '../translations';
-import { Channel, Languages, PlatformId } from '../types';
+import { translations } from '@sdk/translations';
+import { Channel, Languages, PlatformId } from '@sdk/types';
+
 import KickIconTemplate from './icons/kick';
 import TrovoIconTemplate from './icons/trovo';
 import VKPlayIconTemplate from './icons/vkplay';

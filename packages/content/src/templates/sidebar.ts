@@ -1,5 +1,6 @@
-import { translations } from '../translations';
-import { ChannelInfo, Languages } from '../types';
+import { translations } from '@sdk/translations';
+import { ChannelInfo, Languages } from '@sdk/types';
+
 import SidebarItemTemplate from './sidebar-item';
 
 const SidebarTemplate = (

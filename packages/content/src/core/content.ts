@@ -1,7 +1,8 @@
-import { getChannel } from '../api/methods/whitelist';
+import { getChannel } from '@sdk/api/methods/whitelist';
+import { Channel, Languages } from '@sdk/types';
+import { onElementLoaded } from '@sdk/utils/dom';
+
 import NotificationTemplate from '../templates/notification';
-import { Channel, Languages } from '../types';
-import { onElementLoaded } from '../utils/dom';
 
 export default class Content {
   private cachedChannels: Channel[] = [];

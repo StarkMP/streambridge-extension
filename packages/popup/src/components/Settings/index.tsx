@@ -1,11 +1,10 @@
+import { getLocalStorage, setLocalStorage } from '@sdk/storage';
+import { Languages } from '@sdk/types';
 import { Select as SelectComponent } from 'antd';
 import { Typography } from 'antd';
 import React, { JSX } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 import styled from 'styled-components';
-
-import { getLocalStorage, setLocalStorage } from '../../../core/storage';
-import { Languages } from '../../../types';
 
 const { Title, Text } = Typography;
 

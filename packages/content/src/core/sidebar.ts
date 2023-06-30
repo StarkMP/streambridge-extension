@@ -1,10 +1,11 @@
-import { getChannel } from '../api/methods/whitelist';
-import { maxFollowedChannels } from '../constants';
+import { getChannel } from '@sdk/api/methods/whitelist';
+import { maxFollowedChannels } from '@sdk/constants';
+import { getLocalStorage } from '@sdk/storage';
+import { Channel, ChannelInfo, Languages } from '@sdk/types';
+import { onElementLoaded } from '@sdk/utils/dom';
+
 import streamingPlatforms from '../streaming-platforms';
 import SidebarTemplate from '../templates/sidebar';
-import { Channel, ChannelInfo, Languages } from '../types';
-import { onElementLoaded } from '../utils/dom';
-import { getLocalStorage } from './storage';
 
 export default class Sidebar {
   private followedChannelsInfo: ChannelInfo[] = [];

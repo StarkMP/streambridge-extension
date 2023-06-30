@@ -4,10 +4,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "typecheck": "tsc",
-    "eslint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "lint": "npm run eslint && npm run typecheck"
+    "typecheck": "tsc --noEmit"
   },
   "author": "Maksim Serebryakov <starkmp.work@gmail.com>",
   "devDependencies": {

@@ -1,3 +1,9 @@
+import {
+  getLocalStorage,
+  initialStorageValue,
+  setLocalStorage,
+} from '@sdk/storage';
+import { Channel, UserStorage } from '@sdk/types';
 import React, {
   createContext,
   JSX,
@@ -7,13 +13,6 @@ import React, {
   useState,
 } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
-
-import {
-  getLocalStorage,
-  initialStorageValue,
-  setLocalStorage,
-} from '../../core/storage';
-import { Channel, UserStorage } from '../../types';
 
 type StorageContextProps = {
   storage: UserStorage;

@@ -1,13 +1,14 @@
 import './styles/twitch.scss';
 import './styles/youtube.scss';
 
-import { getChannel } from './api/methods/whitelist';
-import { hostname, sidebarUpdateInterval } from './constants';
+import { getChannel } from '@sdk/api/methods/whitelist';
+import { hostname, sidebarUpdateInterval } from '@sdk/constants';
+import { getLocalStorage } from '@sdk/storage';
+import { isExtensionFrame } from '@sdk/utils/frame';
+
 import Content from './core/content';
 import IFrame from './core/iframe';
 import Sidebar from './core/sidebar';
-import { getLocalStorage } from './core/storage';
-import { isExtensionFrame } from './utils/frame';
 
 const init = async (): Promise<void> => {
   const { language } = await getLocalStorage();

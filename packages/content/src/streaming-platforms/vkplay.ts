@@ -1,7 +1,6 @@
+import { PlatformId, StreamingPlatform } from '@sdk/types';
+import { onElementLoaded } from '@sdk/utils/dom';
 import axios from 'axios';
-
-import { PlatformId, StreamingPlatform } from '../types';
-import { onElementLoaded } from '../utils/dom';
 
 const vkPlay: StreamingPlatform = {
   id: PlatformId.VKPlayLive,

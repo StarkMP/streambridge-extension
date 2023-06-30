@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { Channel, PaginationParams } from '../../../types';
+import { Channel, PaginationParams } from '../../types';
 import {
   arrayToQueryParams,
   getPaginationQueryParams,

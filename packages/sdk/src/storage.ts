@@ -1,5 +1,5 @@
-import { detectLanguage } from '../translations';
-import { UserStorage } from '../types';
+import { detectLanguage } from './translations';
+import { UserStorage } from './types';
 
 export const initialStorageValue: UserStorage = {
   followed: [],

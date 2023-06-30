@@ -1,5 +1,5 @@
-import { PlatformId, StreamingPlatform } from '../types';
-import { onElementLoaded } from '../utils/dom';
+import { PlatformId, StreamingPlatform } from '@sdk/types';
+import { onElementLoaded } from '@sdk/utils/dom';
 
 const trovo: StreamingPlatform = {
   id: PlatformId.Trovo,

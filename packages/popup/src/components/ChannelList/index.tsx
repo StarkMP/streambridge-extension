@@ -1,10 +1,10 @@
+import { maxFollowedChannels } from '@sdk/constants';
+import { Channel, PlatformId } from '@sdk/types';
 import { Input, List as ListComponent, Switch, Tooltip } from 'antd';
 import React, { JSX, useRef, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 import styled from 'styled-components';
 
-import { maxFollowedChannels } from '../../../constants';
-import { Channel, PlatformId } from '../../../types';
 import { useStorage } from '../../context/StorageContext';
 import {
   KickIcon,

@@ -1,6 +1,5 @@
+import { PlatformId, StreamingPlatform } from '@sdk/types';
 import axios from 'axios';
-
-import { PlatformId, StreamingPlatform } from '../types';
 
 const youtube: StreamingPlatform = {
   id: PlatformId.YouTube,
