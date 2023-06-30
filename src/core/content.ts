@@ -1,9 +1,10 @@
+import { getChannel } from '../api/methods/whitelist';
 import NotificationTemplate from '../templates/notification';
 import { Channel, Languages } from '../types';
 import { onElementLoaded } from '../utils/dom';
 
 export default class Content {
-  private readonly channelsData: Channel[];
+  private cachedChannels: Channel[] = [];
 
   private readonly language: Languages;
 
@@ -22,18 +23,11 @@ export default class Content {
     notificationCloseButton: '#sb-notification-close',
   };
 
-  constructor({
-    channelsData,
-    language,
-  }: {
-    channelsData: Channel[];
-    language: Languages;
-  }) {
-    this.channelsData = channelsData;
+  constructor({ language }: { language: Languages }) {
     this.language = language;
 
     this.initRouteObserver();
-    this.renderChannel();
+    this.renderChannel().catch(() => {});
   }
 
   private initRouteObserver(): void {
@@ -43,19 +37,19 @@ export default class Content {
       if (location.href !== previousUrl) {
         previousUrl = location.href;
 
-        this.renderChannel();
+        this.renderChannel().catch(() => {});
       }
     });
 
     observer.observe(document, { subtree: true, childList: true });
   }
 
-  private renderChannel(): void {
+  private async renderChannel(): Promise<void> {
     const iframe = document.querySelector(this.selectors.iframe) as HTMLElement;
     const wrapper = document.querySelector(
       this.selectors.wrapper
     ) as HTMLElement;
-    const channel = this.findChannelByLocation();
+    const channel = await this.findChannelByLocation();
 
     const prevNotification = document.querySelector(
       this.selectors.notification
@@ -123,6 +117,7 @@ export default class Content {
           iframe.allow = 'autoplay; fullscreen';
           iframe.style.position = 'absolute';
           iframe.id = 'stream-bridge';
+          iframe.name = `sb:${channel.twitch}`;
           iframe.setAttribute('src', link);
 
           root.appendChild(iframe);
@@ -150,9 +145,28 @@ export default class Content {
     );
   }
 
-  private findChannelByLocation(): Channel | void {
-    const href = window.location.href.toLowerCase();
+  private async fetchChannel(twitch: string): Promise<Channel | null> {
+    const cached = this.cachedChannels.find((item) => item.twitch === twitch);
 
-    return this.channelsData.find((item) => href.includes(`/${item.twitch}`));
+    if (cached) {
+      return cached;
+    }
+
+    try {
+      const { data } = await getChannel(twitch);
+
+      this.cachedChannels.push(data);
+
+      return data;
+    } catch (err) {
+      return null;
+    }
+  }
+
+  private async findChannelByLocation(): Promise<Channel | null> {
+    const twitch = document.location.href.split('.tv/')[1].split('/')[0];
+    const channel = await this.fetchChannel(twitch);
+
+    return channel;
   }
 }

@@ -15,7 +15,7 @@ const vkPlay: StreamingPlatform = {
       return {
         twitch: channel.twitch,
         isOnline: data.isOnline,
-        category: data.category.title,
+        category: data.category?.title,
         viewers: data.isOnline ? data.count.viewers : 0,
         title: data.title,
         nickname: data.user.displayName,

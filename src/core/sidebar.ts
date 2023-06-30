@@ -1,16 +1,17 @@
+import { getChannel } from '../api/methods/whitelist';
 import { maxFollowedChannels } from '../constants';
+import streamingPlatforms from '../streaming-platforms';
 import SidebarTemplate from '../templates/sidebar';
 import { Channel, ChannelInfo, Languages } from '../types';
-import { getChannel, getPlatform } from '../utils/db';
 import { onElementLoaded } from '../utils/dom';
 import { getLocalStorage } from './storage';
 
 export default class Sidebar {
-  private followedChannelsInfo: ChannelInfo[];
+  private followedChannelsInfo: ChannelInfo[] = [];
 
-  private cachedChannelsInfo: ChannelInfo[];
+  private cachedChannelsInfo: ChannelInfo[] = [];
 
-  private readonly channelsData: Channel[];
+  private cachedChannels: Channel[] = [];
 
   private readonly updateInterval: number;
 
@@ -22,19 +23,14 @@ export default class Sidebar {
   };
 
   constructor({
-    channelsData,
     updateInterval,
     language,
   }: {
-    channelsData: Channel[];
     updateInterval: number;
     language: Languages;
   }) {
-    this.channelsData = channelsData;
     this.updateInterval = updateInterval;
     this.language = language;
-    this.followedChannelsInfo = [];
-    this.cachedChannelsInfo = [];
 
     this.init().catch(() => {});
     this.initStorageChangeHandler();
@@ -145,18 +141,18 @@ export default class Sidebar {
     return channelsInfo;
   }
 
-  private async fetchChannelInfo(
-    channelId: string
-  ): Promise<ChannelInfo | null> {
-    const platform = getPlatform(this.channelsData, channelId);
+  private async fetchChannelInfo(twitch: string): Promise<ChannelInfo | null> {
+    const channel = await this.fetchChannel(twitch);
 
-    if (!platform) {
+    if (!channel) {
       return null;
     }
 
-    const channel = getChannel(this.channelsData, channelId);
+    const platform = streamingPlatforms.find(
+      (platform) => channel.source.id === platform.id
+    );
 
-    if (!channel) {
+    if (!platform) {
       return null;
     }
 
@@ -184,5 +180,23 @@ export default class Sidebar {
 
       el.insertAdjacentHTML('afterend', template);
     });
+  }
+
+  private async fetchChannel(twitch: string): Promise<Channel | null> {
+    const cached = this.cachedChannels.find((item) => item.twitch === twitch);
+
+    if (cached) {
+      return cached;
+    }
+
+    try {
+      const { data } = await getChannel(twitch);
+
+      this.cachedChannels.push(data);
+
+      return data;
+    } catch (err) {
+      return null;
+    }
   }
 }

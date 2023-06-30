@@ -1,11 +1,10 @@
 import 'antd/dist/reset.css';
 
-import React, { JSX, useState } from 'react';
+import React, { JSX, useEffect, useState } from 'react';
 import { LocalizerProvider } from 'reactjs-localizer';
 import { createGlobalStyle } from 'styled-components';
 
 import { defaultLanguage } from '../constants';
-import channels from '../db/channels.json';
 import { translations } from '../translations';
 import { Channel, Pages } from '../types';
 import ChannelList from './components/ChannelList';
@@ -45,12 +44,16 @@ const GlobalStyle = createGlobalStyle`
 
 const App = (): JSX.Element => {
   const [page, setPage] = useState<Pages>(Pages.Main);
+  const [channels, setChannels] = useState<Channel[]>([]);
+  const [loading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => {}, []);
 
   let currentPage;
 
   switch (page) {
     case Pages.Main:
-      currentPage = <ChannelList channels={channels as Channel[]} />;
+      currentPage = <ChannelList channels={channels} />;
       break;
 
     case Pages.Settings:
@@ -67,7 +70,7 @@ const App = (): JSX.Element => {
       currentLanguage={defaultLanguage}
       locales={translations}
     >
-      <StorageProvider channels={channels as Channel[]}>
+      <StorageProvider channels={channels}>
         <GlobalStyle />
         <Header isMainPage={page === Pages.Main} setPage={setPage} />
         {currentPage}

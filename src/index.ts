@@ -1,13 +1,13 @@
 import './styles/twitch.scss';
 import './styles/youtube.scss';
 
-import { getChannel } from './api';
+import { getChannel } from './api/methods/whitelist';
 import { hostname, sidebarUpdateInterval } from './constants';
 import Content from './core/content';
 import IFrame from './core/iframe';
 import Sidebar from './core/sidebar';
 import { getLocalStorage } from './core/storage';
-import { isFrame } from './utils/frame';
+import { isExtensionFrame } from './utils/frame';
 
 const init = async (): Promise<void> => {
   const { language } = await getLocalStorage();
@@ -22,13 +22,13 @@ const init = async (): Promise<void> => {
     return;
   }
 
-  if (!isFrame()) {
+  if (!isExtensionFrame()) {
     return;
   }
 
-  getChannel()
-    .then((res) => new IFrame({ channel: res.data, language }))
-    .catch(() => {});
+  const { data } = await getChannel(window.name.replace('sb:', ''));
+
+  new IFrame({ channel: data, language });
 };
 
 init().catch((err) => console.error(err));
