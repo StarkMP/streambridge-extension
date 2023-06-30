@@ -11,4 +11,7 @@ export default defineConfig({
   plugins: [react()],
   base: './',
   publicDir: false,
+  build: {
+    outDir: '../../dist/popup',
+  },
 });

@@ -4,14 +4,12 @@
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "build": "lerna run build --parallel",
-    "dev": "lerna run dev --parallel"
+    "build": "cd ./packages/content-script && npm run build && cd ../popup && npm run build",
+    "dev": "cd ./packages/popup && npm run dev",
+    "postinstall": "cd ./packages/shared && npm i && cd ../content-script && npm i && cd ../popup && npm i"
   },
   "author": "Maksim Serebryakov <starkmp.work@gmail.com>",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
   "devDependencies": {
     "@types/chrome": "^0.0.237",
     "@types/node": "^20.3.2",
@@ -26,7 +24,6 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
-    "lerna": "^7.1.1",
     "prettier": "^2.3.0",
     "typescript": "^4.7.4"
   },

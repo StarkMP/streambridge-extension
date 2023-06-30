@@ -7,14 +7,16 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, '../shared/src'),
     },
   },
+  publicDir: '../../public',
   build: {
+    outDir: '../../dist',
     rollupOptions: {
       input: {
         index: './src/index.ts',
       },
       output: {
-        entryFileNames: 'content/[name].js',
-        assetFileNames: 'content/[name].[ext]',
+        entryFileNames: 'content-script/[name].js',
+        assetFileNames: 'content-script/[name].[ext]',
       },
     },
   },

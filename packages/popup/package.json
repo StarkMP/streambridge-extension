@@ -32,6 +32,7 @@
     "Firefox ESR",
     "not ie < 9"
   ],
+  "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
     "antd": "^5.6.1",
