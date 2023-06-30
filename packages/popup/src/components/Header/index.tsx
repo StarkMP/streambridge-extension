@@ -3,7 +3,7 @@ import {
   SettingOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Pages } from '@sdk/types';
+import { Pages } from '@shared/types';
 import { Button, Tooltip } from 'antd';
 import React, { JSX } from 'react';
 import { useLocalizer } from 'reactjs-localizer';

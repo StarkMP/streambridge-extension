@@ -2,8 +2,8 @@ import {
   getLocalStorage,
   initialStorageValue,
   setLocalStorage,
-} from '@sdk/storage';
-import { Channel, UserStorage } from '@sdk/types';
+} from '@shared/storage';
+import { Channel, UserStorage } from '@shared/types';
 import React, {
   createContext,
   JSX,

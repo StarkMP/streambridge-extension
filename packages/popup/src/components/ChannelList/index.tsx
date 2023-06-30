@@ -1,5 +1,5 @@
-import { maxFollowedChannels } from '@sdk/constants';
-import { Channel, PlatformId } from '@sdk/types';
+import { maxFollowedChannels } from '@shared/constants';
+import { Channel, PlatformId } from '@shared/types';
 import { Input, List as ListComponent, Switch, Tooltip } from 'antd';
 import React, { JSX, useRef, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';

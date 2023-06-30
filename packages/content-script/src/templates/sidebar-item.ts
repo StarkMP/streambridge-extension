@@ -1,5 +1,5 @@
-import { ChannelInfo } from '@sdk/types';
-import { formatNumber } from '@sdk/utils/format';
+import { ChannelInfo } from '@shared/types';
+import { formatNumber } from '@shared/utils/format';
 
 const SidebarItemTemplate = (channel: ChannelInfo): string => {
   const isOnline = channel.isOnline;

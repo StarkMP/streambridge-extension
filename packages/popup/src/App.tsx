@@ -1,8 +1,8 @@
 import 'antd/dist/reset.css';
 
-import { defaultLanguage } from '@sdk/constants';
-import { translations } from '@sdk/translations';
-import { Channel, Pages } from '@sdk/types';
+import { defaultLanguage } from '@shared/constants';
+import { translations } from '@shared/translations';
+import { Channel, Pages } from '@shared/types';
 import React, { JSX, useEffect, useState } from 'react';
 import { LocalizerProvider } from 'reactjs-localizer';
 import { createGlobalStyle } from 'styled-components';

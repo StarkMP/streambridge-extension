@@ -1,5 +1,5 @@
-import { getLocalStorage, setLocalStorage } from '@sdk/storage';
-import { Languages } from '@sdk/types';
+import { getLocalStorage, setLocalStorage } from '@shared/storage';
+import { Languages } from '@shared/types';
 import { Select as SelectComponent } from 'antd';
 import { Typography } from 'antd';
 import React, { JSX } from 'react';

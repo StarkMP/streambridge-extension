@@ -1,10 +1,10 @@
 import './styles/twitch.scss';
 import './styles/youtube.scss';
 
-import { getChannel } from '@sdk/api/methods/whitelist';
-import { hostname, sidebarUpdateInterval } from '@sdk/constants';
-import { getLocalStorage } from '@sdk/storage';
-import { isExtensionFrame } from '@sdk/utils/frame';
+import { getChannel } from '@shared/api/methods/whitelist';
+import { hostname, sidebarUpdateInterval } from '@shared/constants';
+import { getLocalStorage } from '@shared/storage';
+import { isExtensionFrame } from '@shared/utils/frame';
 
 import Content from './core/content';
 import IFrame from './core/iframe';

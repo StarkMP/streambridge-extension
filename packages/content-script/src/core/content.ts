@@ -1,6 +1,6 @@
-import { getChannel } from '@sdk/api/methods/whitelist';
-import { Channel, Languages } from '@sdk/types';
-import { onElementLoaded } from '@sdk/utils/dom';
+import { getChannel } from '@shared/api/methods/whitelist';
+import { Channel, Languages } from '@shared/types';
+import { onElementLoaded } from '@shared/utils/dom';
 
 import NotificationTemplate from '../templates/notification';
 

@@ -1,4 +1,4 @@
-import { Channel, Languages } from '@sdk/types';
+import { Channel, Languages } from '@shared/types';
 
 import platforms from '../streaming-platforms';
 

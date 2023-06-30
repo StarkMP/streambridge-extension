@@ -1,5 +1,5 @@
-import { translations } from '@sdk/translations';
-import { ChannelInfo, Languages } from '@sdk/types';
+import { translations } from '@shared/translations';
+import { ChannelInfo, Languages } from '@shared/types';
 
 import SidebarItemTemplate from './sidebar-item';
 

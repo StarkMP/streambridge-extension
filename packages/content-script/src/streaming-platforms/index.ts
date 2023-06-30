@@ -1,4 +1,4 @@
-import { StreamingPlatform } from '@sdk/types';
+import { StreamingPlatform } from '@shared/types';
 
 import kick from './kick';
 import trovo from './trovo';

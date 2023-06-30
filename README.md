@@ -1,14 +1,14 @@
 # Stream Bridge
 Watch your favorite streamers from other streaming services on Twitch
 
-## Technologies stack
+## Technology stack
 - TypeScript
 - React
 - Styled-components
-- Scss (content)
+- Scss (content-script)
 
 ## Structure
-Monorepo structure with separate popup and content-script packages with separate common SDK
+Monorepo structure with separate popup, content-script and shared packages
 
 ## Startup
 

@@ -1,4 +1,4 @@
-import { PlatformId, StreamingPlatform } from '@sdk/types';
+import { PlatformId, StreamingPlatform } from '@shared/types';
 import axios from 'axios';
 
 const youtube: StreamingPlatform = {

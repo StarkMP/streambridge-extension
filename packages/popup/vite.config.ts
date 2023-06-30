@@ -5,7 +5,7 @@ import { defineConfig } from 'vite';
 export default defineConfig({
   resolve: {
     alias: {
-      '@sdk': path.resolve(__dirname, '../sdk/src'),
+      '@shared': path.resolve(__dirname, '../shared/src'),
     },
   },
   plugins: [react()],
