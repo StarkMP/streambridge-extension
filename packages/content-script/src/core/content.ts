@@ -1,4 +1,4 @@
-import { getChannel } from '@shared/api/methods/whitelist';
+import { getChannel } from '@shared/api/services/whitelist';
 import { Channel, Languages } from '@shared/types';
 import { onElementLoaded } from '@shared/utils/dom';
 

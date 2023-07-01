@@ -1,40 +1,23 @@
-import { getLocalStorage, setLocalStorage } from '@shared/storage';
 import { Languages } from '@shared/types';
-import { Select as SelectComponent } from 'antd';
 import { Typography } from 'antd';
 import React, { JSX } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
-import styled from 'styled-components';
 
-const { Title, Text } = Typography;
+import { useStorage } from '../../context/StorageContext';
+import { Label, Select, Wrapper } from './styles';
 
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+const { Title } = Typography;
 
-const Label = styled(Text)`
-  margin-bottom: 4px;
-`;
-
-const Select = styled(SelectComponent)`
-  width: 250px;
-`;
-
-const Settings = (): JSX.Element => {
+const UserSettingsPage = (): JSX.Element => {
   const { localize, language, setLanguage } = useLocalizer();
+  const { updateStorage } = useStorage();
 
   const onChangeLanguage = (value: string): void => {
     setLanguage(value);
 
-    getLocalStorage()
-      .then((storage) => {
-        setLocalStorage({
-          ...storage,
-          language: value as Languages,
-        }).catch(() => {});
-      })
-      .catch(() => {});
+    updateStorage({
+      language: value as Languages,
+    });
   };
 
   return (
@@ -55,4 +38,4 @@ const Settings = (): JSX.Element => {
   );
 };
 
-export default Settings;
+export default UserSettingsPage;

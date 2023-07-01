@@ -1,7 +1,7 @@
 import './styles/twitch.scss';
 import './styles/youtube.scss';
 
-import { getChannel } from '@shared/api/methods/whitelist';
+import { getChannel } from '@shared/api/services/whitelist';
 import { hostname, sidebarUpdateInterval } from '@shared/constants';
 import { getLocalStorage } from '@shared/storage';
 import { isExtensionFrame } from '@shared/utils/frame';

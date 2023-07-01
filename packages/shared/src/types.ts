@@ -41,11 +41,6 @@ export enum Languages {
   Russian = 'ru',
 }
 
-export enum Pages {
-  Main = 0,
-  Settings,
-}
-
 export type PaginationParams = {
   limit?: number;
   offset?: number;

@@ -1,4 +1,4 @@
-import { getChannel } from '@shared/api/methods/whitelist';
+import { getChannel } from '@shared/api/services/whitelist';
 import { maxFollowedChannels } from '@shared/constants';
 import { getLocalStorage } from '@shared/storage';
 import { Channel, ChannelInfo, Languages } from '@shared/types';

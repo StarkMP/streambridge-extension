@@ -1,9 +1,10 @@
+import { getChannelsByIds } from '@shared/api/services/whitelist';
 import {
   getLocalStorage,
   initialStorageValue,
   setLocalStorage,
 } from '@shared/storage';
-import { Channel, UserStorage } from '@shared/types';
+import { UserStorage } from '@shared/types';
 import React, {
   createContext,
   JSX,
@@ -14,14 +15,15 @@ import React, {
 } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
+import { useSimpleRouter } from '../pages';
+
 type StorageContextProps = {
   storage: UserStorage;
-  updateStorage: (data: UserStorage) => void;
+  updateStorage: (data: Partial<UserStorage>) => void;
 };
 
 type StorageProviderProps = {
   children: ReactNode;
-  channels: Channel[];
 };
 
 const Context = createContext<StorageContextProps>({} as StorageContextProps);
@@ -32,10 +34,10 @@ export const StorageContext = Context;
 
 export const StorageProvider = ({
   children,
-  channels,
 }: StorageProviderProps): JSX.Element => {
   const [storage, setStorage] = useState<UserStorage>(initialStorageValue);
   const { setLanguage } = useLocalizer();
+  const { setLoading } = useSimpleRouter();
 
   useEffect(() => {
     initStorage().catch(() => {});
@@ -43,22 +45,28 @@ export const StorageProvider = ({
 
   const initStorage = async (): Promise<void> => {
     try {
-      const storage = await getLocalStorage();
+      setLoading(true);
 
-      const followed = storage.followed.filter((twitch) =>
-        channels.find((channel) => channel.twitch === twitch)
+      const storage = await getLocalStorage();
+      const { data } = await getChannelsByIds(storage.followed);
+
+      const actualisedFollowed = storage.followed.filter((twitch) =>
+        data.find((channel) => channel.twitch === twitch)
       );
 
       setLanguage(storage.language);
-      updateStorage({ ...storage, followed });
+      updateStorage({ ...storage, followed: actualisedFollowed });
     } catch (err) {
       console.error(err);
+    } finally {
+      setLoading(false);
     }
   };
 
-  const updateStorage = (data: UserStorage): void => {
-    setLocalStorage(data).catch((err) => console.error(err));
-    setStorage(data);
+  const updateStorage = (data: Partial<UserStorage>): void => {
+    setLocalStorage(data)
+      .then((storage) => setStorage(storage))
+      .catch((err) => console.error(err));
   };
 
   return (

@@ -1,88 +1,27 @@
 import { maxFollowedChannels } from '@shared/constants';
 import { Channel, PlatformId } from '@shared/types';
-import { Input, List as ListComponent, Switch, Tooltip } from 'antd';
+import { Input, Switch, Tooltip } from 'antd';
 import React, { JSX, useRef, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
-import styled from 'styled-components';
 
-import { useStorage } from '../../context/StorageContext';
 import {
   KickIcon,
   TrovoIcon,
   VKPlayIcon,
   WASDIcon,
   YouTubeIcon,
-} from '../Icons';
-
-type ChannelListProps = {
-  channels: Channel[];
-};
-
-const ListHeader = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ListHeaderColumns = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 12px;
-`;
-
-const ListItemWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  svg {
-    width: 36px;
-    height: 36px;
-    margin-right: 10px;
-  }
-`;
-
-const ListItemText = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const ListItemTwitch = styled.span``;
-
-const ListItemSourceUrl = styled.a`
-  font-size: 11px;
-  color: #bfbfbf;
-`;
-
-const ScrollableWrapper = styled.div`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  overflow: auto;
-
-  &::-webkit-scrollbar {
-    width: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: #bfbfbf;
-    border-radius: 4px;
-  }
-`;
-
-const List = styled(ListComponent)`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-
-  .ant-spin-nested-loading {
-    flex: 1;
-  }
-
-  .ant-spin-container {
-    height: 100%;
-  }
-`;
+} from '../../components';
+import { useStorage } from '../../context/StorageContext';
+import {
+  List,
+  ListHeader,
+  ListHeaderColumns,
+  ListItemSourceUrl,
+  ListItemText,
+  ListItemTwitch,
+  ListItemWrapper,
+  ScrollableWrapper,
+} from './styles';
 
 const { Search } = Input;
 
@@ -94,12 +33,14 @@ const platformsIcons: Record<string, React.ReactNode> = {
   [PlatformId.YouTube]: <YouTubeIcon />,
 };
 
-const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
+const ChannelsWhitelistPage = (): JSX.Element => {
+  const [channels, setChannels] = useState<Channel[]>([]);
   const { storage, updateStorage } = useStorage();
   const [search, setSearch] = useState<string>('');
   const isFollowedChanged = useRef<boolean>(false);
   const sortedChannels = useRef<Channel[]>(channels.slice());
   const { localize } = useLocalizer();
+  const [fetching, setFetching] = useState<boolean>();
 
   const getSortedChannels = (): Channel[] => {
     if (!isFollowedChanged.current) {
@@ -211,4 +152,4 @@ const ChannelList = ({ channels }: ChannelListProps): JSX.Element => {
   );
 };
 
-export default ChannelList;
+export default ChannelsWhitelistPage;

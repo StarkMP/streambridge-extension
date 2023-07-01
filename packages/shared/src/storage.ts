@@ -19,12 +19,21 @@ export const getLocalStorage = async (): Promise<UserStorage> => {
   } as UserStorage);
 };
 
-export const setLocalStorage = (data: UserStorage): Promise<void> => {
+export const setLocalStorage = async (
+  data: Partial<UserStorage>
+): Promise<UserStorage> => {
+  const storage = await getLocalStorage();
+  const newValue = { ...storage, ...data };
+
   if (chrome.storage) {
-    return chrome.storage.local.set(data);
+    await chrome.storage.local.set(newValue);
+
+    return newValue;
   }
 
-  return Promise.resolve(
-    localStorage.setItem('streambridge', JSON.stringify(data))
+  await Promise.resolve(
+    localStorage.setItem('streambridge', JSON.stringify(newValue))
   );
+
+  return newValue;
 };

@@ -3,57 +3,29 @@ import {
   SettingOutlined,
   WarningOutlined,
 } from '@ant-design/icons';
-import { Pages } from '@shared/types';
 import { Button, Tooltip } from 'antd';
 import React, { JSX } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
-import styled from 'styled-components';
 
-const Wrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
-`;
+import { defaultPage } from '../../constants';
+import { Pages, useSimpleRouter } from '../../pages';
+import { MenuWrapper, Title, Wrapper } from './styles';
 
-const Title = styled.h1`
-  font-size: 24px;
-  margin: 0;
-`;
-
-const MenuWrapper = styled.div`
-  display: flex;
-
-  button,
-  a {
-    margin-right: 6px;
-
-    &:last-child {
-      margin-right: 0;
-    }
-  }
-`;
-
-const Header = ({
-  isMainPage,
-  setPage,
-}: {
-  isMainPage: boolean;
-  setPage: (page: Pages) => void;
-}): JSX.Element => {
+const Header = (): JSX.Element => {
   const { localize } = useLocalizer();
+  const { page, setPage } = useSimpleRouter();
 
   return (
     <Wrapper>
       <Title>{localize('project.name')}</Title>
       <MenuWrapper>
-        {!isMainPage ? (
+        {page !== defaultPage ? (
           <Tooltip title={localize('popup.header.back')}>
             <Button
               type='primary'
               ghost
               icon={<ArrowLeftOutlined />}
-              onClick={(): void => setPage(Pages.Main)}
+              onClick={(): void => setPage(defaultPage)}
             />
           </Tooltip>
         ) : null}
@@ -69,7 +41,7 @@ const Header = ({
           <Button
             type='primary'
             icon={<SettingOutlined />}
-            onClick={(): void => setPage(Pages.Settings)}
+            onClick={(): void => setPage(Pages.UserSettings)}
           />
         </Tooltip>
       </MenuWrapper>
