@@ -12,6 +12,14 @@ export default defineConfig({
   base: './',
   publicDir: false,
   build: {
+    emptyOutDir: true,
     outDir: '../../dist/popup',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          react: ['react', 'react-dom'],
+        },
+      },
+    },
   },
 });
