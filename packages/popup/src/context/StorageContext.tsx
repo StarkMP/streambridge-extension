@@ -37,7 +37,7 @@ export const StorageProvider = ({
 }: StorageProviderProps): JSX.Element => {
   const [storage, setStorage] = useState<UserStorage>(initialStorageValue);
   const { setLanguage } = useLocalizer();
-  const { setLoading } = useSimpleRouter();
+  const { setLoading, setError } = useSimpleRouter();
 
   useEffect(() => {
     initStorage().catch(() => {});
@@ -57,7 +57,7 @@ export const StorageProvider = ({
       setLanguage(storage.language);
       updateStorage({ ...storage, followed: actualisedFollowed });
     } catch (err) {
-      console.error(err);
+      setError('Server error');
     } finally {
       setLoading(false);
     }

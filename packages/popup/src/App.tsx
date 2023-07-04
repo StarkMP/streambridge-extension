@@ -23,7 +23,7 @@ const App = (): JSX.Element => {
         <StorageProvider>
           <GlobalStyles />
           <BaseLayout>
-            <Outlet loader={<PageLoader />} />
+            <Outlet />
           </BaseLayout>
         </StorageProvider>
       </LocalizerProvider>

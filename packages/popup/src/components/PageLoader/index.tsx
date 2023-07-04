@@ -1,7 +1,11 @@
 import React, { JSX } from 'react';
 
-import { Loader } from './styles';
+import { Loader, Wrapper } from './styles';
 
-const PageLoader = (): JSX.Element => <Loader type='primary' />;
+const PageLoader = (): JSX.Element => (
+  <Wrapper>
+    <Loader />
+  </Wrapper>
+);
 
 export default PageLoader;
