@@ -3,6 +3,7 @@ import { onElementLoaded } from '@shared/utils/dom';
 
 const trovo: StreamingPlatform = {
   id: PlatformId.Trovo,
+  url: 'https://trovo.live/s',
   getInfo: async (channel) => {
     const apiUrl = 'https://api-web.trovo.live/graphql?qid=0';
 

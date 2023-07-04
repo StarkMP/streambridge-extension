@@ -5,7 +5,6 @@ import { translations } from '@shared/translations';
 import React, { JSX } from 'react';
 import { LocalizerProvider } from 'reactjs-localizer';
 
-import { PageLoader } from './components';
 import { defaultPage } from './constants';
 import { StorageProvider } from './context/StorageContext';
 import { BaseLayout } from './layouts';

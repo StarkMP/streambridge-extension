@@ -1,5 +1,6 @@
 export type StreamingPlatform = {
   id: string;
+  url: string;
   render: (data: { channel: Channel; language: Languages }) => void;
   getInfo: (channel: Channel) => Promise<ChannelInfo | null>;
 };
@@ -9,7 +10,6 @@ export type Channel = {
   source: {
     id: PlatformId;
     channelId: string;
-    url: string;
   };
 };
 

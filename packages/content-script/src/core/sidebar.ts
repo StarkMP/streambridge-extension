@@ -1,10 +1,10 @@
 import { getChannel } from '@shared/api/services/whitelist';
 import { maxFollowedChannels } from '@shared/constants';
 import { getLocalStorage } from '@shared/storage';
+import streamingPlatforms from '@shared/streaming-platforms';
 import { Channel, ChannelInfo, Languages } from '@shared/types';
 import { onElementLoaded } from '@shared/utils/dom';
 
-import streamingPlatforms from '../streaming-platforms';
 import SidebarTemplate from '../templates/sidebar';
 
 export default class Sidebar {

@@ -2,7 +2,9 @@
   "name": "@stream-bridge/shared",
   "version": "1.0.0",
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc",
+    "lint": "eslint . --ext .ts,.tsx",
+    "lint:fix": "eslint . --ext .ts,.tsx --fix"
   },
   "author": "Maksim Serebryakov <starkmp.work@gmail.com>",
   "devDependencies": {

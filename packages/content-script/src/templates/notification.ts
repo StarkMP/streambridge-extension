@@ -1,5 +1,6 @@
 import { translations } from '@shared/translations';
 import { Channel, Languages, PlatformId } from '@shared/types';
+import { getChannelUrl } from '@shared/utils/platform';
 
 import KickIconTemplate from './icons/kick';
 import TrovoIconTemplate from './icons/trovo';
@@ -31,6 +32,8 @@ const NotificationTemplate = (
   channel: Channel,
   language: Languages
 ): string => {
+  const url = getChannelUrl(channel.source.id, channel.source.channelId);
+
   return `
     <div class="sb-notification sb-notification--${channel.source.id}">
       <button id="sb-notification-close" class="sb-notification__close-btn"></button>
@@ -38,13 +41,13 @@ const NotificationTemplate = (
       <div class="sb-notification__text-wrapper">
         <div class="sb-notification__title">
           ${translations['content.notification.title'][language]
-            .replace('%url%', channel.source.url)
+            .replace('%url%', url)
             .replace('%name%', getPlatformName(channel.source.id, language))}
         </div>
         <div class="sb-notification__description">
           ${translations['content.notification.description'][language].replace(
             '%url%',
-            channel.source.url
+            url
           )}
         </div>
       </div>

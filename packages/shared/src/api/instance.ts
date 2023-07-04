@@ -1,6 +1,5 @@
+import { apiUrl } from '@shared/constants';
 import axios from 'axios';
-
-import { apiUrl } from '../constants';
 
 const apiInstance = axios.create({
   baseURL: apiUrl,

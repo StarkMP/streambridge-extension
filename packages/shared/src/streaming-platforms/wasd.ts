@@ -4,6 +4,7 @@ import axios from 'axios';
 
 const wasd: StreamingPlatform = {
   id: PlatformId.WASD,
+  url: 'https://wasd.tv',
   getInfo: async (channel) => {
     const apiUrl = `https://wasd.tv/api/v2/broadcasts/public?channel_name=${channel.source.channelId}`;
 

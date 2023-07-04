@@ -1,5 +1,5 @@
-import { detectLanguage } from './translations';
-import { UserStorage } from './types';
+import { detectLanguage } from '@shared/translations';
+import { UserStorage } from '@shared/types';
 
 export const initialStorageValue: UserStorage = {
   followed: [],

@@ -1,18 +1,18 @@
-import { AxiosResponse } from 'axios';
-
-import { Channel, PaginationParams } from '../../types';
+import apiInstance from '@shared/api/instance';
+import { Channel, PaginationParams } from '@shared/types';
 import {
   arrayToQueryParams,
   getPaginationQueryParams,
-} from '../../utils/queryParams';
-import apiInstance from '../instance';
+} from '@shared/utils/queryParams';
+import { AxiosResponse } from 'axios';
 
 export const getChannels = (
   params: PaginationParams = {}
 ): Promise<AxiosResponse<Channel[]>> => {
-  const paginationQueryParams = getPaginationQueryParams(params);
+  const paginationQueryParams =
+    Object.keys(params).length > 0 ? getPaginationQueryParams(params) : '';
 
-  return apiInstance.get(`/api/v1/channel/whitelist?${paginationQueryParams}`);
+  return apiInstance.get(`/api/v1/whitelist${paginationQueryParams}`);
 };
 
 export const getChannel = (twitch: string): Promise<AxiosResponse<Channel>> =>

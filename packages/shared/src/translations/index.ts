@@ -1,8 +1,8 @@
-import { defaultLanguage } from '../constants';
-import { Languages } from '../types';
-import { formatLanguage } from '../utils/format';
-import locales from './locales.json';
-import untranslatable from './untranslatable.json';
+import { defaultLanguage } from '@shared/constants';
+import locales from '@shared/translations/locales.json';
+import untranslatable from '@shared/translations/untranslatable.json';
+import { Languages } from '@shared/types';
+import { formatLanguage } from '@shared/utils/format';
 
 export const translations: Record<string, Record<Languages, string>> = {
   ...locales,

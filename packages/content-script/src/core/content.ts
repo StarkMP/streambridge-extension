@@ -1,6 +1,7 @@
 import { getChannel } from '@shared/api/services/whitelist';
 import { Channel, Languages } from '@shared/types';
 import { onElementLoaded } from '@shared/utils/dom';
+import { getChannelUrl } from '@shared/utils/platform';
 
 import NotificationTemplate from '../templates/notification';
 
@@ -110,7 +111,10 @@ export default class Content {
             video.pause();
           }
 
-          const link = channel.source.url;
+          const link = getChannelUrl(
+            channel.source.id,
+            channel.source.channelId
+          );
           const iframe = document.createElement('iframe');
 
           iframe.width = '100%';

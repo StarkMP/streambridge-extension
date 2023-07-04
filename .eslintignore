@@ -3,3 +3,4 @@ node_modules/
 tools/
 public/
 __tests__/
+packages/shared/@types/

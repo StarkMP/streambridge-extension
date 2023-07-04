@@ -3,7 +3,7 @@
   "include": ["src/**/*", "./src/**/*.json", "vite.config.ts"],
   "compilerOptions": {
     "typeRoots": ["src/types", "../../node_modules/@types"],
-    "module": "esnext"
+    "module": "esnext",
   },
   "references": [
     { "path": "../shared" }

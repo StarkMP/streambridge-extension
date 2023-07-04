@@ -4,6 +4,7 @@
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
+    "typecheck": "cd ./packages/shared && tsc && cd ../content-script && tsc && cd ../popup && tsc",
     "build": "cd ./packages/content-script && npm run build && cd ../popup && npm run build",
     "dev": "cd ./packages/popup && npm run dev",
     "postinstall": "cd ./packages/shared && npm i && cd ../content-script && npm i && cd ../popup && npm i"
@@ -33,5 +34,8 @@
     "last 4 versions",
     "Firefox ESR",
     "not ie < 9"
-  ]
+  ],
+  "dependencies": {
+    "react-infinite-scroll-component": "^6.1.0"
+  }
 }

@@ -1,4 +1,4 @@
-import { Languages } from './types';
+import { Languages } from '@shared/types';
 
 export const hostname = 'www.twitch.tv';
 export const maxFollowedChannels = 5;

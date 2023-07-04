@@ -1,6 +1,5 @@
+import platforms from '@shared/streaming-platforms';
 import { Channel, Languages } from '@shared/types';
-
-import platforms from '../streaming-platforms';
 
 export default class IFrame {
   private readonly channel: Channel;

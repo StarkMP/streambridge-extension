@@ -38,7 +38,7 @@ const SimpleRouterContext = createContext<SimpleRouterContextProps>(
 export const useSimpleRouter = (): SimpleRouterContextProps =>
   useContext(SimpleRouterContext);
 
-export const Outlet = (): JSX.Element | ReactNode => {
+export const Outlet = (): JSX.Element => {
   const { page } = useSimpleRouter();
   const CurrentPageComponent = pageComponent[page];
 

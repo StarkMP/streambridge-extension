@@ -4,7 +4,7 @@ import {
   initialStorageValue,
   setLocalStorage,
 } from '@shared/storage';
-import { UserStorage } from '@shared/types';
+import { Channel, UserStorage } from '@shared/types';
 import React, {
   createContext,
   JSX,
@@ -48,16 +48,23 @@ export const StorageProvider = ({
       setLoading(true);
 
       const storage = await getLocalStorage();
-      const { data } = await getChannelsByIds(storage.followed);
 
-      const actualisedFollowed = storage.followed.filter((twitch) =>
-        data.find((channel) => channel.twitch === twitch)
-      );
+      if (storage.followed.length > 0) {
+        const { data } = await getChannelsByIds(storage.followed);
+
+        const actualisedFollowed = storage.followed.filter((twitch) =>
+          ([] as Channel[])
+            .concat(data)
+            .find((channel) => channel.twitch === twitch)
+        );
+
+        updateStorage({ ...storage, followed: actualisedFollowed });
+      }
 
       setLanguage(storage.language);
-      updateStorage({ ...storage, followed: actualisedFollowed });
     } catch (err) {
       setError('Server error');
+      console.error(err);
     } finally {
       setLoading(false);
     }
