@@ -10,7 +10,9 @@ export const getChannels = (
   params: PaginationParams = {}
 ): Promise<AxiosResponse<Channel[]>> => {
   const paginationQueryParams =
-    Object.keys(params).length > 0 ? getPaginationQueryParams(params) : '';
+    Object.keys(params).length > 0
+      ? `?${getPaginationQueryParams(params)}`
+      : '';
 
   return apiInstance.get(`/api/v1/whitelist${paginationQueryParams}`);
 };
@@ -27,9 +29,12 @@ export const getChannelsByKeyword = (
   keyword: string,
   params: PaginationParams = {}
 ): Promise<AxiosResponse<Channel[]>> => {
-  const paginationQueryParams = getPaginationQueryParams(params);
+  const paginationQueryParams =
+    Object.keys(params).length > 0
+      ? `&${getPaginationQueryParams(params)}`
+      : '';
 
   return apiInstance.get(
-    `/api/v1/whitelist?keyword=${keyword}&${paginationQueryParams}`
+    `/api/v1/whitelist?keyword=${keyword}${paginationQueryParams}`
   );
 };

@@ -66,3 +66,9 @@ export const List = styled(AntdList)`
     height: 100%;
   }
 `;
+
+export const LoaderWrapper = styled.div`
+  padding: 16px 0;
+  display: flex;
+  justify-content: center;
+`;

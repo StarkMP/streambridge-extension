@@ -6,14 +6,14 @@ export const getPaginationQueryParams = (params: PaginationParams): string => {
   let query = '';
 
   if (limit !== undefined) {
-    query = `?limit=${limit}`;
+    query = `limit=${limit}`;
   }
 
   if (offset !== undefined) {
     if (limit !== undefined) {
       query = `${query}&offset=${offset}`;
     } else {
-      query = `?offset=${offset}`;
+      query = `offset=${offset}`;
     }
   }
 
