@@ -11,7 +11,7 @@ export const getChannels = (params: PaginationParams = {}): Promise<AxiosRespons
 };
 
 export const getChannel = (twitch: string): Promise<AxiosResponse<Channel>> =>
-  apiInstance.get(`/api/v1/whitelist?twitch=${twitch}`);
+  apiInstance.get(`/api/v1/whitelist/${twitch}`);
 
 export const getChannelsByIds = (twitch: string[]): Promise<AxiosResponse<Channel[]>> =>
   apiInstance.get(`/api/v1/whitelist?${arrayToQueryParams('twitch', twitch)}`);
