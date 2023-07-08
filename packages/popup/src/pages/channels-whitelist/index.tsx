@@ -44,7 +44,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
   const offsetRef = useRef<number>(0);
   const searchRef = useRef<string>(search);
   const { localize } = useLocalizer();
-  const [switcherLoading, setSwitcherLoading] = useState<boolean>(false);
+  const [switcherLoading, setSwitcherLoading] = useState<string | null>(null);
 
   const onSearch: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     offsetRef.current = 0;
@@ -54,13 +54,17 @@ const ChannelsWhitelistPage = (): JSX.Element => {
   };
 
   const handleFollow = (checked: boolean, twitch: string): void => {
+    if (switcherLoading === twitch) {
+      return;
+    }
+
     const followed = storage.followed.slice();
 
     if (checked && followed.length >= maxFollowedChannels) {
       return;
     }
 
-    setSwitcherLoading(true);
+    setSwitcherLoading(twitch);
 
     if (checked) {
       followed.push(twitch);
@@ -71,7 +75,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
     }
 
     isFollowedChanged.current = true;
-    updateStorage({ ...storage, followed }).finally(() => setSwitcherLoading(false));
+    updateStorage({ ...storage, followed }).finally(() => setSwitcherLoading(null));
   };
 
   const loadMoreChannels = (): void => {
@@ -199,7 +203,6 @@ const ChannelsWhitelistPage = (): JSX.Element => {
                     }
                   >
                     <Switch
-                      loading={switcherLoading}
                       size='small'
                       checked={checked}
                       disabled={disabled}

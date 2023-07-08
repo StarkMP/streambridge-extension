@@ -1,13 +1,13 @@
 import { DependencyList, useEffect, useRef } from 'react';
 
 const useDidUpdateEffect = (callback: () => void, deps?: DependencyList): void => {
-  const didMounRef = useRef(false);
+  const didMountRef = useRef(false);
 
   useEffect(() => {
-    if (didMounRef.current) {
+    if (didMountRef.current) {
       callback();
     } else {
-      didMounRef.current = true;
+      didMountRef.current = true;
     }
   }, deps);
 };
