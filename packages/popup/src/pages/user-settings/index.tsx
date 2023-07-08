@@ -4,6 +4,7 @@ import React, { JSX } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
 import { useStorage } from '../../context/StorageContext';
+import { useSimpleRouter } from '..';
 import { Label, Select, Wrapper } from './styles';
 
 const { Title } = Typography;
@@ -11,13 +12,14 @@ const { Title } = Typography;
 const UserSettingsPage = (): JSX.Element => {
   const { localize, language, setLanguage } = useLocalizer();
   const { updateStorage } = useStorage();
+  const { setPageError } = useSimpleRouter();
 
   const onChangeLanguage = (value: string): void => {
     setLanguage(value);
 
     updateStorage({
       language: value as Languages,
-    }).catch((err) => console.error(err));
+    }).catch(() => setPageError(true));
   };
 
   return (

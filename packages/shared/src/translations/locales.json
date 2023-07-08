@@ -43,6 +43,18 @@
     "en": "Language",
     "ru": "Язык интерфейса"
   },
+  "popup.page-error.title": {
+    "en": "Error!",
+    "ru": "Ошибка!"
+  },
+  "popup.page-error.subtitle": {
+    "en": "Something went wrong",
+    "ru": "Что-то пошло не так"
+  },
+  "popup.page-error.refresh-btn": {
+    "en": "Reload",
+    "ru": "Обновить"
+  },
   "iframe.kick.open-chat-btn": {
     "en": "Open in new window",
     "ru": "Открыть"

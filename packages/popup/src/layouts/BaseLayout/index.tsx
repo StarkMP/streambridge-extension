@@ -1,16 +1,16 @@
 import React, { JSX, ReactNode } from 'react';
 
-import { Header, PageLoader } from '../../components';
+import { Header, PageError, PageLoader } from '../../components';
 import { useSimpleRouter } from '../../pages';
 
 const BaseLayout = ({ children }: { children: ReactNode }): JSX.Element => {
-  const { loading, error } = useSimpleRouter();
+  const { pageLoading, pageError } = useSimpleRouter();
 
-  if (error) {
-    return <p>{error}</p>;
+  if (pageError) {
+    return <PageError />;
   }
 
-  if (loading) {
+  if (pageLoading) {
     return <PageLoader />;
   }
 

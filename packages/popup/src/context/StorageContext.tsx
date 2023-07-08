@@ -24,7 +24,7 @@ export const StorageContext = Context;
 export const StorageProvider = ({ children }: StorageProviderProps): JSX.Element => {
   const [storage, setStorage] = useState<UserStorage>(initialStorageValue);
   const { setLanguage } = useLocalizer();
-  const { setLoading, setError } = useSimpleRouter();
+  const { setPageLoading, setPageError } = useSimpleRouter();
 
   useEffect(() => {
     initStorage().catch(() => {});
@@ -32,7 +32,7 @@ export const StorageProvider = ({ children }: StorageProviderProps): JSX.Element
 
   const initStorage = async (): Promise<void> => {
     try {
-      setLoading(true);
+      setPageLoading(true);
 
       const storage = await getLocalStorage();
 
@@ -48,10 +48,9 @@ export const StorageProvider = ({ children }: StorageProviderProps): JSX.Element
 
       setLanguage(storage.language);
     } catch (err) {
-      setError('Server error');
-      console.error(err);
+      setPageError(true);
     } finally {
-      setLoading(false);
+      setPageLoading(false);
     }
   };
 

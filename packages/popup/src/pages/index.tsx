@@ -17,12 +17,12 @@ const pageComponent = {
 };
 
 type SimpleRouterContextProps = {
-  loading: boolean;
+  pageLoading: boolean;
   page: Pages;
-  error: string | null;
-  setLoading: (loading: boolean) => void;
+  pageError: boolean;
+  setPageLoading: (loading: boolean) => void;
   setPage: (page: Pages) => void;
-  setError: (error: string | null) => void;
+  setPageError: (error: boolean) => void;
 };
 
 const SimpleRouterContext = createContext<SimpleRouterContextProps>({} as SimpleRouterContextProps);
@@ -46,12 +46,14 @@ export const SimpleRouterProvider = ({
   children,
   ...props
 }: SimpleRouterProviderProps): JSX.Element => {
-  const [loading, setLoading] = useState<boolean>(props.loading || false);
-  const [error, setError] = useState<string | null>(null);
+  const [pageLoading, setPageLoading] = useState<boolean>(props.loading || false);
+  const [pageError, setPageError] = useState<boolean>(false);
   const [page, setPage] = useState<Pages>(props.defaultPage);
 
   return (
-    <SimpleRouterContext.Provider value={{ loading, page, error, setLoading, setPage, setError }}>
+    <SimpleRouterContext.Provider
+      value={{ pageLoading, page, pageError, setPageLoading, setPage, setPageError }}
+    >
       {children}
     </SimpleRouterContext.Provider>
   );
