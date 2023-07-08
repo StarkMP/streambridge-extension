@@ -44,4 +44,5 @@ export enum Languages {
 export type PaginationParams = {
   limit?: number;
   offset?: number;
+  priority?: string[];
 };

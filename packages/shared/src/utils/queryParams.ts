@@ -1,7 +1,7 @@
 import { PaginationParams } from '@shared/types';
 
 export const getPaginationQueryParams = (params: PaginationParams): string => {
-  const { limit, offset } = params;
+  const { limit, offset, priority } = params;
 
   let query = '';
 
@@ -17,11 +17,18 @@ export const getPaginationQueryParams = (params: PaginationParams): string => {
     }
   }
 
+  if (priority !== undefined && priority.length > 0) {
+    const priorityQueryString = arrayToQueryParams('priority', priority);
+
+    if (limit !== undefined || offset !== undefined) {
+      query = `${query}&${priorityQueryString}`;
+    } else {
+      query = priorityQueryString;
+    }
+  }
+
   return query;
 };
 
 export const arrayToQueryParams = (key: string, params: string[]): string =>
-  params
-    .map((item) => `${key}=${item}&`)
-    .join('')
-    .slice(0, -1);
+  params.map((item) => `${key}=${item}`).join('&');

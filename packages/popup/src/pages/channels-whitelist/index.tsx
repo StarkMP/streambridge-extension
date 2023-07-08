@@ -1,25 +1,17 @@
 import { LoadingOutlined } from '@ant-design/icons';
-import {
-  getChannels,
-  getChannelsByKeyword,
-} from '@shared/api/services/whitelist';
+import { getChannels, getChannelsByKeyword } from '@shared/api/services/whitelist';
 import { maxFollowedChannels } from '@shared/constants';
 import { Channel, PlatformId } from '@shared/types';
 import { getChannelUrl } from '@shared/utils/platform';
-import { Input, Skeleton, Space, Switch, Tooltip } from 'antd';
+import { Input, Switch, Tooltip } from 'antd';
 import React, { JSX, useEffect, useRef, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import { useLocalizer } from 'reactjs-localizer';
 
-import {
-  KickIcon,
-  TrovoIcon,
-  VKPlayIcon,
-  WASDIcon,
-  YouTubeIcon,
-} from '../../components/Icons';
+import { KickIcon, TrovoIcon, VKPlayIcon, WASDIcon, YouTubeIcon } from '../../components/Icons';
 import { whitelistLazyLoadLimit } from '../../constants';
 import { useStorage } from '../../context/StorageContext';
+import useDidUpdateEffect from '../../hooks/useDidUpdateEffect';
 import {
   List,
   ListHeader,
@@ -52,6 +44,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
   const offsetRef = useRef<number>(0);
   const searchRef = useRef<string>(search);
   const { localize } = useLocalizer();
+  const [switcherLoading, setSwitcherLoading] = useState<boolean>(false);
 
   const onSearch: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     offsetRef.current = 0;
@@ -67,6 +60,8 @@ const ChannelsWhitelistPage = (): JSX.Element => {
       return;
     }
 
+    setSwitcherLoading(true);
+
     if (checked) {
       followed.push(twitch);
     } else {
@@ -76,7 +71,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
     }
 
     isFollowedChanged.current = true;
-    updateStorage({ ...storage, followed });
+    updateStorage({ ...storage, followed }).finally(() => setSwitcherLoading(false));
   };
 
   const loadMoreChannels = (): void => {
@@ -92,6 +87,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
       getChannelsByKeyword(search, {
         offset: offsetRef.current,
         limit: whitelistLazyLoadLimit,
+        priority: storage.followed,
       })
         .then((res) => {
           // if doesn't match (because we use async operations)
@@ -114,7 +110,11 @@ const ChannelsWhitelistPage = (): JSX.Element => {
 
     setFetching(true);
 
-    getChannels({ offset: offsetRef.current, limit: whitelistLazyLoadLimit })
+    getChannels({
+      offset: offsetRef.current,
+      limit: whitelistLazyLoadLimit,
+      priority: storage.followed,
+    })
       .then((res) => addLoadedChannels(res.data))
       .finally(() => {
         setFetching(false);
@@ -141,7 +141,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
     loadMoreChannels();
   }, []);
 
-  useEffect(() => {
+  useDidUpdateEffect(() => {
     searchRef.current = search;
 
     loadMoreChannels();
@@ -181,12 +181,8 @@ const ChannelsWhitelistPage = (): JSX.Element => {
         >
           {channels.map((item, index) => {
             const checked = storage.followed.includes(item.twitch);
-            const disabled =
-              !checked && storage.followed.length >= maxFollowedChannels;
-            const channelUrl = getChannelUrl(
-              item.source.id,
-              item.source.channelId
-            );
+            const disabled = !checked && storage.followed.length >= maxFollowedChannels;
+            const channelUrl = getChannelUrl(item.source.id, item.source.channelId);
 
             return (
               <List.Item
@@ -203,12 +199,11 @@ const ChannelsWhitelistPage = (): JSX.Element => {
                     }
                   >
                     <Switch
+                      loading={switcherLoading}
                       size='small'
                       checked={checked}
                       disabled={disabled}
-                      onChange={(checked): void =>
-                        handleFollow(checked, item.twitch)
-                      }
+                      onChange={(checked): void => handleFollow(checked, item.twitch)}
                     />
                   </Tooltip>,
                 ]}

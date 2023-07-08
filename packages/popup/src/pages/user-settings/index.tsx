@@ -17,7 +17,7 @@ const UserSettingsPage = (): JSX.Element => {
 
     updateStorage({
       language: value as Languages,
-    });
+    }).catch((err) => console.error(err));
   };
 
   return (

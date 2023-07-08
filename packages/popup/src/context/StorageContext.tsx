@@ -19,7 +19,7 @@ import { useSimpleRouter } from '../pages';
 
 type StorageContextProps = {
   storage: UserStorage;
-  updateStorage: (data: Partial<UserStorage>) => void;
+  updateStorage: (data: Partial<UserStorage>) => Promise<void>;
 };
 
 type StorageProviderProps = {
@@ -58,7 +58,7 @@ export const StorageProvider = ({
             .find((channel) => channel.twitch === twitch)
         );
 
-        updateStorage({ ...storage, followed: actualisedFollowed });
+        await updateStorage({ ...storage, followed: actualisedFollowed });
       }
 
       setLanguage(storage.language);
@@ -70,10 +70,10 @@ export const StorageProvider = ({
     }
   };
 
-  const updateStorage = (data: Partial<UserStorage>): void => {
-    setLocalStorage(data)
-      .then((storage) => setStorage(storage))
-      .catch((err) => console.error(err));
+  const updateStorage = async (data: Partial<UserStorage>): Promise<void> => {
+    const storage = await setLocalStorage(data);
+
+    setStorage(storage);
   };
 
   return (
