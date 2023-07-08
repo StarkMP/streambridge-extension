@@ -48,14 +48,10 @@ export default class Content {
 
   private async renderChannel(): Promise<void> {
     const iframe = document.querySelector(this.selectors.iframe) as HTMLElement;
-    const wrapper = document.querySelector(
-      this.selectors.wrapper
-    ) as HTMLElement;
+    const wrapper = document.querySelector(this.selectors.wrapper) as HTMLElement;
     const channel = await this.findChannelByLocation();
 
-    const prevNotification = document.querySelector(
-      this.selectors.notification
-    );
+    const prevNotification = document.querySelector(this.selectors.notification);
 
     if (prevNotification) {
       prevNotification.remove();
@@ -67,9 +63,7 @@ export default class Content {
 
         wrapper.style.display = 'block';
 
-        const video = document.querySelector(
-          this.selectors.video
-        ) as HTMLVideoElement;
+        const video = document.querySelector(this.selectors.video) as HTMLVideoElement;
 
         if (video) {
           video.play().catch(() => {});
@@ -87,67 +81,59 @@ export default class Content {
       this.channelStatusObserver.disconnect();
     }
 
-    this.channelStatusObserver = onElementLoaded(
-      this.selectors.errorWrapper,
-      () => {
-        const root = document.querySelector(this.selectors.root) as HTMLElement;
-        const video = document.querySelector(
-          this.selectors.video
-        ) as HTMLVideoElement;
+    this.channelStatusObserver = onElementLoaded(this.selectors.errorWrapper, () => {
+      const root = document.querySelector(this.selectors.root) as HTMLElement;
+      const video = document.querySelector(this.selectors.video) as HTMLVideoElement;
 
-        if (root && wrapper) {
-          wrapper.style.display = 'none';
-          root.style.overflow = 'hidden';
+      if (root && wrapper) {
+        wrapper.style.display = 'none';
+        root.style.overflow = 'hidden';
 
-          const sidebars = document.querySelectorAll(this.selectors.scrollbar);
+        const sidebars = document.querySelectorAll(this.selectors.scrollbar);
 
-          if (sidebars.length > 0) {
-            sidebars.forEach((el) => {
-              (el as HTMLElement).style.display = 'none';
-            });
-          }
-
-          if (video) {
-            video.pause();
-          }
-
-          const link = getChannelUrl(
-            channel.source.id,
-            channel.source.channelId
-          );
-          const iframe = document.createElement('iframe');
-
-          iframe.width = '100%';
-          iframe.height = '100%';
-          iframe.allow = 'autoplay; fullscreen';
-          iframe.style.position = 'absolute';
-          iframe.id = 'stream-bridge';
-          iframe.name = `sb:${channel.twitch}`;
-          iframe.setAttribute('src', link);
-
-          root.appendChild(iframe);
-
-          setTimeout(() => {
-            document.body.insertAdjacentHTML(
-              'beforeend',
-              NotificationTemplate(channel, this.language)
-            );
-
-            onElementLoaded(this.selectors.notification, (notification) => {
-              (
-                notification.querySelector(
-                  this.selectors.notificationCloseButton
-                ) as HTMLButtonElement
-              ).addEventListener('click', (e) => {
-                notification.style.display = 'none';
-              });
-            });
-          }, 2000);
-
-          this.channelStatusObserver = undefined;
+        if (sidebars.length > 0) {
+          sidebars.forEach((el) => {
+            (el as HTMLElement).style.display = 'none';
+          });
         }
+
+        if (video) {
+          video.pause();
+        }
+
+        const link = getChannelUrl(channel.source.id, channel.source.channelId);
+        const iframe = document.createElement('iframe');
+
+        iframe.width = '100%';
+        iframe.height = '100%';
+        iframe.allow = 'autoplay; fullscreen';
+        iframe.style.position = 'absolute';
+        iframe.id = 'stream-bridge';
+        iframe.name = `sb:${channel.twitch}`;
+        iframe.setAttribute('src', link);
+
+        root.appendChild(iframe);
+
+        setTimeout(() => {
+          document.body.insertAdjacentHTML(
+            'beforeend',
+            NotificationTemplate(channel, this.language)
+          );
+
+          onElementLoaded(this.selectors.notification, (notification) => {
+            (
+              notification.querySelector(
+                this.selectors.notificationCloseButton
+              ) as HTMLButtonElement
+            ).addEventListener('click', (e) => {
+              notification.style.display = 'none';
+            });
+          });
+        }, 2000);
+
+        this.channelStatusObserver = undefined;
       }
-    );
+    });
   }
 
   private async fetchChannel(twitch: string): Promise<Channel | null> {

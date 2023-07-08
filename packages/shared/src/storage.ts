@@ -19,9 +19,7 @@ export const getLocalStorage = async (): Promise<UserStorage> => {
   } as UserStorage);
 };
 
-export const setLocalStorage = async (
-  data: Partial<UserStorage>
-): Promise<UserStorage> => {
+export const setLocalStorage = async (data: Partial<UserStorage>): Promise<UserStorage> => {
   const storage = await getLocalStorage();
   const newValue = { ...storage, ...data };
 
@@ -31,9 +29,7 @@ export const setLocalStorage = async (
     return newValue;
   }
 
-  await Promise.resolve(
-    localStorage.setItem('streambridge', JSON.stringify(newValue))
-  );
+  await Promise.resolve(localStorage.setItem('streambridge', JSON.stringify(newValue)));
 
   return newValue;
 };

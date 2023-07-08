@@ -20,9 +20,7 @@ const youtube: StreamingPlatform = {
         const data = ytInitData[1].split('</script>')[0].slice(0, -1);
 
         if (pageData.split('INNERTUBE_CONTEXT').length > 0) {
-          context = JSON.parse(
-            pageData.split('INNERTUBE_CONTEXT')[1].trim().slice(2, -2)
-          );
+          context = JSON.parse(pageData.split('INNERTUBE_CONTEXT')[1].trim().slice(2, -2));
         }
 
         initData = JSON.parse(data);
@@ -32,18 +30,16 @@ const youtube: StreamingPlatform = {
 
       const isOnline =
         initData.contents.twoColumnWatchNextResults !== undefined &&
-        initData?.contents?.twoColumnWatchNextResults?.results?.results
-          ?.contents[0].videoPrimaryInfoRenderer?.viewCount
-          ?.videoViewCountRenderer?.isLive;
+        initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0]
+          .videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.isLive;
 
       let category;
 
       try {
         category = isOnline
-          ? initData?.contents?.twoColumnWatchNextResults?.results?.results
-              ?.contents[1].videoSecondaryInfoRenderer?.metadataRowContainer
-              ?.metadataRowContainerRenderer?.rows[0].richMetadataRowRenderer
-              ?.contents[0].richMetadataRenderer?.title?.simpleText
+          ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1]
+              .videoSecondaryInfoRenderer?.metadataRowContainer?.metadataRowContainerRenderer
+              ?.rows[0].richMetadataRowRenderer?.contents[0].richMetadataRenderer?.title?.simpleText
           : null;
       } catch (err) {
         category = undefined;
@@ -63,9 +59,8 @@ const youtube: StreamingPlatform = {
           : 0,
         title: '',
         nickname: isOnline
-          ? initData?.contents?.twoColumnWatchNextResults?.results?.results
-              ?.contents[1].videoSecondaryInfoRenderer?.owner
-              ?.videoOwnerRenderer?.title?.runs[0].text
+          ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1]
+              .videoSecondaryInfoRenderer?.owner?.videoOwnerRenderer?.title?.runs[0].text
           : initData?.metadata?.channelMetadataRenderer?.title,
         avatar: isOnline
           ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1].videoSecondaryInfoRenderer?.owner?.videoOwnerRenderer?.thumbnail?.thumbnails[0].url.replace(
@@ -84,9 +79,7 @@ const youtube: StreamingPlatform = {
     }
   },
   render: () => {
-    (document.querySelector('html') as HTMLElement).classList.add(
-      'stream-bridge-page'
-    );
+    (document.querySelector('html') as HTMLElement).classList.add('stream-bridge-page');
   },
 };
 

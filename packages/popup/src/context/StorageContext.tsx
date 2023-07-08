@@ -1,18 +1,7 @@
 import { getChannelsByIds } from '@shared/api/services/whitelist';
-import {
-  getLocalStorage,
-  initialStorageValue,
-  setLocalStorage,
-} from '@shared/storage';
+import { getLocalStorage, initialStorageValue, setLocalStorage } from '@shared/storage';
 import { Channel, UserStorage } from '@shared/types';
-import React, {
-  createContext,
-  JSX,
-  ReactNode,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, JSX, ReactNode, useContext, useEffect, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
 import { useSimpleRouter } from '../pages';
@@ -32,9 +21,7 @@ export const useStorage = (): StorageContextProps => useContext(Context);
 
 export const StorageContext = Context;
 
-export const StorageProvider = ({
-  children,
-}: StorageProviderProps): JSX.Element => {
+export const StorageProvider = ({ children }: StorageProviderProps): JSX.Element => {
   const [storage, setStorage] = useState<UserStorage>(initialStorageValue);
   const { setLanguage } = useLocalizer();
   const { setLoading, setError } = useSimpleRouter();
@@ -53,9 +40,7 @@ export const StorageProvider = ({
         const { data } = await getChannelsByIds(storage.followed);
 
         const actualisedFollowed = storage.followed.filter((twitch) =>
-          ([] as Channel[])
-            .concat(data)
-            .find((channel) => channel.twitch === twitch)
+          ([] as Channel[]).concat(data).find((channel) => channel.twitch === twitch)
         );
 
         await updateStorage({ ...storage, followed: actualisedFollowed });
@@ -76,9 +61,5 @@ export const StorageProvider = ({
     setStorage(storage);
   };
 
-  return (
-    <Context.Provider value={{ storage, updateStorage }}>
-      {children}
-    </Context.Provider>
-  );
+  return <Context.Provider value={{ storage, updateStorage }}>{children}</Context.Provider>;
 };

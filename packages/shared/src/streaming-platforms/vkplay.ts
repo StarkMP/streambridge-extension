@@ -32,9 +32,7 @@ const vkPlay: StreamingPlatform = {
       topMenu.style.display = 'none';
     }
 
-    const sidebar = document.querySelector(
-      '#topMenu + div > div'
-    ) as HTMLElement;
+    const sidebar = document.querySelector('#topMenu + div > div') as HTMLElement;
 
     if (sidebar) {
       sidebar.style.display = 'none';
@@ -48,9 +46,7 @@ const vkPlay: StreamingPlatform = {
 
     if (player) {
       // @ts-ignore
-      const video = player.shadowRoot.firstChild.querySelector(
-        'video'
-      ) as HTMLVideoElement;
+      const video = player.shadowRoot.firstChild.querySelector('video') as HTMLVideoElement;
 
       video.onloadeddata = (): void => {
         video.muted = false;

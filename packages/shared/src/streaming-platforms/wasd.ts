@@ -19,8 +19,7 @@ const wasd: StreamingPlatform = {
         isOnline,
         category: data.result.media_container?.game?.game_name,
         viewers: isOnline
-          ? data.result.media_container?.media_container_streams[0]
-              ?.stream_current_viewers
+          ? data.result.media_container?.media_container_streams[0]?.stream_current_viewers
           : 0,
         title: data.result.media_container?.media_container_name,
         nickname: data.result.channel.channel_name,

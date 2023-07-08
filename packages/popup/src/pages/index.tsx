@@ -1,13 +1,7 @@
 // we don't need a separate router library
 // because we have few view content states (pages)
 // without nesting routes
-import React, {
-  createContext,
-  JSX,
-  ReactNode,
-  useContext,
-  useState,
-} from 'react';
+import React, { createContext, JSX, ReactNode, useContext, useState } from 'react';
 
 import ChannelsWhitelistPage from './channels-whitelist';
 import UserSettingsPage from './user-settings';
@@ -31,12 +25,9 @@ type SimpleRouterContextProps = {
   setError: (error: string | null) => void;
 };
 
-const SimpleRouterContext = createContext<SimpleRouterContextProps>(
-  {} as SimpleRouterContextProps
-);
+const SimpleRouterContext = createContext<SimpleRouterContextProps>({} as SimpleRouterContextProps);
 
-export const useSimpleRouter = (): SimpleRouterContextProps =>
-  useContext(SimpleRouterContext);
+export const useSimpleRouter = (): SimpleRouterContextProps => useContext(SimpleRouterContext);
 
 export const Outlet = (): JSX.Element => {
   const { page } = useSimpleRouter();
@@ -60,9 +51,7 @@ export const SimpleRouterProvider = ({
   const [page, setPage] = useState<Pages>(props.defaultPage);
 
   return (
-    <SimpleRouterContext.Provider
-      value={{ loading, page, error, setLoading, setPage, setError }}
-    >
+    <SimpleRouterContext.Provider value={{ loading, page, error, setLoading, setPage, setError }}>
       {children}
     </SimpleRouterContext.Provider>
   );

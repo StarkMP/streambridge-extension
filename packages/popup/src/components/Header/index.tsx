@@ -1,8 +1,4 @@
-import {
-  ArrowLeftOutlined,
-  SettingOutlined,
-  WarningOutlined,
-} from '@ant-design/icons';
+import { ArrowLeftOutlined, SettingOutlined, WarningOutlined } from '@ant-design/icons';
 import { Button, Tooltip } from 'antd';
 import React, { JSX } from 'react';
 import { useLocalizer } from 'reactjs-localizer';

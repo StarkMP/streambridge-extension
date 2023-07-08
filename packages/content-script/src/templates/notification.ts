@@ -28,10 +28,7 @@ const platformIcons = {
   [PlatformId.YouTube]: YouTubeIconTemplate(),
 };
 
-const NotificationTemplate = (
-  channel: Channel,
-  language: Languages
-): string => {
+const NotificationTemplate = (channel: Channel, language: Languages): string => {
   const url = getChannelUrl(channel.source.id, channel.source.channelId);
 
   return `
@@ -45,10 +42,7 @@ const NotificationTemplate = (
             .replace('%name%', getPlatformName(channel.source.id, language))}
         </div>
         <div class="sb-notification__description">
-          ${translations['content.notification.description'][language].replace(
-            '%url%',
-            url
-          )}
+          ${translations['content.notification.description'][language].replace('%url%', url)}
         </div>
       </div>
     </div>

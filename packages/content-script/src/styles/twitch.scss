@@ -34,7 +34,7 @@
   width: 450px;
   display: flex;
   padding: 16px 22px;
-  background-color: #1F1F23;
+  background-color: #1f1f23;
   color: #ffffff;
   position: fixed;
   left: 50%;
@@ -50,23 +50,23 @@
   }
 
   &--vkplay a {
-    color: #0077FF;
+    color: #0077ff;
   }
 
   &--trovo a {
-    color: #30B373;
+    color: #30b373;
   }
 
   &--wasd a {
-    color: #3A5DF4;
+    color: #3a5df4;
   }
 
   &--kick a {
-    color: #53FC18;
+    color: #53fc18;
   }
 
   &--youtube a {
-    color: #FF0000;
+    color: #ff0000;
   }
 
   svg {
@@ -103,12 +103,13 @@
     background: transparent;
     outline: none;
     border: none;
-  
+
     &:hover {
       opacity: 1;
     }
-  
-    &:before, &:after {
+
+    &:before,
+    &:after {
       position: absolute;
       left: 5px;
       top: -2px;
@@ -117,11 +118,11 @@
       width: 2px;
       background-color: #ffffff;
     }
-  
+
     &:before {
       transform: rotate(45deg);
     }
-  
+
     &:after {
       transform: rotate(-45deg);
     }
@@ -129,6 +130,10 @@
 }
 
 @keyframes notification-show {
-  from {top: 50px;}
-  to {top: 120px;}
+  from {
+    top: 50px;
+  }
+  to {
+    top: 120px;
+  }
 }

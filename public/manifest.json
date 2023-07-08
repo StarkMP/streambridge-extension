@@ -12,19 +12,15 @@
   "action": {
     "default_popup": "popup/index.html"
   },
-  "permissions": [
-    "declarativeNetRequest",
-    "activeTab", 
-    "scripting",
-    "tabs",
-    "storage"
-  ],
-  "declarative_net_request" : {
-    "rule_resources" : [{
-      "id": "modifyHeaders",
-      "enabled": true,
-      "path": "modifyHeaders.json"
-    }]
+  "permissions": ["declarativeNetRequest", "activeTab", "scripting", "tabs", "storage"],
+  "declarative_net_request": {
+    "rule_resources": [
+      {
+        "id": "modifyHeaders",
+        "enabled": true,
+        "path": "modifyHeaders.json"
+      }
+    ]
   },
   "host_permissions": [
     "https://www.twitch.tv/",
@@ -38,7 +34,14 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://www.twitch.tv/*", "https://vkplay.live/*", "https://kick.com/*", "https://trovo.live/*", "https://wasd.tv/*", "https://www.youtube.com/*"],
+      "matches": [
+        "https://www.twitch.tv/*",
+        "https://vkplay.live/*",
+        "https://kick.com/*",
+        "https://trovo.live/*",
+        "https://wasd.tv/*",
+        "https://www.youtube.com/*"
+      ],
       "all_frames": true,
       "js": ["content-script/index.js"],
       "css": ["content-script/index.css"]

@@ -23,13 +23,7 @@ export default class Sidebar {
     sidebarElement: '[role="group"]',
   };
 
-  constructor({
-    updateInterval,
-    language,
-  }: {
-    updateInterval: number;
-    language: Languages;
-  }) {
+  constructor({ updateInterval, language }: { updateInterval: number; language: Languages }) {
     this.updateInterval = updateInterval;
     this.language = language;
 
@@ -60,17 +54,12 @@ export default class Sidebar {
       if (newValue.length > oldValue.length) {
         this.fetchChannelsInfo(
           (newValue as string[]).filter(
-            (twitch) =>
-              !this.cachedChannelsInfo.find(
-                (cachedItem) => cachedItem.twitch === twitch
-              )
+            (twitch) => !this.cachedChannelsInfo.find((cachedItem) => cachedItem.twitch === twitch)
           )
         )
           .then(() => {
             this.updateFollowedChannelsInfo(
-              this.cachedChannelsInfo.filter((item) =>
-                newValue.includes(item.twitch)
-              )
+              this.cachedChannelsInfo.filter((item) => newValue.includes(item.twitch))
             );
           })
           .catch(() => {});
@@ -79,9 +68,7 @@ export default class Sidebar {
       }
 
       this.updateFollowedChannelsInfo(
-        this.followedChannelsInfo.filter((item) =>
-          newValue.includes(item.twitch)
-        )
+        this.followedChannelsInfo.filter((item) => newValue.includes(item.twitch))
       );
     });
   }
@@ -99,9 +86,7 @@ export default class Sidebar {
   }
 
   private cacheChannelInfo(info: ChannelInfo): void {
-    const index = this.cachedChannelsInfo.findIndex(
-      (item) => item.twitch === info.twitch
-    );
+    const index = this.cachedChannelsInfo.findIndex((item) => item.twitch === info.twitch);
 
     if (index !== -1) {
       this.cachedChannelsInfo[index] = info;
@@ -119,16 +104,12 @@ export default class Sidebar {
       return [];
     }
 
-    const channelsInfo = await this.fetchChannelsInfo(
-      followed.slice(0, maxFollowedChannels)
-    );
+    const channelsInfo = await this.fetchChannelsInfo(followed.slice(0, maxFollowedChannels));
 
     return channelsInfo;
   }
 
-  private async fetchChannelsInfo(
-    channelIdArray: string[]
-  ): Promise<ChannelInfo[]> {
+  private async fetchChannelsInfo(channelIdArray: string[]): Promise<ChannelInfo[]> {
     const channelsInfo = [];
 
     for await (const twitch of channelIdArray) {
@@ -149,9 +130,7 @@ export default class Sidebar {
       return null;
     }
 
-    const platform = streamingPlatforms.find(
-      (platform) => channel.source.id === platform.id
-    );
+    const platform = streamingPlatforms.find((platform) => channel.source.id === platform.id);
 
     if (!platform) {
       return null;
@@ -174,10 +153,7 @@ export default class Sidebar {
     }
 
     onElementLoaded(this.selectors.sidebarElement, (el) => {
-      const template = SidebarTemplate(
-        this.followedChannelsInfo,
-        this.language
-      );
+      const template = SidebarTemplate(this.followedChannelsInfo, this.language);
 
       el.insertAdjacentHTML('afterend', template);
     });

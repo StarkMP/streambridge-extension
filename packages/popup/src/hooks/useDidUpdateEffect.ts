@@ -1,9 +1,6 @@
 import { DependencyList, useEffect, useRef } from 'react';
 
-const useDidUpdateEffect = (
-  callback: () => void,
-  deps?: DependencyList
-): void => {
+const useDidUpdateEffect = (callback: () => void, deps?: DependencyList): void => {
   const didMounRef = useRef(false);
 
   useEffect(() => {

@@ -5,11 +5,7 @@ export const findElement = (
   const elements = document.querySelectorAll(tag); // Get all div elements
   for (let i = 0; i < elements.length; i++) {
     const element = elements[i];
-    if (
-      Array.from(element.classList).some((className) =>
-        className.includes(classNamePart)
-      )
-    ) {
+    if (Array.from(element.classList).some((className) => className.includes(classNamePart))) {
       // Check if any class name includes the specified string
       return element;
     }

@@ -6,13 +6,7 @@ export default class IFrame {
 
   private readonly language: Languages;
 
-  constructor({
-    channel,
-    language,
-  }: {
-    channel: Channel;
-    language: Languages;
-  }) {
+  constructor({ channel, language }: { channel: Channel; language: Languages }) {
     this.channel = channel;
     this.language = language;
 

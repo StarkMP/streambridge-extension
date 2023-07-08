@@ -3,18 +3,13 @@ import { ChannelInfo, Languages } from '@shared/types';
 
 import SidebarItemTemplate from './sidebar-item';
 
-const SidebarTemplate = (
-  channels: ChannelInfo[],
-  language: Languages
-): string => {
+const SidebarTemplate = (channels: ChannelInfo[], language: Languages): string => {
   const items =
     channels.length > 0
       ? channels
           .sort(
             (a, b) =>
-              Number(b.isOnline) +
-              Number(b.viewers) -
-              (Number(a.isOnline) + Number(a.viewers))
+              Number(b.isOnline) + Number(b.viewers) - (Number(a.isOnline) + Number(a.viewers))
           )
           .map((item) => SidebarItemTemplate(item))
           .join('')

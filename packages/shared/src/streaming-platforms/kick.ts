@@ -44,9 +44,7 @@ const kick: StreamingPlatform = {
           window.open(
             `https://kick.com/${channel.source.channelId}/chatroom`,
             'mywindow',
-            `width=340,height=${window.innerHeight},top=0,left=${
-              window.innerWidth - 340
-            }`
+            `width=340,height=${window.innerHeight},top=0,left=${window.innerWidth - 340}`
           );
         });
       },
