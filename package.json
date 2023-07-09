@@ -1,5 +1,5 @@
 {
-  "name": "stream-bridge",
+  "name": "@stream-bridge/extension",
   "version": "1.1.0",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
