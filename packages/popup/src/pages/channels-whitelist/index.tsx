@@ -1,38 +1,12 @@
-import { LoadingOutlined } from '@ant-design/icons';
 import { getChannels, getChannelsByKeyword } from '@shared/api/services/whitelist';
 import { maxFollowedChannels } from '@shared/constants';
-import { Channel, PlatformId } from '@shared/types';
-import { getChannelUrl } from '@shared/utils/platform';
-import { Input, Switch, Tooltip } from 'antd';
+import { Channel } from '@shared/types';
 import React, { JSX, useEffect, useRef, useState } from 'react';
-import InfiniteScroll from 'react-infinite-scroll-component';
-import { useLocalizer } from 'reactjs-localizer';
 
-import { KickIcon, TrovoIcon, VKPlayIcon, WASDIcon, YouTubeIcon } from '../../components/Icons';
 import { whitelistLazyLoadLimit } from '../../constants';
 import { useStorage } from '../../context/StorageContext';
+import Whitelist from '../../features/Whitelist';
 import useDidUpdateEffect from '../../hooks/useDidUpdateEffect';
-import {
-  List,
-  ListHeader,
-  ListHeaderColumns,
-  ListItemSourceUrl,
-  ListItemText,
-  ListItemTwitch,
-  ListItemWrapper,
-  LoaderWrapper,
-  ScrollableWrapper,
-} from './styles';
-
-const { Search } = Input;
-
-const platformsIcons: Record<string, React.ReactNode> = {
-  [PlatformId.Kick]: <KickIcon />,
-  [PlatformId.VKPlayLive]: <VKPlayIcon />,
-  [PlatformId.Trovo]: <TrovoIcon />,
-  [PlatformId.WASD]: <WASDIcon />,
-  [PlatformId.YouTube]: <YouTubeIcon />,
-};
 
 const ChannelsWhitelistPage = (): JSX.Element => {
   const [channels, setChannels] = useState<Channel[]>([]);
@@ -43,14 +17,13 @@ const ChannelsWhitelistPage = (): JSX.Element => {
   const isFollowedChanged = useRef<boolean>(false);
   const offsetRef = useRef<number>(0);
   const searchRef = useRef<string>(search);
-  const { localize } = useLocalizer();
   const [switcherLoading, setSwitcherLoading] = useState<string | null>(null);
 
-  const onSearch: React.ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onSearch = (value: string): void => {
     offsetRef.current = 0;
     setChannels([]);
     setHasMore(true);
-    setSearch(e.currentTarget.value);
+    setSearch(value);
   };
 
   const handleFollow = (checked: boolean, twitch: string): void => {
@@ -152,80 +125,14 @@ const ChannelsWhitelistPage = (): JSX.Element => {
   }, [search]);
 
   return (
-    <List
-      dataSource={channels}
-      header={
-        <ListHeader>
-          <Search
-            value={search}
-            onChange={onSearch}
-            placeholder={localize('popup.channel-list.search')}
-            allowClear
-          />
-          <ListHeaderColumns>
-            <b>{localize('popup.channel-list.channel')}</b>
-            <b>{localize('popup.channel-list.followed')}</b>
-          </ListHeaderColumns>
-        </ListHeader>
-      }
-      itemLayout='horizontal'
-    >
-      <ScrollableWrapper id='channels-scroll'>
-        <InfiniteScroll
-          dataLength={channels.length}
-          next={loadMoreChannels}
-          hasMore={hasMore}
-          loader={
-            <LoaderWrapper>
-              <LoadingOutlined />
-            </LoaderWrapper>
-          }
-          // endMessage={<p>Thats all!</p>}
-          scrollableTarget='channels-scroll'
-        >
-          {channels.map((item, index) => {
-            const checked = storage.followed.includes(item.twitch);
-            const disabled = !checked && storage.followed.length >= maxFollowedChannels;
-            const channelUrl = getChannelUrl(item.source.id, item.source.channelId);
-
-            return (
-              <List.Item
-                key={index}
-                actions={[
-                  <Tooltip
-                    key={index}
-                    title={
-                      disabled
-                        ? localize('popup.channel-list.limit', {
-                            maxCount: maxFollowedChannels,
-                          })
-                        : ''
-                    }
-                  >
-                    <Switch
-                      size='small'
-                      checked={checked}
-                      disabled={disabled}
-                      onChange={(checked): void => handleFollow(checked, item.twitch)}
-                    />
-                  </Tooltip>,
-                ]}
-              >
-                <ListItemWrapper>
-                  {platformsIcons[item.source.id] || null}
-                  <ListItemText>
-                    <ListItemTwitch>{item.twitch}</ListItemTwitch>
-                    <ListItemSourceUrl target='_blank' href={channelUrl}>
-                      {channelUrl.replace('https://', '').replace('www.', '')}
-                    </ListItemSourceUrl>
-                  </ListItemText>
-                </ListItemWrapper>
-              </List.Item>
-            );
-          })}
-        </InfiniteScroll>
-      </ScrollableWrapper>
-    </List>
+    <Whitelist
+      channels={channels}
+      search={search}
+      hasMore={hasMore}
+      loadMore={loadMoreChannels}
+      onSearch={onSearch}
+      onFollow={handleFollow}
+    />
   );
 };
 
