@@ -3,7 +3,7 @@ import axios from 'axios';
 
 const youtube: StreamingPlatform = {
   id: PlatformId.YouTube,
-  url: 'https://www.youtube.com',
+  url: 'https://www.youtube.com/%id%/live',
   getInfo: async (channel) => {
     const apiUrl = `https://www.youtube.com/@${channel.source.channelId}/live`;
 

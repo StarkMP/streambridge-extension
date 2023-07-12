@@ -12,4 +12,4 @@ export const getPlatformById = (id: string): StreamingPlatform => {
 };
 
 export const getChannelUrl = (platformId: string, channelId: string): string =>
-  `${getPlatformById(platformId).url}/${channelId}`;
+  getPlatformById(platformId).url.replace('%id%', channelId);

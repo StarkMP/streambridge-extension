@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const kick: StreamingPlatform = {
   id: PlatformId.Kick,
-  url: 'https://kick.com',
+  url: 'https://kick.com/%id%',
   getInfo: async (channel) => {
     const apiUrl = `https://kick.com/api/v2/channels/${channel.source.channelId}`;
 
