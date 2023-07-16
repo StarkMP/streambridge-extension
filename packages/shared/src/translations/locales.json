@@ -39,6 +39,74 @@
     "en": "You can't subscribe to more than %maxCount% channels",
     "ru": "Количество подписок не может быть больше %maxCount%"
   },
+  "popup.channel-list.add-channel-text": {
+    "en": "Can't see channel you need?",
+    "ru": "Не нашли своего стримера?"
+  },
+  "popup.channel-list.add-channel-btn": {
+    "en": "Add channel",
+    "ru": "Добавить канал"
+  },
+  "popup.channel-list.local-channel-menu": {
+    "en": "Menu",
+    "ru": "Меню"
+  },
+  "popup.channel-list.local-channel-menu-remove": {
+    "en": "Remove",
+    "ru": "Удалить"
+  },
+  "popup.add-channel.error-limit": {
+    "en": "You can't add more than %maxCount% channels",
+    "ru": "Количество добавленных каналов не может быть больше %maxCount%"
+  },
+  "popup.add-channel.error-existing": {
+    "en": "You already have this channel in your list",
+    "ru": "Канал уже есть в вашем списке"
+  },
+  "popup.add-channel.error-fetch": {
+    "en": "Failed to request channel info. Check the entered data",
+    "ru": "Не удалось получить данные о канале. Проверьте правильность ввода"
+  },
+  "popup.add-channel.error-available": {
+    "en": "Channel already available in the list (%twitch%)",
+    "ru": "Канал уже доступен в списке (%twitch%)"
+  },
+  "popup.add-channel.title": {
+    "en": "Add channel",
+    "ru": "Добавить канал"
+  },
+  "popup.add-channel.fields-platform": {
+    "en": "Streaming platform",
+    "ru": "Стриминговая платформа"
+  },
+  "popup.add-channel.fields-platform-placeholder": {
+    "en": "Choose platform",
+    "ru": "Выберите платформу"
+  },
+  "popup.add-channel.fields-nickname": {
+    "en": "Streamer's nickname",
+    "ru": "Ник стримера"
+  },
+  "popup.add-channel.fields-nickname-placeholder": {
+    "en": "Example: xQc",
+    "ru": "Пример: evelone"
+  },
+  "popup.add-channel.info-description": {
+    "en": "Only you will see channels which added via this form.",
+    "ru": "Добавленные каналы через эту форму будут видны только вам."
+  },
+  "popup.add-channel.info-question": {
+    "en": "How to add channel for all?",
+    "ru": "Как добавить канал для всех?"
+  },
+  "popup.add-channel.submit": {
+    "en": "Submit",
+    "ru": "Добавить"
+  },
+  "popup.add-channel.reset": {
+    "en": "Reset",
+    "ru": "Очистить"
+  },
   "popup.settings.language": {
     "en": "Language",
     "ru": "Язык интерфейса"
@@ -55,8 +123,24 @@
     "en": "Reload",
     "ru": "Обновить"
   },
+  "popup.validation-errors.required": {
+    "en": "Field is required",
+    "ru": "Заполните обязательное поле"
+  },
+  "popup.validation-errors.min": {
+    "en": "Min length is %length%",
+    "ru": "Минимальная длина %length%"
+  },
+  "popup.validation-errors.max": {
+    "en": "Max length is %length%",
+    "ru": "Максимальная длина %length%"
+  },
+  "popup.validation-errors.format": {
+    "en": "Incorrect format",
+    "ru": "Некорректный формат"
+  },
   "iframe.kick.open-chat-btn": {
-    "en": "Open in new window",
+    "en": "Open",
     "ru": "Открыть"
   },
   "iframe.kick.open-chat-description": {

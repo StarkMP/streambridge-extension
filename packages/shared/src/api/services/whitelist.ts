@@ -7,14 +7,14 @@ export const getChannels = (params: PaginationParams = {}): Promise<AxiosRespons
   const paginationQueryParams =
     Object.keys(params).length > 0 ? `?${getPaginationQueryParams(params)}` : '';
 
-  return apiInstance.get(`/api/v1/whitelist${paginationQueryParams}`);
+  return apiInstance.get(`/api/v1/whitelist/items${paginationQueryParams}`);
 };
 
 export const getChannel = (twitch: string): Promise<AxiosResponse<Channel>> =>
-  apiInstance.get(`/api/v1/whitelist/${twitch}`);
+  apiInstance.get(`/api/v1/whitelist/items/${twitch}`);
 
 export const getChannelsByIds = (twitch: string[]): Promise<AxiosResponse<Channel[]>> =>
-  apiInstance.get(`/api/v1/whitelist?${arrayToQueryParams('twitch', twitch)}`);
+  apiInstance.get(`/api/v1/whitelist/items?${arrayToQueryParams('twitch', twitch)}`);
 
 export const getChannelsByKeyword = (
   keyword: string,
@@ -23,5 +23,11 @@ export const getChannelsByKeyword = (
   const paginationQueryParams =
     Object.keys(params).length > 0 ? `&${getPaginationQueryParams(params)}` : '';
 
-  return apiInstance.get(`/api/v1/whitelist?keyword=${keyword}${paginationQueryParams}`);
+  return apiInstance.get(`/api/v1/whitelist/items?keyword=${keyword}${paginationQueryParams}`);
 };
+
+/**
+ * @param sourceArray - Use pattern "channel:source" for each element of array
+ */
+export const getChannelBySource = (sourceArray: string[]): Promise<AxiosResponse<Channel[]>> =>
+  apiInstance.get(`/api/v1/whitelist/items?${arrayToQueryParams('source', sourceArray)}`);

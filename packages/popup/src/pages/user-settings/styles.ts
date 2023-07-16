@@ -6,6 +6,7 @@ const { Text } = Typography;
 export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  padding-top: 10px;
 `;
 
 export const Label = styled(Text)`

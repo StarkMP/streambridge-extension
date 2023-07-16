@@ -48,7 +48,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
     }
 
     isFollowedChanged.current = true;
-    updateStorage({ ...storage, followed }).finally(() => setSwitcherLoading(null));
+    updateStorage({ followed }).finally(() => setSwitcherLoading(null));
   };
 
   const loadMoreChannels = (): void => {
@@ -114,6 +114,18 @@ const ChannelsWhitelistPage = (): JSX.Element => {
     }
   };
 
+  const getLocalChannels = (): Channel[] => {
+    const localWhitelist = storage.localWhitelist.sort((a, b) => a.twitch.localeCompare(b.twitch));
+
+    if (search) {
+      return localWhitelist.filter(
+        (item) => item.twitch.includes(search) || item.source.channelId.includes(search)
+      );
+    }
+
+    return localWhitelist;
+  };
+
   useEffect(() => {
     loadMoreChannels();
   }, []);
@@ -126,7 +138,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
 
   return (
     <Whitelist
-      channels={channels}
+      channels={getLocalChannels().concat(channels)}
       search={search}
       hasMore={hasMore}
       loadMore={loadMoreChannels}

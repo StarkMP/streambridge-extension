@@ -3,17 +3,20 @@
 // without nesting routes
 import React, { createContext, JSX, ReactNode, useContext, useState } from 'react';
 
+import AddChannelPage from './add-channel';
 import ChannelsWhitelistPage from './channels-whitelist';
 import UserSettingsPage from './user-settings';
 
 export enum Pages {
   ChannelsWhitelist = 'channels-whitelist',
   UserSettings = 'user-settings',
+  AddChannel = 'add-channel',
 }
 
 const pageComponent = {
   [Pages.ChannelsWhitelist]: ChannelsWhitelistPage,
   [Pages.UserSettings]: UserSettingsPage,
+  [Pages.AddChannel]: AddChannelPage,
 };
 
 type SimpleRouterContextProps = {

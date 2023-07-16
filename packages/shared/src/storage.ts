@@ -4,6 +4,7 @@ import { UserStorage } from '@shared/types';
 export const initialStorageValue: UserStorage = {
   followed: [],
   language: detectLanguage(),
+  localWhitelist: [],
 };
 
 export const getLocalStorage = async (): Promise<UserStorage> => {

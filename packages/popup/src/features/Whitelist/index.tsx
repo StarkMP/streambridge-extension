@@ -3,6 +3,7 @@ import { Channel } from '@shared/types';
 import React, { JSX } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
 
+import ListFooter from './ListFooter';
 import ListHeader from './ListHeader';
 import ListItem from './ListItem';
 import { List, LoaderWrapper, ScrollableWrapper } from './styles';
@@ -39,7 +40,7 @@ const Whitelist = ({
             <LoadingOutlined />
           </LoaderWrapper>
         }
-        // endMessage={<p>Thats all!</p>}
+        endMessage={<ListFooter />}
         scrollableTarget='channels-scroll'
       >
         {channels.map((item) => (

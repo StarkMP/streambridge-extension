@@ -11,6 +11,7 @@ export type Channel = {
     id: PlatformId;
     channelId: string;
   };
+  isLocal?: boolean;
 };
 
 export type ChannelInfo = {
@@ -26,6 +27,7 @@ export type ChannelInfo = {
 export type UserStorage = {
   followed: string[];
   language: Languages;
+  localWhitelist: Channel[];
 };
 
 export enum PlatformId {

@@ -36,6 +36,8 @@ export const StorageProvider = ({ children }: StorageProviderProps): JSX.Element
 
       const storage = await getLocalStorage();
 
+      setLanguage(storage.language);
+
       if (storage.followed.length > 0) {
         const { data } = await getChannelsByIds(storage.followed);
 
@@ -44,9 +46,11 @@ export const StorageProvider = ({ children }: StorageProviderProps): JSX.Element
         );
 
         await updateStorage({ ...storage, followed: actualisedFollowed });
+
+        return;
       }
 
-      setLanguage(storage.language);
+      await updateStorage(storage);
     } catch (err) {
       setPageError(true);
     } finally {
