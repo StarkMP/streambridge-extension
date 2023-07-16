@@ -1,6 +1,6 @@
-import { getChannelsByIds } from '@shared/api/services/whitelist';
+import { getChannelBySource, getChannelsByIds } from '@shared/api/services/whitelist';
 import { getLocalStorage, initialStorageValue, setLocalStorage } from '@shared/storage';
-import { Channel, UserStorage } from '@shared/types';
+import { UserStorage } from '@shared/types';
 import React, { createContext, JSX, ReactNode, useContext, useEffect, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
@@ -27,7 +27,7 @@ export const StorageProvider = ({ children }: StorageProviderProps): JSX.Element
   const { setPageLoading, setPageError } = useSimpleRouter();
 
   useEffect(() => {
-    initStorage().catch(() => {});
+    initStorage();
   }, []);
 
   const initStorage = async (): Promise<void> => {
@@ -36,20 +36,50 @@ export const StorageProvider = ({ children }: StorageProviderProps): JSX.Element
 
       const storage = await getLocalStorage();
 
-      setLanguage(storage.language);
+      // fetch channels from server DB
+      // and replace user's local whitelist items to
+      // server DB items if we will find matches.
+      // we need to do it to avoid conflicts
+      if (storage.localWhitelist.length > 0) {
+        const sourceArray = storage.localWhitelist.map(
+          (item) => `${item.source.channelId}:${item.source.id}`
+        );
+        const { data } = await getChannelBySource(sourceArray);
 
+        storage.localWhitelist = storage.localWhitelist.filter((localChannel) => {
+          const matched = data.find(
+            (channel) =>
+              channel.source.id === localChannel.source.id &&
+              channel.source.channelId === localChannel.source.channelId
+          );
+
+          // refollow user to channel from server
+          // if user has follow to same local channel
+          if (matched && storage.followed.includes(localChannel.twitch)) {
+            const index = storage.followed.findIndex(
+              (followed) => followed === localChannel.twitch
+            );
+
+            storage.followed.splice(index, 1, matched.twitch);
+          }
+
+          return !matched;
+        });
+      }
+
+      // check if followed channel doesn't exist no longer
+      // and unfollow from them
       if (storage.followed.length > 0) {
         const { data } = await getChannelsByIds(storage.followed);
 
         const actualisedFollowed = storage.followed.filter((twitch) =>
-          ([] as Channel[]).concat(data).find((channel) => channel.twitch === twitch)
+          storage.localWhitelist.concat(data).find((channel) => channel.twitch === twitch)
         );
 
-        await updateStorage({ ...storage, followed: actualisedFollowed });
-
-        return;
+        storage.followed = actualisedFollowed;
       }
 
+      setLanguage(storage.language);
       await updateStorage(storage);
     } catch (err) {
       setPageError(true);

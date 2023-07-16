@@ -27,7 +27,7 @@ export default class Sidebar {
     this.updateInterval = updateInterval;
     this.language = language;
 
-    this.init().catch(() => {});
+    this.init();
     this.initStorageChangeHandler();
   }
 
@@ -35,7 +35,7 @@ export default class Sidebar {
     await this.update();
 
     setInterval(() => {
-      this.update().catch(() => {});
+      this.update();
     }, this.updateInterval);
   }
 
@@ -56,13 +56,11 @@ export default class Sidebar {
           (newValue as string[]).filter(
             (twitch) => !this.cachedChannelsInfo.find((cachedItem) => cachedItem.twitch === twitch)
           )
-        )
-          .then(() => {
-            this.updateFollowedChannelsInfo(
-              this.cachedChannelsInfo.filter((item) => newValue.includes(item.twitch))
-            );
-          })
-          .catch(() => {});
+        ).then(() => {
+          this.updateFollowedChannelsInfo(
+            this.cachedChannelsInfo.filter((item) => newValue.includes(item.twitch))
+          );
+        });
 
         return;
       }

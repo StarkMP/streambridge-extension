@@ -39,11 +39,18 @@ const ListItem = ({ item, onFollow }: ListItemProps): JSX.Element => {
 
   const removeLocalChannel = (twitch: string): void => {
     const localWhitelist = storage.localWhitelist.slice();
+    const followed = storage.followed.slice();
     const index = localWhitelist.findIndex((item) => item.twitch === twitch);
+
+    if (followed.includes(localWhitelist[index].twitch)) {
+      const followedIndex = followed.findIndex((item) => item === twitch);
+
+      followed.splice(followedIndex, 1);
+    }
 
     localWhitelist.splice(index, 1);
 
-    updateStorage({ localWhitelist }).catch(() => {});
+    updateStorage({ localWhitelist, followed });
   };
 
   return (

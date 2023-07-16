@@ -2,7 +2,7 @@ import { getChannelBySource } from '@shared/api/services/whitelist';
 import { maxLocalWhitelistLength } from '@shared/constants';
 import { PlatformId } from '@shared/types';
 import { getPlatformById } from '@shared/utils/platform';
-import { Button, Form, Input, Select, Space, Typography } from 'antd';
+import { Button, Form, Input, message, Select, Space, Typography } from 'antd';
 import React, { JSX, useState } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
@@ -27,6 +27,7 @@ const AddChannelPage = (): JSX.Element => {
   const { localize } = useLocalizer();
   const { storage, updateStorage } = useStorage();
   const { setPageError } = useSimpleRouter();
+  const [messageApi, contextHolder] = message.useMessage();
 
   const onChannelIdChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const value = e.target.value;
@@ -82,8 +83,8 @@ const AddChannelPage = (): JSX.Element => {
 
       if (data.length === 0) {
         await updateStorage({ localWhitelist: [...storage.localWhitelist, formattedChannel] });
-
-        console.log('Success added');
+        messageApi.success(localize('popup.add-channel.success'));
+        form.resetFields();
 
         return;
       }
@@ -97,11 +98,13 @@ const AddChannelPage = (): JSX.Element => {
   };
 
   const onSubmit = (values: AddChannelFormValues): void => {
-    addChannel(values).catch(() => {});
+    addChannel(values);
   };
 
   return (
     <Wrapper>
+      {contextHolder}
+
       <Title style={{ marginBottom: '15px' }} level={5}>
         {localize('popup.add-channel.title')}
       </Title>

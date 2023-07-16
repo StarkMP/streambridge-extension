@@ -29,7 +29,7 @@ export default class Content {
     this.language = language;
 
     this.initRouteObserver();
-    this.renderChannel().catch(() => {});
+    this.renderChannel();
   }
 
   private initRouteObserver(): void {
@@ -39,7 +39,7 @@ export default class Content {
       if (location.href !== previousUrl) {
         previousUrl = location.href;
 
-        this.renderChannel().catch(() => {});
+        this.renderChannel();
       }
     });
 
@@ -66,7 +66,7 @@ export default class Content {
         const video = document.querySelector(this.selectors.video) as HTMLVideoElement;
 
         if (video) {
-          video.play().catch(() => {});
+          video.play();
         }
       }
 

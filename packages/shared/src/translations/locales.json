@@ -103,6 +103,10 @@
     "en": "Submit",
     "ru": "Добавить"
   },
+  "popup.add-channel.success": {
+    "en": "Channel has been added",
+    "ru": "Канал добавлен в список"
+  },
   "popup.add-channel.reset": {
     "en": "Reset",
     "ru": "Очистить"
