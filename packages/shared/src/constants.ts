@@ -5,5 +5,5 @@ export const maxFollowedChannels = 5;
 export const maxLocalWhitelistLength = 3;
 export const defaultLanguage = Languages.English;
 export const sidebarUpdateInterval = 60000;
-export const apiUrl = 'http://localhost:3000';
-// export const apiUrl = 'https://streambridge.site';
+// export const apiUrl = 'http://localhost:3000';
+export const apiUrl = 'https://streambridge.site';
