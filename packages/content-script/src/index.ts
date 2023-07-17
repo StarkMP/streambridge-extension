@@ -11,7 +11,7 @@ import IFrame from './core/iframe';
 import Sidebar from './core/sidebar';
 
 const init = async (): Promise<void> => {
-  const { language } = await getLocalStorage();
+  const { language, localWhitelist } = await getLocalStorage();
 
   if (window.location.hostname === hostname) {
     new Content({ language });
@@ -27,7 +27,16 @@ const init = async (): Promise<void> => {
     return;
   }
 
-  const { data } = await getChannel(window.name.replace('sb:', ''));
+  const id = window.name.replace('sb:', '');
+  const localResult = localWhitelist.find((item) => item.id === id);
+
+  if (localResult) {
+    new IFrame({ channel: localResult, language });
+
+    return;
+  }
+
+  const { data } = await getChannel(id);
 
   new IFrame({ channel: data, language });
 };

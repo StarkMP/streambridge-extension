@@ -1,4 +1,5 @@
-import { getChannel } from '@shared/api/services/whitelist';
+import { getChannelByTwitch } from '@shared/api/services/whitelist';
+import { getLocalStorage } from '@shared/storage';
 import { Channel, Languages } from '@shared/types';
 import { onElementLoaded } from '@shared/utils/dom';
 import { getChannelUrl } from '@shared/utils/platform';
@@ -143,8 +144,18 @@ export default class Content {
       return cached;
     }
 
+    const localResult = (await getLocalStorage()).localWhitelist.find(
+      (item) => item.twitch === twitch
+    );
+
+    if (localResult) {
+      this.cachedChannels.push(localResult);
+
+      return localResult;
+    }
+
     try {
-      const { data } = await getChannel(twitch);
+      const { data } = await getChannelByTwitch(twitch);
 
       this.cachedChannels.push(data);
 

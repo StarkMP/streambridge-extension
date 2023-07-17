@@ -73,6 +73,19 @@ const AddChannelPage = (): JSX.Element => {
       source: { id: sourceId, channelId },
       isLocal: true,
     };
+
+    const existsChannelWithSameId = storage.localWhitelist.find(
+      (channel) => channel.id === formattedChannel.id
+    );
+
+    if (existsChannelWithSameId) {
+      setValidatonError(localize('popup.add-channel.error-existing'));
+
+      setFetching(false);
+
+      return;
+    }
+
     const info = await platform.getInfo(formattedChannel);
 
     if (info === null) {
