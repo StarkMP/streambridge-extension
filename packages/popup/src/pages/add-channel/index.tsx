@@ -67,7 +67,12 @@ const AddChannelPage = (): JSX.Element => {
     }
 
     const platform = getPlatformById(sourceId);
-    const formattedChannel = { twitch, source: { id: sourceId, channelId }, isLocal: true };
+    const formattedChannel = {
+      id: `${channelId}:${sourceId}`,
+      twitch,
+      source: { id: sourceId, channelId },
+      isLocal: true,
+    };
     const info = await platform.getInfo(formattedChannel);
 
     if (info === null) {

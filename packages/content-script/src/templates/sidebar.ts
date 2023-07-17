@@ -9,7 +9,9 @@ const SidebarTemplate = (channels: ChannelInfo[], language: Languages): string =
       ? channels
           .sort(
             (a, b) =>
-              Number(b.isOnline) + Number(b.viewers) - (Number(a.isOnline) + Number(a.viewers))
+              Number(b.data.isOnline) +
+              Number(b.data.viewers) -
+              (Number(a.data.isOnline) + Number(a.data.viewers))
           )
           .map((item) => SidebarItemTemplate(item))
           .join('')

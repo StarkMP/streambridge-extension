@@ -18,7 +18,7 @@ import {
 
 type ListItemProps = {
   item: Channel;
-  onFollow: (checked: boolean, twitch: string) => void;
+  onFollow: (checked: boolean, twitch: string, isLocal: boolean) => void;
 };
 
 const platformsIcons: Record<string, React.ReactNode> = {
@@ -33,18 +33,17 @@ const ListItem = ({ item, onFollow }: ListItemProps): JSX.Element => {
   const { localize } = useLocalizer();
   const { storage, updateStorage } = useStorage();
 
-  const checked = storage.followed.includes(item.twitch);
+  const checked = storage.followed.findIndex((followed) => followed.id === item.id) !== -1;
   const disabled = !checked && storage.followed.length >= maxFollowedChannels;
   const channelUrl = getChannelUrl(item.source.id, item.source.channelId);
 
-  const removeLocalChannel = (twitch: string): void => {
+  const removeLocalChannel = (id: string): void => {
     const localWhitelist = storage.localWhitelist.slice();
     const followed = storage.followed.slice();
-    const index = localWhitelist.findIndex((item) => item.twitch === twitch);
+    const index = localWhitelist.findIndex((item) => item.id === id);
+    const followedIndex = followed.findIndex((followed) => followed.id === id);
 
-    if (followed.includes(localWhitelist[index].twitch)) {
-      const followedIndex = followed.findIndex((item) => item === twitch);
-
+    if (followedIndex !== -1) {
       followed.splice(followedIndex, 1);
     }
 
@@ -56,7 +55,7 @@ const ListItem = ({ item, onFollow }: ListItemProps): JSX.Element => {
   return (
     <List.Item
       actions={[
-        <ActionsWrapper key={item.twitch}>
+        <ActionsWrapper key={item.id}>
           {item.isLocal && (
             <Tooltip title={localize('popup.channel-list.local-channel-menu')}>
               <Dropdown
@@ -66,7 +65,7 @@ const ListItem = ({ item, onFollow }: ListItemProps): JSX.Element => {
                     {
                       key: 'remove',
                       label: localize('popup.channel-list.local-channel-menu-remove'),
-                      onClick: () => removeLocalChannel(item.twitch),
+                      onClick: () => removeLocalChannel(item.id),
                     },
                   ],
                 }}
@@ -88,7 +87,7 @@ const ListItem = ({ item, onFollow }: ListItemProps): JSX.Element => {
               size='small'
               checked={checked}
               disabled={disabled}
-              onChange={(checked): void => onFollow(checked, item.twitch)}
+              onChange={(checked): void => onFollow(checked, item.id, item.isLocal || false)}
             />
           </Tooltip>
         </ActionsWrapper>,

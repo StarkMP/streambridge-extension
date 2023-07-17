@@ -6,6 +6,7 @@ export type StreamingPlatform = {
 };
 
 export type Channel = {
+  id: string;
   twitch: string;
   source: {
     id: PlatformId;
@@ -15,17 +16,25 @@ export type Channel = {
 };
 
 export type ChannelInfo = {
-  twitch: string;
-  isOnline: boolean;
-  category?: string;
-  viewers?: number;
-  title?: string;
-  nickname: string;
-  avatar?: string;
+  id: string;
+  data: {
+    twitch: string;
+    isOnline: boolean;
+    category?: string;
+    viewers?: number;
+    title?: string;
+    nickname: string;
+    avatar?: string;
+  };
+};
+
+export type FollowedChannel = {
+  id: string;
+  isLocal?: boolean;
 };
 
 export type UserStorage = {
-  followed: string[];
+  followed: FollowedChannel[];
   language: Languages;
   localWhitelist: Channel[];
 };

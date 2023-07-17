@@ -1,6 +1,7 @@
 import { getChannels, getChannelsByKeyword } from '@shared/api/services/whitelist';
 import { maxFollowedChannels } from '@shared/constants';
 import { Channel } from '@shared/types';
+import { getFollowedIds } from '@shared/utils/followed';
 import React, { JSX, useEffect, useRef, useState } from 'react';
 
 import { whitelistLazyLoadLimit } from '../../constants';
@@ -26,8 +27,8 @@ const ChannelsWhitelistPage = (): JSX.Element => {
     setSearch(value);
   };
 
-  const handleFollow = (checked: boolean, twitch: string): void => {
-    if (switcherLoading === twitch) {
+  const handleFollow = (checked: boolean, id: string, isLocal = false): void => {
+    if (switcherLoading === id) {
       return;
     }
 
@@ -37,12 +38,12 @@ const ChannelsWhitelistPage = (): JSX.Element => {
       return;
     }
 
-    setSwitcherLoading(twitch);
+    setSwitcherLoading(id);
 
     if (checked) {
-      followed.push(twitch);
+      followed.push({ id, isLocal });
     } else {
-      const index = followed.findIndex((item) => item === twitch);
+      const index = followed.findIndex((item) => item.id === id);
 
       followed.splice(index, 1);
     }
@@ -64,7 +65,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
       getChannelsByKeyword(search, {
         offset: offsetRef.current,
         limit: whitelistLazyLoadLimit,
-        priority: storage.followed,
+        priority: getFollowedIds(storage.followed, true),
       })
         .then((res) => {
           // if doesn't match (because we use async operations)
@@ -90,7 +91,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
     getChannels({
       offset: offsetRef.current,
       limit: whitelistLazyLoadLimit,
-      priority: storage.followed,
+      priority: getFollowedIds(storage.followed, true),
     })
       .then((res) => addLoadedChannels(res.data))
       .finally(() => {

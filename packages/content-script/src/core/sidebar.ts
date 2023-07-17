@@ -2,8 +2,9 @@ import { getChannel } from '@shared/api/services/whitelist';
 import { maxFollowedChannels } from '@shared/constants';
 import { getLocalStorage } from '@shared/storage';
 import streamingPlatforms from '@shared/streaming-platforms';
-import { Channel, ChannelInfo, Languages } from '@shared/types';
+import { Channel, ChannelInfo, FollowedChannel, Languages } from '@shared/types';
 import { onElementLoaded } from '@shared/utils/dom';
+import { getFollowedIds } from '@shared/utils/followed';
 
 import SidebarTemplate from '../templates/sidebar';
 
@@ -45,28 +46,35 @@ export default class Sidebar {
         return;
       }
 
-      const { oldValue, newValue } = changes.followed;
+      const oldValue: FollowedChannel[] | void = changes.followed.oldValue;
+      const newValue: FollowedChannel[] | void = changes.followed.newValue;
 
       if (!oldValue || !newValue) {
         return;
       }
 
+      // if we follow to new channel
       if (newValue.length > oldValue.length) {
         this.fetchChannelsInfo(
-          (newValue as string[]).filter(
-            (twitch) => !this.cachedChannelsInfo.find((cachedItem) => cachedItem.twitch === twitch)
+          getFollowedIds(newValue).filter(
+            (id) => !this.cachedChannelsInfo.find((cachedItem) => cachedItem.id === id)
           )
         ).then(() => {
           this.updateFollowedChannelsInfo(
-            this.cachedChannelsInfo.filter((item) => newValue.includes(item.twitch))
+            this.cachedChannelsInfo.filter((item) =>
+              newValue.find((followed) => item.id === followed.id)
+            )
           );
         });
 
         return;
       }
 
+      // if we unfollow from channel
       this.updateFollowedChannelsInfo(
-        this.followedChannelsInfo.filter((item) => newValue.includes(item.twitch))
+        this.followedChannelsInfo.filter((item) =>
+          newValue.find((fromStorage) => fromStorage.id === item.id)
+        )
       );
     });
   }
@@ -83,16 +91,16 @@ export default class Sidebar {
     this.render();
   }
 
-  private cacheChannelInfo(info: ChannelInfo): void {
-    const index = this.cachedChannelsInfo.findIndex((item) => item.twitch === info.twitch);
+  private cacheChannelInfo(data: ChannelInfo): void {
+    const index = this.cachedChannelsInfo.findIndex((item) => item.id === data.id);
 
     if (index !== -1) {
-      this.cachedChannelsInfo[index] = info;
+      this.cachedChannelsInfo[index] = data;
 
       return;
     }
 
-    this.cachedChannelsInfo.push(info);
+    this.cachedChannelsInfo.push(data);
   }
 
   private async fetchFollowedChannelsInfo(): Promise<ChannelInfo[]> {
@@ -102,16 +110,18 @@ export default class Sidebar {
       return [];
     }
 
-    const channelsInfo = await this.fetchChannelsInfo(followed.slice(0, maxFollowedChannels));
+    const channelsInfo = await this.fetchChannelsInfo(
+      getFollowedIds(followed.slice(0, maxFollowedChannels))
+    );
 
     return channelsInfo;
   }
 
-  private async fetchChannelsInfo(channelIdArray: string[]): Promise<ChannelInfo[]> {
-    const channelsInfo = [];
+  private async fetchChannelsInfo(ids: string[]): Promise<ChannelInfo[]> {
+    const channelsInfo: ChannelInfo[] = [];
 
-    for await (const twitch of channelIdArray) {
-      const info = await this.fetchChannelInfo(twitch);
+    for await (const id of ids) {
+      const info = await this.fetchChannelInfo(id);
 
       if (info) {
         channelsInfo.push(info);
@@ -121,8 +131,8 @@ export default class Sidebar {
     return channelsInfo;
   }
 
-  private async fetchChannelInfo(twitch: string): Promise<ChannelInfo | null> {
-    const channel = await this.fetchChannel(twitch);
+  private async fetchChannelInfo(id: string): Promise<ChannelInfo | null> {
+    const channel = await this.fetchChannel(id);
 
     if (!channel) {
       return null;
@@ -136,9 +146,11 @@ export default class Sidebar {
 
     const info = await platform.getInfo(channel);
 
-    if (info) {
-      this.cacheChannelInfo(info);
+    if (!info) {
+      return null;
     }
+
+    this.cacheChannelInfo(info);
 
     return info;
   }
@@ -157,15 +169,24 @@ export default class Sidebar {
     });
   }
 
-  private async fetchChannel(twitch: string): Promise<Channel | null> {
-    const cached = this.cachedChannels.find((item) => item.twitch === twitch);
+  private async fetchChannel(id: string): Promise<Channel | null> {
+    const cached = this.cachedChannels.find((item) => item.id === id);
 
     if (cached) {
       return cached;
     }
 
+    const storage = await getLocalStorage();
+    const localResult = storage.localWhitelist.find((item) => item.id === id);
+
+    if (localResult) {
+      this.cachedChannels.push(localResult);
+
+      return localResult;
+    }
+
     try {
-      const { data } = await getChannel(twitch);
+      const { data } = await getChannel(id);
 
       this.cachedChannels.push(data);
 

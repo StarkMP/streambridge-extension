@@ -14,7 +14,7 @@ type WhitelistProps = {
   hasMore: boolean;
   loadMore: () => void;
   onSearch: (value: string) => void;
-  onFollow: (checked: boolean, twitch: string) => void;
+  onFollow: (checked: boolean, twitch: string, isLocal: boolean) => void;
 };
 
 const Whitelist = ({
@@ -44,7 +44,7 @@ const Whitelist = ({
         scrollableTarget='channels-scroll'
       >
         {channels.map((item) => (
-          <ListItem key={item.twitch} item={item} onFollow={onFollow} />
+          <ListItem key={item.id} item={item} onFollow={onFollow} />
         ))}
       </InfiniteScroll>
     </ScrollableWrapper>

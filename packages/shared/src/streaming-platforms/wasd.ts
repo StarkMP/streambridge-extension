@@ -15,15 +15,18 @@ const wasd: StreamingPlatform = {
       const isOnline = data.result.channel.channel_is_live;
 
       return {
-        twitch: channel.twitch,
-        isOnline,
-        category: data.result.media_container?.game?.game_name,
-        viewers: isOnline
-          ? data.result.media_container?.media_container_streams[0]?.stream_current_viewers
-          : 0,
-        title: data.result.media_container?.media_container_name,
-        nickname: data.result.channel.channel_name,
-        avatar: data.result.channel?.channel_image?.small,
+        id: channel.id,
+        data: {
+          twitch: channel.twitch,
+          isOnline,
+          category: data.result.media_container?.game?.game_name,
+          viewers: isOnline
+            ? data.result.media_container?.media_container_streams[0]?.stream_current_viewers
+            : 0,
+          title: data.result.media_container?.media_container_name,
+          nickname: data.result.channel.channel_name,
+          avatar: data.result.channel?.channel_image?.small,
+        },
       };
     } catch (e) {
       return null;

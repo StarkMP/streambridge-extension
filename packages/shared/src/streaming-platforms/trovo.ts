@@ -36,13 +36,16 @@ const trovo: StreamingPlatform = {
       const isOnline = !!data.isLive;
 
       return {
-        twitch: channel.twitch,
-        isOnline,
-        category: data.categoryInfo.name,
-        viewers: isOnline ? data.channelInfo.viewers : 0,
-        title: data.channelInfo.title,
-        nickname: data.streamerInfo.nickName,
-        avatar: data.streamerInfo.faceUrl,
+        id: channel.id,
+        data: {
+          twitch: channel.twitch,
+          isOnline,
+          category: data.categoryInfo.name,
+          viewers: isOnline ? data.channelInfo.viewers : 0,
+          title: data.channelInfo.title,
+          nickname: data.streamerInfo.nickName,
+          avatar: data.streamerInfo.faceUrl,
+        },
       };
     } catch (e) {
       return null;

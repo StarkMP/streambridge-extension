@@ -1,26 +1,27 @@
 import { ChannelInfo } from '@shared/types';
 import { formatNumber } from '@shared/utils/format';
 
-const SidebarItemTemplate = (channel: ChannelInfo): string => {
-  const isOnline = channel.isOnline;
-  const viewers = formatNumber(channel.viewers || 0);
+const SidebarItemTemplate = (info: ChannelInfo): string => {
+  const { data } = info;
+  const isOnline = data.isOnline;
+  const viewers = formatNumber(data.viewers || 0);
 
   return `
     <div class="ScTransitionBase-sc-hx4quq-0 bIklSd tw-transition" data-channel="${
-      channel.twitch
+      data.twitch
     }" aria-hidden="false" style="transition-property: transform, opacity; transition-timing-function: ease;">
       <div>
         <div class="Layout-sc-1xcs6mc-0 bZVrjx side-nav-card sb-sidebar-card--collapsed" data-test-selector="side-nav-card-collapsed">
           <a class="ScCoreLink-sc-16kq0mq-0 jSrrlW InjectLayout-sc-1i43xsx-0 fKMgEV side-nav-card tw-link" href="/${
-            channel.twitch
+            data.twitch
           }">
             <div class="Layout-sc-1xcs6mc-0 dutbes side-nav-card__avatar ${
               isOnline ? '' : 'side-nav-card__avatar--offline'
             }">
               <figure class="ScAvatar-sc-144b42z-0 fUKwUf tw-avatar">
                 <img class="InjectLayout-sc-1i43xsx-0 bEwPpb tw-image tw-image-avatar" alt="${
-                  channel.nickname
-                }" src="${channel.avatar}">
+                  data.nickname
+                }" src="${data.avatar}">
               </figure>
             </div>
           </a>
@@ -28,7 +29,7 @@ const SidebarItemTemplate = (channel: ChannelInfo): string => {
 
         <div class="Layout-sc-1xcs6mc-0 bZVrjx side-nav-card sb-sidebar-card--expanded">
           <a class="ScCoreLink-sc-16kq0mq-0 jKBAWW InjectLayout-sc-1i43xsx-0 fpJafq side-nav-card__link tw-link" href="/${
-            channel.twitch
+            data.twitch
           }">
 
             <div class="Layout-sc-1xcs6mc-0 dutbes side-nav-card__avatar ${
@@ -36,8 +37,8 @@ const SidebarItemTemplate = (channel: ChannelInfo): string => {
             }">
               <figure class="ScAvatar-sc-144b42z-0 fUKwUf tw-avatar">
                 <img class="InjectLayout-sc-1i43xsx-0 bEwPpb tw-image tw-image-avatar" alt="${
-                  channel.nickname
-                }" src="${channel.avatar}">
+                  data.nickname
+                }" src="${data.avatar}">
               </figure>
             </div>
 
@@ -45,16 +46,16 @@ const SidebarItemTemplate = (channel: ChannelInfo): string => {
               <div class="Layout-sc-1xcs6mc-0 eCunGK">
                 <div class="Layout-sc-1xcs6mc-0 beAYWq side-nav-card__title">
                   <p title="${
-                    channel.nickname
+                    data.nickname
                   }" class="CoreText-sc-1txzju1-0 iQYdBM InjectLayout-sc-1i43xsx-0 gaLyxR">${
-    channel.nickname
+    data.nickname
   }</p>
                 </div>
                 ${
-                  isOnline && channel.category
+                  isOnline && data.category
                     ? `
                 <div class="Layout-sc-1xcs6mc-0 fFENuB side-nav-card__metadata">
-                  <p title="${channel.category}" class="CoreText-sc-1txzju1-0 bApHMU">${channel.category}</p>
+                  <p title="${data.category}" class="CoreText-sc-1txzju1-0 bApHMU">${data.category}</p>
                 </div>
                 `
                     : ''

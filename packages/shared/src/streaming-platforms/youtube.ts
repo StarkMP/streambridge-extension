@@ -46,31 +46,34 @@ const youtube: StreamingPlatform = {
       }
 
       return {
-        twitch: channel.twitch,
-        isOnline,
-        category,
-        viewers: isOnline
-          ? Number(
-              initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.viewCount?.runs[0].text.replace(
-                ',',
-                ''
+        id: channel.id,
+        data: {
+          twitch: channel.twitch,
+          isOnline,
+          category,
+          viewers: isOnline
+            ? Number(
+                initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.viewCount?.runs[0].text.replace(
+                  ',',
+                  ''
+                )
               )
-            )
-          : 0,
-        title: '',
-        nickname: isOnline
-          ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1]
-              .videoSecondaryInfoRenderer?.owner?.videoOwnerRenderer?.title?.runs[0].text
-          : initData?.metadata?.channelMetadataRenderer?.title,
-        avatar: isOnline
-          ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1].videoSecondaryInfoRenderer?.owner?.videoOwnerRenderer?.thumbnail?.thumbnails[0].url.replace(
-              'ggpht',
-              'googleusercontent'
-            )
-          : initData?.metadata?.channelMetadataRenderer?.avatar?.thumbnails[0].url.replace(
-              's900',
-              's48'
-            ),
+            : 0,
+          title: '',
+          nickname: isOnline
+            ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1]
+                .videoSecondaryInfoRenderer?.owner?.videoOwnerRenderer?.title?.runs[0].text
+            : initData?.metadata?.channelMetadataRenderer?.title,
+          avatar: isOnline
+            ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1].videoSecondaryInfoRenderer?.owner?.videoOwnerRenderer?.thumbnail?.thumbnails[0].url.replace(
+                'ggpht',
+                'googleusercontent'
+              )
+            : initData?.metadata?.channelMetadataRenderer?.avatar?.thumbnails[0].url.replace(
+                's900',
+                's48'
+              ),
+        },
       };
     } catch (e) {
       console.log('yt fetch error', e);

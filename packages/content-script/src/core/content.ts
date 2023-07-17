@@ -109,7 +109,7 @@ export default class Content {
         iframe.allow = 'autoplay; fullscreen';
         iframe.style.position = 'absolute';
         iframe.id = 'stream-bridge';
-        iframe.name = `sb:${channel.twitch}`;
+        iframe.name = `sb:${channel.id}`;
         iframe.setAttribute('src', link);
 
         root.appendChild(iframe);
