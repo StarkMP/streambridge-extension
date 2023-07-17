@@ -20,6 +20,7 @@ const ListHeader = ({ search, onSearch }: ListHeaderProps): JSX.Element => {
         value={search}
         onChange={(e): void => onSearch(e.currentTarget.value)}
         placeholder={localize('popup.channel-list.search')}
+        maxLength={32}
         allowClear
       />
       <ListHeaderColumns>

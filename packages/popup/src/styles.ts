@@ -28,6 +28,10 @@ const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
   }
+
+  .ant-message-notice {
+    text-align: left !important;
+  }
 `;
 
 export default GlobalStyles;

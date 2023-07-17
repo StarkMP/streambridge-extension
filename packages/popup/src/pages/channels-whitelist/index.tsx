@@ -134,7 +134,12 @@ const ChannelsWhitelistPage = (): JSX.Element => {
   useDidUpdateEffect(() => {
     searchRef.current = search;
 
-    loadMoreChannels();
+    // antispam
+    setTimeout(() => {
+      if (searchRef.current === search) {
+        loadMoreChannels();
+      }
+    }, 300);
   }, [search]);
 
   return (
