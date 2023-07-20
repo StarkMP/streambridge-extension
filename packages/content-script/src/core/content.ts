@@ -29,12 +29,15 @@ export default class Content {
   constructor({ language }: { language: Languages }) {
     this.language = language;
 
-    this.initRouteObserver();
-    this.renderChannel();
+    const currentLocation = location.href;
+
+    this.renderChannel().then(() => {
+      this.initRouteObserver(currentLocation);
+    });
   }
 
-  private initRouteObserver(): void {
-    let previousUrl = '';
+  private initRouteObserver(initLocation: string): void {
+    let previousUrl = initLocation;
 
     const observer = new MutationObserver(() => {
       if (location.href !== previousUrl) {
@@ -50,6 +53,7 @@ export default class Content {
   private async renderChannel(): Promise<void> {
     const iframe = document.querySelector(this.selectors.iframe) as HTMLElement;
     const wrapper = document.querySelector(this.selectors.wrapper) as HTMLElement;
+    const memoLocation = location.href;
     const channel = await this.findChannelByLocation();
 
     const prevNotification = document.querySelector(this.selectors.notification);
@@ -80,60 +84,75 @@ export default class Content {
 
     if (this.channelStatusObserver) {
       this.channelStatusObserver.disconnect();
+      this.channelStatusObserver = undefined;
     }
 
-    this.channelStatusObserver = onElementLoaded(this.selectors.errorWrapper, () => {
-      const root = document.querySelector(this.selectors.root) as HTMLElement;
-      const video = document.querySelector(this.selectors.video) as HTMLVideoElement;
+    if (memoLocation !== location.href) {
+      return;
+    }
 
-      if (root && wrapper) {
-        wrapper.style.display = 'none';
-        root.style.overflow = 'hidden';
+    return new Promise((resolve) => {
+      this.channelStatusObserver = onElementLoaded(this.selectors.errorWrapper, () => {
+        if (memoLocation !== location.href) {
+          resolve();
 
-        const sidebars = document.querySelectorAll(this.selectors.scrollbar);
-
-        if (sidebars.length > 0) {
-          sidebars.forEach((el) => {
-            (el as HTMLElement).style.display = 'none';
-          });
+          return;
         }
 
-        if (video) {
-          video.pause();
-        }
+        const root = document.querySelector(this.selectors.root) as HTMLElement;
+        const video = document.querySelector(this.selectors.video) as HTMLVideoElement;
 
-        const link = getChannelUrl(channel.source.id, channel.source.channelId);
-        const iframe = document.createElement('iframe');
+        if (root && wrapper) {
+          wrapper.style.display = 'none';
+          root.style.overflow = 'hidden';
 
-        iframe.width = '100%';
-        iframe.height = '100%';
-        iframe.allow = 'autoplay; fullscreen';
-        iframe.style.position = 'absolute';
-        iframe.id = 'stream-bridge';
-        iframe.name = `sb:${channel.id}`;
-        iframe.setAttribute('src', link);
+          const sidebars = document.querySelectorAll(this.selectors.scrollbar);
 
-        root.appendChild(iframe);
-
-        setTimeout(() => {
-          document.body.insertAdjacentHTML(
-            'beforeend',
-            NotificationTemplate(channel, this.language)
-          );
-
-          onElementLoaded(this.selectors.notification, (notification) => {
-            (
-              notification.querySelector(
-                this.selectors.notificationCloseButton
-              ) as HTMLButtonElement
-            ).addEventListener('click', (e) => {
-              notification.style.display = 'none';
+          if (sidebars.length > 0) {
+            sidebars.forEach((el) => {
+              (el as HTMLElement).style.display = 'none';
             });
-          });
-        }, 2000);
+          }
 
-        this.channelStatusObserver = undefined;
-      }
+          if (video) {
+            video.pause();
+          }
+
+          const link = getChannelUrl(channel.source.id, channel.source.channelId);
+          const iframe = document.createElement('iframe');
+
+          iframe.width = '100%';
+          iframe.height = '100%';
+          iframe.allow = 'autoplay; fullscreen';
+          iframe.style.position = 'absolute';
+          iframe.id = 'stream-bridge';
+          iframe.name = `sb:${channel.id}`;
+          iframe.setAttribute('src', link);
+
+          root.appendChild(iframe);
+
+          setTimeout(() => {
+            document.body.insertAdjacentHTML(
+              'beforeend',
+              NotificationTemplate(channel, this.language)
+            );
+
+            onElementLoaded(this.selectors.notification, (notification) => {
+              (
+                notification.querySelector(
+                  this.selectors.notificationCloseButton
+                ) as HTMLButtonElement
+              ).addEventListener('click', (e) => {
+                notification.remove();
+              });
+
+              resolve();
+            });
+          }, 2000);
+
+          this.channelStatusObserver = undefined;
+        }
+      });
     });
   }
 
