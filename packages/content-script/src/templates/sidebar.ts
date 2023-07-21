@@ -13,26 +13,14 @@ const SidebarTemplate = (channels: ChannelInfo[], language: Languages): string =
               Number(b.data.viewers) -
               (Number(a.data.isOnline) + Number(a.data.viewers))
           )
-          .map((item) => SidebarItemTemplate(item))
+          .map((item) => SidebarItemTemplate(item, language))
           .join('')
-      : `<span class="sb-sidebar__empty">${translations['content.sidebar.empty-description'][language]}</span>`;
+      : `<span class="sb-sidebar__empty-label">${translations['content.sidebar.empty-description'][language]}</span>`;
 
   return `
-    <div id="stream-bridge-sidebar" aria-label="${translations['project.name'][language]}" class="Layout-sc-1xcs6mc-0 bSoSIm side-nav-section sb-sidebar" role="group">
-      <div class="Layout-sc-1xcs6mc-0 lmQRGZ side-nav-header sb-sidebar__header">
-        <h2 class="CoreText-sc-1txzju1-0 lnnKUr">${translations['project.name'][language]}</h2>
-      </div>
-      <div class="InjectLayout-sc-1i43xsx-0 dVOhMf sb-sidebar__header--collapsed">
-        <div class="Layout-sc-1xcs6mc-0 eYvyCM followed-side-nav-header" data-a-target="side-nav-header-collapsed">
-          <figure class="ScFigure-sc-wkgzod-0 jCwWPp tw-svg">
-            <svg width="2rem" height="2rem" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M9.171 4.171A4 4 0 0 0 6.343 3H6a4 4 0 0 0-4 4v.343a4 4 0 0 0 1.172 2.829L10 17l6.828-6.828A4 4 0 0 0 18 7.343V7a4 4 0 0 0-4-4h-.343a4 4 0 0 0-2.829 1.172L10 5l-.829-.829zm.829 10 5.414-5.414A2 2 0 0 0 16 7.343V7a2 2 0 0 0-2-2h-.343a2 2 0 0 0-1.414.586L10 7.828 7.757 5.586A2 2 0 0 0 6.343 5H6a2 2 0 0 0-2 2v.343a2 2 0 0 0 .586 1.414L10 14.172z" clip-rule="evenodd"></path>
-            </svg>
-          </figure>
-        </div>
-      </div>
-
-      <div class="InjectLayout-sc-1i43xsx-0 eptOJT tw-transition-group">
+    <div id="stream-bridge-sidebar" class="sb-sidebar">
+      <h2 class="sb-sidebar__title">${translations['project.name'][language]}</h2>
+      <div class="sb-sidebar-items">
         ${items}
       </div>
     </div>

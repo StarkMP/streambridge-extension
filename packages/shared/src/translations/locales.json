@@ -3,6 +3,10 @@
     "en": "Use extension to add channels",
     "ru": "Добавьте каналы в меню расширения"
   },
+  "content.sidebar.offline": {
+    "en": "Offline",
+    "ru": "Не в сети"
+  },
   "content.notification.title": {
     "en": "You're watching this channel from <a href=\"%url%\" target=\"_blank\">%name%</a>",
     "ru": "Вы просматриваете этот канал с <a href=\"%url%\" target=\"_blank\">%name%</a>"

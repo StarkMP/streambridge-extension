@@ -1,4 +1,4 @@
-import './styles/twitch.scss';
+import './styles/twitch/index.scss';
 import './styles/youtube.scss';
 
 import { getChannel } from '@shared/api/services/whitelist';

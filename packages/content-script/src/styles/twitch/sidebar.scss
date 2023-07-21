@@ -1,0 +1,125 @@
+.sb-sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &__title {
+    font-size: var(--font-size-6) !important;
+    font-weight: var(--font-weight-semibold) !important;
+    text-transform: uppercase !important;
+    margin: 1rem !important;
+    padding-top: 0.5rem !important;
+  }
+
+  &-items {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    padding: 0.5rem 1rem !important;
+    flex-wrap: nowrap;
+    text-decoration: none !important;
+
+    &:hover {
+      background: #26262c;
+    }
+
+    &__user {
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: flex !important;
+      width: 100% !important;
+      -webkit-box-pack: justify !important;
+      justify-content: space-between !important;
+      margin-left: 1rem !important;
+    }
+
+    &__info {
+      display: flex;
+      flex-direction: column;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 100% !important;
+    }
+
+    &__nickname {
+      font-weight: var(--font-weight-semibold) !important;
+      color: var(--color-text-alt) !important;
+      font-size: var(--font-size-5) !important;
+      line-height: var(--line-height-heading) !important;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      flex-grow: 1 !important;
+    }
+
+    &__category {
+      padding-right: 0.5rem !important;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      color: var(--color-text-alt-2) !important;
+      font-size: var(--font-size-6) !important;
+      line-height: var(--line-height-heading) !important;
+    }
+
+    &__avatar {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+
+    &--offline &__avatar {
+      filter: grayscale(100%) contrast(85%);
+      opacity: .8;
+    }
+
+    &__status {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      flex-shrink: 0 !important;
+      margin-left: 0.5rem !important;
+
+      &__label {
+        color: var(--color-text-alt) !important;
+        font-size: var(--font-size-6) !important;
+        flex-shrink: 0 !important;
+        margin-left: 0.5rem !important;
+      }
+
+      &__dot {
+        background-color: var(--color-fill-live);
+        border-radius: var(--border-radius-rounded);
+        width: 0.8rem;
+        height: 0.8rem;
+        display: inline-block;
+        position: relative;
+      }
+    }
+  }
+
+  &__empty-label {
+    margin: 1rem;
+    margin-top: 0;
+    color: var(--color-text-alt-2) !important;
+    display: block;
+  }
+}
+
+// Override twitch styles
+.side-nav--collapsed {
+  .sb-sidebar {
+    &__empty-label, &__title {
+      display: none;
+    }
+  }
+}

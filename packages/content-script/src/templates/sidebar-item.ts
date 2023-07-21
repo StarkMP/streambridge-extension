@@ -1,88 +1,37 @@
-import { ChannelInfo } from '@shared/types';
+import { translations } from '@shared/translations';
+import { ChannelInfo, Languages } from '@shared/types';
 import { formatNumber } from '@shared/utils/format';
 
-const SidebarItemTemplate = (info: ChannelInfo): string => {
+const SidebarItemTemplate = (info: ChannelInfo, language: Languages): string => {
   const { data } = info;
   const isOnline = data.isOnline;
   const viewers = formatNumber(data.viewers || 0);
 
   return `
-    <div class="ScTransitionBase-sc-hx4quq-0 bIklSd tw-transition" data-channel="${
-      data.twitch
-    }" aria-hidden="false" style="transition-property: transform, opacity; transition-timing-function: ease;">
-      <div>
-        <div class="Layout-sc-1xcs6mc-0 bZVrjx side-nav-card sb-sidebar-card--collapsed" data-test-selector="side-nav-card-collapsed">
-          <a class="ScCoreLink-sc-16kq0mq-0 jSrrlW InjectLayout-sc-1i43xsx-0 fKMgEV side-nav-card tw-link" href="/${
-            data.twitch
-          }">
-            <div class="Layout-sc-1xcs6mc-0 dutbes side-nav-card__avatar ${
-              isOnline ? '' : 'side-nav-card__avatar--offline'
-            }">
-              <figure class="ScAvatar-sc-144b42z-0 fUKwUf tw-avatar">
-                <img class="InjectLayout-sc-1i43xsx-0 bEwPpb tw-image tw-image-avatar" alt="${
-                  data.nickname
-                }" src="${data.avatar}">
-              </figure>
-            </div>
-          </a>
+    <a class="sb-sidebar-item ${!isOnline ? 'sb-sidebar-item--offline' : ''}" href="/${
+    data.twitch
+  }">
+      <img class="sb-sidebar-item__avatar" alt="${data.nickname}" src="${data.avatar}">
+      <div class="sb-sidebar-item__user">
+        <div class="sb-sidebar-item__info">
+          <span class="sb-sidebar-item__nickname">${data.nickname}</span>
+          ${
+            isOnline && data.category
+              ? `<span class="sb-sidebar-item__category">${data.category}</span>`
+              : ''
+          }
         </div>
-
-        <div class="Layout-sc-1xcs6mc-0 bZVrjx side-nav-card sb-sidebar-card--expanded">
-          <a class="ScCoreLink-sc-16kq0mq-0 jKBAWW InjectLayout-sc-1i43xsx-0 fpJafq side-nav-card__link tw-link" href="/${
-            data.twitch
-          }">
-
-            <div class="Layout-sc-1xcs6mc-0 dutbes side-nav-card__avatar ${
-              isOnline ? '' : 'side-nav-card__avatar--offline'
-            }">
-              <figure class="ScAvatar-sc-144b42z-0 fUKwUf tw-avatar">
-                <img class="InjectLayout-sc-1i43xsx-0 bEwPpb tw-image tw-image-avatar" alt="${
-                  data.nickname
-                }" src="${data.avatar}">
-              </figure>
-            </div>
-
-            <div class="Layout-sc-1xcs6mc-0 jQTQnr">
-              <div class="Layout-sc-1xcs6mc-0 eCunGK">
-                <div class="Layout-sc-1xcs6mc-0 beAYWq side-nav-card__title">
-                  <p title="${
-                    data.nickname
-                  }" class="CoreText-sc-1txzju1-0 iQYdBM InjectLayout-sc-1i43xsx-0 gaLyxR">${
-    data.nickname
-  }</p>
-                </div>
-                ${
-                  isOnline && data.category
-                    ? `
-                <div class="Layout-sc-1xcs6mc-0 fFENuB side-nav-card__metadata">
-                  <p title="${data.category}" class="CoreText-sc-1txzju1-0 bApHMU">${data.category}</p>
-                </div>
-                `
-                    : ''
-                }
-              </div>
-              ${
-                isOnline
-                  ? `
-              <div class="Layout-sc-1xcs6mc-0 kzjhVk side-nav-card__live-status">
-              <div class="Layout-sc-1xcs6mc-0 beAYWq">
-                <div class="ScChannelStatusIndicator-sc-bjn067-0 dMXHmM tw-channel-status-indicator"></div>
-                <p class="CoreText-sc-1txzju1-0 InjectLayout-sc-1i43xsx-0 cixGyF">Live</p>
-                <div class="Layout-sc-1xcs6mc-0 kaXoQh">
-                  <span aria-hidden="true" class="CoreText-sc-1txzju1-0 grGUPN">${viewers}</span>
-                  <p class="CoreText-sc-1txzju1-0 InjectLayout-sc-1i43xsx-0 cixGyF">${viewers}</p>
-                </div>
-              </div>
-            </div>
-              `
-                  : '<div class="Layout-sc-1xcs6mc-0 kzjhVk side-nav-card__live-status" data-a-target="side-nav-live-status"><span class="CoreText-sc-1txzju1-0 grGUPN">Offline</span></div>'
-              }
-            </div>
-            
-          </a>
+        <div class="sb-sidebar-item__status">
+          ${
+            isOnline
+              ? `
+            <span class="sb-sidebar-item__status__dot"></span>
+            <span class="sb-sidebar-item__status__label">${viewers}</span>`
+              : `<span class="sb-sidebar-item__status__label">${translations['content.sidebar.offline'][language]}</span>`
+          }
         </div>
       </div>
-    </div>
+    </a>
   `;
 };
 
