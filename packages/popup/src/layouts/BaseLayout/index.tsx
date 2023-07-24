@@ -1,7 +1,8 @@
 import React, { JSX, ReactNode } from 'react';
 
-import { Header, PageError, PageLoader } from '../../components';
+import { Footer, Header, PageError, PageLoader } from '../../components';
 import { useSimpleRouter } from '../../pages';
+import { ContentWrapper } from './styles';
 
 const BaseLayout = ({ children }: { children: ReactNode }): JSX.Element => {
   const { pageLoading, pageError } = useSimpleRouter();
@@ -17,7 +18,8 @@ const BaseLayout = ({ children }: { children: ReactNode }): JSX.Element => {
   return (
     <>
       <Header />
-      {children}
+      <ContentWrapper>{children}</ContentWrapper>
+      <Footer />
     </>
   );
 };

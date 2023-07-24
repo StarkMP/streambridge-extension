@@ -147,6 +147,18 @@
     "en": "Incorrect format",
     "ru": "Некорректный формат"
   },
+  "popup.footer.donate": {
+    "en": "Donate",
+    "ru": "Поддержать"
+  },
+  "popup.footer.telegram": {
+    "en": "News",
+    "ru": "Telegram"
+  },
+  "popup.footer.share": {
+    "en": "Share",
+    "ru": "Поделиться"
+  },
   "iframe.kick.open-chat-btn": {
     "en": "Open",
     "ru": "Открыть"

@@ -1,5 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
+import { theme } from './theme';
+
 const GlobalStyles = createGlobalStyle`
   * {
     margin: 0;
@@ -8,17 +10,16 @@ const GlobalStyles = createGlobalStyle`
   }
 
   html {
-    background: #f0f0f0;
+    background: black;
   }
 
   body {
-    width: 350px;
-    height: 500px;
+    width: ${theme.body.width};
+    height: ${theme.body.height};
     font-family: sans-serif;
   }
 
   #app {
-    padding: 12px;
     padding-bottom: 0;
     background: #ffffff;
     width: 100%;

@@ -7,7 +7,7 @@ import { defaultPage } from '../../constants';
 import { Pages, useSimpleRouter } from '../../pages';
 import { MenuWrapper, Title, Wrapper } from './styles';
 
-const Header = (): JSX.Element => {
+export const Header = (): JSX.Element => {
   const { localize } = useLocalizer();
   const { page, setPage } = useSimpleRouter();
 
@@ -44,5 +44,3 @@ const Header = (): JSX.Element => {
     </Wrapper>
   );
 };
-
-export default Header;

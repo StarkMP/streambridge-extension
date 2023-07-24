@@ -5,7 +5,7 @@ import { useLocalizer } from 'reactjs-localizer';
 
 import { Result } from './styles';
 
-const PageError = (): JSX.Element => {
+export const PageError = (): JSX.Element => {
   const { localize } = useLocalizer();
 
   return (
@@ -25,5 +25,3 @@ const PageError = (): JSX.Element => {
     />
   );
 };
-
-export default PageError;

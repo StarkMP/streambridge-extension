@@ -1,3 +1,4 @@
-export { default as Header } from './Header';
-export { default as PageLoader } from './PageLoader';
-export { default as PageError } from './PageError';
+export { Header } from './Header';
+export { PageLoader } from './PageLoader';
+export { PageError } from './PageError';
+export { Footer } from './Footer';

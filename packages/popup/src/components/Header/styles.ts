@@ -5,6 +5,8 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
+  padding: 12px;
+  padding-bottom: 0;
 `;
 
 export const Title = styled.h1`
