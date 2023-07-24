@@ -1,6 +1,6 @@
 {
   "name": "@stream-bridge/extension",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
