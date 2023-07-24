@@ -7,12 +7,14 @@
     "typecheck": "cd ./packages/shared && tsc && cd ../content-script && tsc && cd ../popup && tsc",
     "build": "cd ./packages/content-script && npm run build && cd ../popup && npm run build",
     "dev": "cd ./packages/popup && npm run dev",
-    "postinstall": "cd ./packages/shared && npm i && cd ../content-script && npm i && cd ../popup && npm i"
+    "postinstall": "cd ./packages/shared && npm i && cd ../content-script && npm i && cd ../popup && npm i",
+    "test": "jest"
   },
   "author": "Maksim Serebryakov <starkmp.work@gmail.com>",
   "private": true,
   "devDependencies": {
     "@types/chrome": "^0.0.237",
+    "@types/jest": "^29.5.3",
     "@types/node": "^20.3.2",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
@@ -25,7 +27,9 @@
     "eslint-plugin-react": "^7.26.1",
     "eslint-plugin-react-hooks": "^4.2.0",
     "eslint-plugin-simple-import-sort": "^7.0.0",
+    "jest": "^29.6.1",
     "prettier": "^2.3.0",
+    "ts-jest": "^29.1.1",
     "typescript": "^4.7.4"
   },
   "baseUrl": "",
