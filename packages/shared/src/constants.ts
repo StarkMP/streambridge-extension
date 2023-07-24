@@ -8,6 +8,6 @@ export const sidebarUpdateInterval = 60000000;
 // export const apiUrl = 'http://localhost:3000';
 export const apiUrl = 'https://streambridge.site';
 export const telegramUrl = 'https://t.me/streambridge';
-export const donationAlertsUrl = 'https://www.donationalerts.com/r/5tark';
+export const donationAlertsUrl = 'https://www.donationalerts.com/r/streambridge';
 export const extensionUrl =
   'https://chrome.google.com/webstore/detail/stream-bridge/oidkgchhceggifadcafliepojifbgdji';
