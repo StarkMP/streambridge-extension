@@ -182,7 +182,7 @@ const AddChannelPage = (): JSX.Element => {
           message={
             <>
               {localize('popup.add-channel.info-description')}{' '}
-              <a>{localize('popup.add-channel.info-question')}</a>
+              {/* <a>{localize('popup.add-channel.info-question')}</a> */}
             </>
           }
           type='info'

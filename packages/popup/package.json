@@ -37,6 +37,8 @@
   "private": true,
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
+    "@sentry/react": "^7.60.1",
+    "@sentry/tracing": "^7.60.1",
     "antd": "^5.6.1",
     "axios": "^1.4.0",
     "react": "^18.2.0",
