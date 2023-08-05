@@ -3,7 +3,7 @@ import './styles/youtube.scss';
 
 import { getChannel } from '@shared/api/services/whitelist';
 import { hostname, sidebarUpdateInterval } from '@shared/constants';
-import { getLocalStorage, syncLocalStorage } from '@shared/storage';
+import { syncLocalStorage } from '@shared/storage';
 import { isExtensionFrame } from '@shared/utils/frame';
 
 import Content from './core/content';
@@ -11,9 +11,7 @@ import IFrame from './core/iframe';
 import Sidebar from './core/sidebar';
 
 const init = async (): Promise<void> => {
-  await syncLocalStorage();
-
-  const { language, localWhitelist } = await getLocalStorage();
+  const { language, localWhitelist } = await syncLocalStorage();
 
   if (window.location.hostname === hostname) {
     new Content({ language });
