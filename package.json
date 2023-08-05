@@ -1,11 +1,12 @@
 {
   "name": "@stream-bridge/extension",
-  "version": "1.6.2",
+  "version": "1.7.0",
   "scripts": {
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "typecheck": "cd ./packages/shared && tsc && cd ../content-script && tsc && cd ../popup && tsc",
     "build": "cd ./packages/content-script && npm run build && cd ../popup && npm run build",
+    "build:content-script": "mv ./dist/popup ./ && cd ./packages/content-script && npm run build && mv ../../popup ../../dist",
     "dev": "cd ./packages/popup && npm run dev",
     "postinstall": "cd ./packages/shared && npm i && cd ../content-script && npm i && cd ../popup && npm i",
     "test": "jest"

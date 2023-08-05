@@ -144,16 +144,13 @@ const AddChannelPage = (): JSX.Element => {
             placeholder={localize('popup.add-channel.fields-platform-placeholder')}
             onChange={(value: string): void => setSourceId(value)}
           >
-            {Object.values(PlatformId)
-              // TODO: temporary
-              .filter((item) => item !== PlatformId.YouTube)
-              .map((id) => {
-                return (
-                  <Option key={id} value={id}>
-                    {localize(`platform.${id}.name`)}
-                  </Option>
-                );
-              })}
+            {Object.values(PlatformId).map((id) => {
+              return (
+                <Option key={id} value={id}>
+                  {localize(`platform.${id}.name`)}
+                </Option>
+              );
+            })}
           </Select>
         </Form.Item>
         <Form.Item

@@ -14,4 +14,45 @@
   #related {
     display: none !important;
   }
+
+  @media (min-width: 1126px) {
+    ytd-live-chat-frame {
+      border-radius: 0 !important;
+      margin: 0 !important;
+      height: 100vh !important;
+      position: fixed !important;
+      right: 0 !important;
+      top: 0 !important;
+      width: var(--ytd-watch-flexy-sidebar-width) !important;
+      width: calc(var(--ytd-watch-flexy-sidebar-width) + var(--ytd-margin-6x)) !important;
+      border-bottom: none !important;
+      border-right: none !important;
+      border-top: none !important;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  tp-yt-app-header {
+    margin-top: 0 !important;
+    left: 0 !important;
+  }
+
+  tp-yt-app-drawer, ytd-mini-guide-renderer {
+    display: none !important;
+  }
+
+  ytd-page-manager {
+    margin-left: 0 !important;
+  }
+
+  #primary {
+    padding-top: 0 !important;
+  }
+
+  #player-wide-container {
+    z-index: 602 !important;
+  }
 }

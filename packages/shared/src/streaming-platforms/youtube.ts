@@ -12,16 +12,16 @@ const youtube: StreamingPlatform = {
       const pageData: string = response.data;
 
       let initData: { [key: string]: any } = {};
-      let context = null;
+      // let context = null;
 
       const ytInitData = pageData.split('var ytInitialData =');
 
       if (ytInitData && ytInitData.length > 1) {
         const data = ytInitData[1].split('</script>')[0].slice(0, -1);
 
-        if (pageData.split('INNERTUBE_CONTEXT').length > 0) {
-          context = JSON.parse(pageData.split('INNERTUBE_CONTEXT')[1].trim().slice(2, -2));
-        }
+        // if (pageData.split('INNERTUBE_CONTEXT').length > 0) {
+        //   context = JSON.parse(pageData.split('INNERTUBE_CONTEXT')[1].trim().slice(2, -2));
+        // }
 
         initData = JSON.parse(data);
       } else {
@@ -32,6 +32,10 @@ const youtube: StreamingPlatform = {
         initData.contents.twoColumnWatchNextResults !== undefined &&
         initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0]
           .videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.isLive;
+      const isScheduled =
+        initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.dateText.simpleText.includes(
+          'Scheduled'
+        );
 
       let category;
 
@@ -45,20 +49,21 @@ const youtube: StreamingPlatform = {
         category = undefined;
       }
 
-      return {
+      const result = {
         id: channel.id,
         data: {
           twitch: channel.twitch,
-          isOnline,
+          isOnline: isOnline && !isScheduled,
           category,
-          viewers: isOnline
-            ? Number(
-                initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.viewCount?.runs[0].text.replace(
-                  ',',
-                  ''
+          viewers:
+            isOnline && !isScheduled
+              ? Number(
+                  initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.viewCount?.runs[0].text.replace(
+                    ',',
+                    ''
+                  )
                 )
-              )
-            : 0,
+              : 0,
           title: '',
           nickname: isOnline
             ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1]
@@ -75,6 +80,8 @@ const youtube: StreamingPlatform = {
               ),
         },
       };
+
+      return result;
     } catch (e) {
       console.log('yt fetch error', e);
 
@@ -82,7 +89,10 @@ const youtube: StreamingPlatform = {
     }
   },
   render: () => {
-    (document.querySelector('html') as HTMLElement).classList.add('stream-bridge-page');
+    const html = document.querySelector('html') as HTMLElement;
+
+    html.classList.add('stream-bridge-page');
+    html.setAttribute('dark', '');
   },
 };
 
