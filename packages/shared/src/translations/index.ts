@@ -31,7 +31,7 @@ export const translations: Record<string, Record<Languages, string>> = {
 export const detectLanguage = (): Languages => {
   const browserLanguage = formatLanguage(window.navigator.language);
 
-  if (browserLanguage in Languages) {
+  if (Object.values(Languages).includes(browserLanguage as Languages)) {
     return browserLanguage as Languages;
   }
 
