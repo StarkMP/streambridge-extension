@@ -15,13 +15,21 @@ export const ListItemWrapper = styled.div`
 export const ListItemText = styled.div`
   display: flex;
   flex-direction: column;
+  max-width: 168px;
 `;
 
-export const ListItemTwitch = styled.div``;
+export const ListItemTwitch = styled.span`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
 
 export const ListItemSourceUrl = styled.a`
   font-size: 11px;
   color: #bfbfbf;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 export const ActionsWrapper = styled.div`
