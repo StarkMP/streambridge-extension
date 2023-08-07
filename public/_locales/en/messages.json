@@ -1,8 +1,8 @@
 {
   "project_name": {
-    "message": "Stream Bridge"
+    "message": "Stream Bridge - Watch all on Twitch"
   },
   "project_description": {
-    "message": "Watch your favorite streamers from other streaming services on Twitch!"
+    "message": "Watch streamers from other streaming services on Twitch!"
   }
 }
