@@ -2,13 +2,12 @@
   "name": "@stream-bridge/extension",
   "version": "1.8.3",
   "scripts": {
-    "lint": "eslint . --ext .ts,.tsx",
+    "lint": "bash scripts/lint.sh",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
-    "typecheck": "cd ./packages/shared && tsc && cd ../content-script && tsc && cd ../popup && tsc",
-    "build": "cd ./packages/content-script && npm run build && cd ../popup && npm run build",
-    "build:content-script": "mv ./dist/popup ./ && cd ./packages/content-script && npm run build && mv ../../popup ../../dist",
+    "build": "bash scripts/build.sh",
+    "build:content-script": "bash scripts/build-content-script.sh",
     "dev": "cd ./packages/popup && npm run dev",
-    "postinstall": "cd ./packages/shared && npm i && cd ../content-script && npm i && cd ../popup && npm i",
+    "postinstall": "bash scripts/install.sh",
     "test": "jest"
   },
   "author": "Maksim Serebryakov <starkmp.work@gmail.com>",

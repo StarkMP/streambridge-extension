@@ -65,6 +65,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
       getChannelsByKeyword(search, {
         offset: offsetRef.current,
         limit: whitelistLazyLoadLimit,
+        // TODO: fix
         priority: getFollowedIds(storage.followed, true),
       })
         .then((res) => {

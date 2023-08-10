@@ -7,7 +7,7 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, '../shared/src'),
     },
   },
-  publicDir: '../../public',
+  publicDir: '../../public-chrome',
   build: {
     emptyOutDir: true,
     outDir: '../../dist',
