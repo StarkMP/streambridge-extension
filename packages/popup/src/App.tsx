@@ -1,8 +1,10 @@
 import 'antd/dist/reset.css';
 
+import { trackEvent } from '@shared/analytics';
 import { defaultLanguage } from '@shared/constants';
 import { translations } from '@shared/translations';
-import React, { JSX } from 'react';
+import { AnalyticsEvent } from '@shared/types';
+import React, { JSX, useEffect } from 'react';
 import { LocalizerProvider } from 'reactjs-localizer';
 
 import { defaultPage } from './constants';
@@ -12,6 +14,12 @@ import { Outlet, SimpleRouterProvider } from './pages';
 import GlobalStyles from './styles';
 
 const App = (): JSX.Element => {
+  useEffect(() => {
+    setTimeout(() => {
+      trackEvent(AnalyticsEvent.OPEN_POPUP).catch(() => {});
+    }, 1000);
+  }, []);
+
   return (
     <SimpleRouterProvider defaultPage={defaultPage}>
       <LocalizerProvider

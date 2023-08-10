@@ -151,9 +151,9 @@
     "en": "Donate",
     "ru": "Поддержать"
   },
-  "popup.footer.telegram": {
-    "en": "News",
-    "ru": "Telegram"
+  "popup.footer.discord": {
+    "en": "Discord",
+    "ru": "Discord"
   },
   "popup.footer.share": {
     "en": "Share",

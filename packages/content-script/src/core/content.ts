@@ -1,6 +1,7 @@
+import { trackEvent } from '@shared/analytics';
 import { getChannelByTwitch } from '@shared/api/services/whitelist';
 import { getLocalStorage } from '@shared/storage';
-import { Channel, Languages } from '@shared/types';
+import { AnalyticsEvent, Channel, Languages } from '@shared/types';
 import { onElementLoaded } from '@shared/utils/dom';
 import { getChannelUrl } from '@shared/utils/platform';
 
@@ -148,6 +149,8 @@ export default class Content {
 
               resolve();
             });
+
+            trackEvent(AnalyticsEvent.WATCH_STREAM, { twitch: channel.twitch }).catch(() => {});
           }, 2000);
 
           this.channelStatusObserver = undefined;

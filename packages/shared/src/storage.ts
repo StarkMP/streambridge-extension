@@ -2,8 +2,10 @@ import { getChannelBySource, getChannelsByIds } from '@shared/api/services/white
 import { detectLanguage } from '@shared/translations';
 import { UserStorage } from '@shared/types';
 import { getFollowedIds } from '@shared/utils/followed';
+import { v4 as uuidv4 } from 'uuid';
 
 export const initialStorageValue: UserStorage = {
+  userId: uuidv4(),
   followed: [],
   language: detectLanguage(),
   localWhitelist: [],

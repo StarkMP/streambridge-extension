@@ -2,7 +2,7 @@
   "extends": "../../tsconfig.json",
   "include": ["src/**/*", "./src/**/*.json"],
   "compilerOptions": {
-    "typeRoots": ["src/types", "../../node_modules/@types"],
+    "typeRoots": ["src/types", "../../node_modules/@types", "./node_modules/@types"],
     "module": "esnext"
   },
   "references": [{ "path": "../shared" }]

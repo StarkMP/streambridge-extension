@@ -1,4 +1,4 @@
-import { donationAlertsUrl, extensionUrl, telegramUrl } from '@shared/constants';
+import { discordUrl, donationAlertsUrl, extensionUrl } from '@shared/constants';
 import React, { JSX } from 'react';
 import { useLocalizer } from 'reactjs-localizer';
 
@@ -12,8 +12,8 @@ export const Footer = (): JSX.Element => {
       <Link href={donationAlertsUrl} target='_blank'>
         {localize('popup.footer.donate')}
       </Link>
-      <Link href={telegramUrl} target='_blank'>
-        {localize('popup.footer.telegram')}
+      <Link href={discordUrl} target='_blank'>
+        {localize('popup.footer.discord')}
       </Link>
       <Link href={extensionUrl} target='_blank'>
         {localize('popup.footer.share')}

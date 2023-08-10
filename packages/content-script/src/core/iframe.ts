@@ -1,5 +1,5 @@
-import platforms from '@shared/streaming-platforms';
 import { Channel, Languages } from '@shared/types';
+import { getPlatformById } from '@shared/utils/platform';
 
 export default class IFrame {
   private readonly channel: Channel;
@@ -29,10 +29,9 @@ export default class IFrame {
   }
 
   private render(): void {
-    for (const platform of platforms) {
-      if (platform.id === this.channel.source.id) {
-        platform.render({ channel: this.channel, language: this.language });
-      }
-    }
+    getPlatformById(this.channel.source.id).render({
+      channel: this.channel,
+      language: this.language,
+    });
   }
 }

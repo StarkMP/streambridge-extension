@@ -1,5 +1,5 @@
 export type StreamingPlatform = {
-  id: string;
+  id: PlatformId;
   url: string;
   render: (data: { channel: Channel; language: Languages }) => void;
   getInfo: (channel: Channel) => Promise<ChannelInfo | null>;
@@ -34,6 +34,7 @@ export type FollowedChannel = {
 };
 
 export type UserStorage = {
+  userId: string;
   followed: FollowedChannel[];
   language: Languages;
   localWhitelist: Channel[];
@@ -57,3 +58,8 @@ export type PaginationParams = {
   offset?: number;
   priority?: string[];
 };
+
+export enum AnalyticsEvent {
+  OPEN_POPUP = 'OPEN_POPUP',
+  WATCH_STREAM = 'WATCH_STREAM',
+}

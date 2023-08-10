@@ -1,6 +1,7 @@
 import './styles/twitch/index.scss';
 import './styles/youtube.scss';
 
+import { initAnalytics } from '@shared/analytics';
 import { getChannel } from '@shared/api/services/whitelist';
 import { hostname, sidebarUpdateInterval } from '@shared/constants';
 import { syncLocalStorage } from '@shared/storage';
@@ -14,6 +15,8 @@ const init = async (): Promise<void> => {
   const { language, localWhitelist } = await syncLocalStorage();
 
   if (window.location.hostname === hostname) {
+    await initAnalytics();
+
     new Content({ language });
     new Sidebar({
       updateInterval: sidebarUpdateInterval,
