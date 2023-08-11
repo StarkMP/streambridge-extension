@@ -19,6 +19,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
   const offsetRef = useRef<number>(0);
   const searchRef = useRef<string>(search);
   const [switcherLoading, setSwitcherLoading] = useState<string | null>(null);
+  const followedChannels = useRef<string[]>(getFollowedIds(storage.followed, true));
 
   const onSearch = (value: string): void => {
     offsetRef.current = 0;
@@ -65,7 +66,7 @@ const ChannelsWhitelistPage = (): JSX.Element => {
       getChannelsByKeyword(search, {
         offset: offsetRef.current,
         limit: whitelistLazyLoadLimit,
-        priority: getFollowedIds(storage.followed, true),
+        priority: followedChannels.current,
       })
         .then((res) => {
           // if doesn't match (because we use async operations)
@@ -137,6 +138,8 @@ const ChannelsWhitelistPage = (): JSX.Element => {
     // antispam
     setTimeout(() => {
       if (searchRef.current === search) {
+        followedChannels.current = getFollowedIds(storage.followed, true);
+
         loadMoreChannels();
       }
     }, 300);
