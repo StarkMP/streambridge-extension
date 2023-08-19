@@ -1,3 +1,4 @@
+#!/bin/bash
 cd ./packages/shared
 npm install
 cd ../content-script

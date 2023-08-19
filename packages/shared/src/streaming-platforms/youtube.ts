@@ -12,16 +12,12 @@ const youtube: StreamingPlatform = {
       const pageData: string = response.data;
 
       let initData: { [key: string]: any } = {};
-      // let context = null;
 
+      // we should parse this because youtube api has limits (quota)
       const ytInitData = pageData.split('var ytInitialData =');
 
       if (ytInitData && ytInitData.length > 1) {
         const data = ytInitData[1].split('</script>')[0].slice(0, -1);
-
-        // if (pageData.split('INNERTUBE_CONTEXT').length > 0) {
-        //   context = JSON.parse(pageData.split('INNERTUBE_CONTEXT')[1].trim().slice(2, -2));
-        // }
 
         initData = JSON.parse(data);
       } else {
@@ -83,7 +79,7 @@ const youtube: StreamingPlatform = {
 
       return result;
     } catch (e) {
-      console.log('yt fetch error', e);
+      console.error('yt fetch error', e);
 
       return null;
     }

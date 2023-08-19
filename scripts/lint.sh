@@ -1,3 +1,4 @@
+#!/bin/bash
 eslint . --ext .ts,.tsx
 cd ./packages/shared
 tsc

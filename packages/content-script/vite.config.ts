@@ -7,10 +7,8 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, '../shared/src'),
     },
   },
-  publicDir: '../../public-chrome',
+  publicDir: '../../public',
   build: {
-    emptyOutDir: true,
-    outDir: '../../dist',
     rollupOptions: {
       input: {
         index: './src/index.ts',

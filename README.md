@@ -6,30 +6,36 @@ Watch your favorite streamers from other streaming services on Twitch
 
 - TypeScript
 - React
-- Styled-components
+- Styled-components (popup)
 - Scss (content-script)
 
 ## Structure
 
-Monorepo structure with separate popup, content-script and shared packages
+Monorepo structure with separate packages
 
 ## Startup
 
-### Requirements
+### 1. Requirements
 
-- [Node.js](https://nodejs.org)
+- [Node.js](https://nodejs.org) ^18.0.0
+- NPM ^9.5.1
+- Bash/Zsh terminal
 
-### Install dependencies
+### 2. Install dependencies
 
 ```sh
 npm install
 ```
 
-### Build extension
+### 3. Build extension
 
 ```sh
 npm run build
 ```
+
+Then you will see the build at the `dist` folder in the root directory of project
+
+## Development
 
 ### Popup development mode
 
