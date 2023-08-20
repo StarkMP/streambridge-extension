@@ -9,8 +9,8 @@ const SidebarItemTemplate = (info: ChannelInfo, language: Languages): string => 
 
   return `
     <a class="sb-sidebar-item ${!isOnline ? 'sb-sidebar-item--offline' : ''}" href="/${
-    data.twitch
-  }">
+      data.twitch
+    }">
       <img class="sb-sidebar-item__avatar" alt="${data.nickname}" src="${data.avatar}">
       <div class="sb-sidebar-item__user">
         <div class="sb-sidebar-item__info">

@@ -44,4 +44,5 @@ const init = async (): Promise<void> => {
   new IFrame({ channel: data, language });
 };
 
+// eslint-disable-next-line no-console
 init().catch((err) => console.error(err));
