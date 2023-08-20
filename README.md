@@ -33,7 +33,7 @@ npm install
 npm run build
 ```
 
-Then you will see the build at the `dist` folder in the root directory of project
+Then you will see the bundles for each browser (Chrome, Firefox) at the `dist` folder in the root directory of project
 
 ## Development
 
