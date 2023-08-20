@@ -5,7 +5,6 @@
     "lint": "bash scripts/lint.sh",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
     "build": "bash scripts/build.sh",
-    "build:content-script": "bash scripts/build-content-script.sh",
     "dev": "cd ./packages/popup && npm run dev",
     "postinstall": "bash scripts/install.sh",
     "test": "jest"

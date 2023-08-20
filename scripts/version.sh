@@ -1,5 +1,4 @@
 #!/bin/bash
-cd ./dist
-REGEX='"version"[[:space:]]*:[[:space:]]*"[^"]*"'
 VERSION=$(grep -oP '(?<="version": ")[^"]*' '../package.json')
-sed -i "s/%version%/$VERSION/g" manifest.json
+sed -i "s/%version%/$VERSION/g" manifest-chrome.json
+sed -i "s/%version%/$VERSION/g" manifest-firefox.json

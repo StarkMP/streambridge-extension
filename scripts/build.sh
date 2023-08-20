@@ -6,5 +6,31 @@ mv ./dist ../../
 cd ../popup
 npm run build
 mv ./dist ../../dist/popup
-cd ../../
-source ./scripts/version.sh
+cd ../../dist
+
+# Replace version
+source ../scripts/version.sh
+cd ../
+
+CHROME_FOLDER="streambridge-chrome"
+FIREFOX_FOLDER="streambridge-firefox"
+
+cp -R ./dist ./$FIREFOX_FOLDER
+
+# Separate Chrome extension
+echo 'Separating Chrome version...'
+mv ./dist ./$CHROME_FOLDER
+rm ./$CHROME_FOLDER/manifest-firefox.json
+mv ./$CHROME_FOLDER/manifest-chrome.json ./$CHROME_FOLDER/manifest.json
+
+# Separate Firefox extension
+echo 'Separating Firefox version...'
+rm ./$FIREFOX_FOLDER/manifest-chrome.json
+mv ./$FIREFOX_FOLDER/manifest-firefox.json ./$FIREFOX_FOLDER/manifest.json
+
+# Move bundles to dist folder
+mkdir dist
+mv ./$CHROME_FOLDER ./dist/$CHROME_FOLDER
+mv ./$FIREFOX_FOLDER ./dist/$FIREFOX_FOLDER
+
+echo 'Extension is successfully built!'
