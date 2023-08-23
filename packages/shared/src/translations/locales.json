@@ -1,6 +1,6 @@
 {
   "content.sidebar.empty-description": {
-    "en": "Use extension to add channels",
+    "en": "Use the extension to add channels",
     "ru": "Добавьте каналы в меню расширения"
   },
   "content.sidebar.offline": {
@@ -155,9 +155,9 @@
     "en": "Discord",
     "ru": "Discord"
   },
-  "popup.footer.share": {
-    "en": "Share",
-    "ru": "Поделиться"
+  "popup.footer.website": {
+    "en": "Website",
+    "ru": "Сайт"
   },
   "iframe.kick.open-chat-btn": {
     "en": "Open",

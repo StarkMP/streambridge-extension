@@ -1,6 +1,6 @@
 {
   "name": "@streambridge/extension",
-  "version": "1.8.5",
+  "version": "1.8.8",
   "scripts": {
     "lint": "bash scripts/lint.sh",
     "lint:fix": "eslint . --ext .ts,.tsx --fix",
