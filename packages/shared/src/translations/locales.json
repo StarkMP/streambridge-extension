@@ -1,7 +1,7 @@
 {
   "content.sidebar.empty-description": {
     "en": "Use the extension to add channels",
-    "ru": "Добавьте каналы в меню расширения"
+    "ru": "Добавьте каналы в расширении"
   },
   "content.sidebar.offline": {
     "en": "Offline",
@@ -84,7 +84,7 @@
     "ru": "Стриминговая платформа"
   },
   "popup.add-channel.fields-platform-placeholder": {
-    "en": "Choose platform",
+    "en": "Choose a platform",
     "ru": "Выберите платформу"
   },
   "popup.add-channel.fields-nickname": {

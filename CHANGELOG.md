@@ -1,3 +1,12 @@
+## 1.8.11
+
+- Increase following channel limit
+- Fix locales
+
+## 1.8.9
+
+- Remove `www` from api url
+
 ## 1.8.8
 
 - Change share link url in the popup
