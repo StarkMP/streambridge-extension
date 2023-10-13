@@ -33,6 +33,8 @@ export default class Sidebar {
   }
 
   private async init(): Promise<void> {
+    this.render(true);
+
     await this.update();
 
     setInterval(() => {
@@ -155,7 +157,7 @@ export default class Sidebar {
     return info;
   }
 
-  private render(): void {
+  private render(isLoading?: boolean): void {
     const sidebarElement = document.querySelector(this.selectors.sidebar);
 
     if (sidebarElement) {
@@ -163,7 +165,10 @@ export default class Sidebar {
     }
 
     onElementLoaded(this.selectors.sidebarElement, (el) => {
-      const template = SidebarTemplate(this.followedChannelsInfo, this.language);
+      const template = SidebarTemplate(
+        { channels: this.followedChannelsInfo, isLoading },
+        this.language
+      );
 
       el.insertAdjacentHTML('afterend', template);
     });

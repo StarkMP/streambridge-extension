@@ -1,7 +1,9 @@
-## 1.8.11
+## 1.8.13
 
 - Increase following channel limit
 - Fix locales
+- Remove YouTube channel scheduled stream status
+- Add loader to sidebar
 
 ## 1.8.9
 

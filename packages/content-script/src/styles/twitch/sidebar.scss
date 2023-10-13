@@ -17,6 +17,14 @@
     width: 100%;
   }
 
+  &-loader {
+    color: #ffffff;
+    width: 20px;
+    height: 20px;
+    margin: 1rem;
+    margin-top: 0;
+  }
+
   &-item {
     display: flex;
     flex-direction: row;
