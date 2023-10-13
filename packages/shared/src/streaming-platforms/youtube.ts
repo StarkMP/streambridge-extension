@@ -28,10 +28,6 @@ const youtube: StreamingPlatform = {
         initData.contents.twoColumnWatchNextResults !== undefined &&
         initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0]
           .videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.isLive;
-      const isScheduled =
-        initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.dateText.simpleText.includes(
-          'Scheduled'
-        );
 
       let category;
 
@@ -49,17 +45,16 @@ const youtube: StreamingPlatform = {
         id: channel.id,
         data: {
           twitch: channel.twitch,
-          isOnline: isOnline && !isScheduled,
+          isOnline: isOnline,
           category,
-          viewers:
-            isOnline && !isScheduled
-              ? Number(
-                  initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.viewCount?.runs[0].text.replace(
-                    ',',
-                    ''
-                  )
+          viewers: isOnline
+            ? Number(
+                initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[0].videoPrimaryInfoRenderer?.viewCount?.videoViewCountRenderer?.viewCount?.runs[0].text.replace(
+                  ',',
+                  ''
                 )
-              : 0,
+              )
+            : 0,
           title: '',
           nickname: isOnline
             ? initData?.contents?.twoColumnWatchNextResults?.results?.results?.contents[1]
