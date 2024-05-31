@@ -160,7 +160,7 @@ const AddChannelPage = (): JSX.Element => {
             { required: true, message: localize('popup.validation-errors.required') },
             { min: 2, message: localize('popup.validation-errors.min', { length: 2 }) },
             { max: 32, message: localize('popup.validation-errors.max', { length: 32 }) },
-            { pattern: /^[A-Za-z0-9_]*$/g, message: localize('popup.validation-errors.format') },
+            { pattern: /([A-Za-z0-9\-_]+)/g, message: localize('popup.validation-errors.format') },
           ]}
           validateStatus={validatonError ? 'error' : undefined}
           help={validatonError || undefined}

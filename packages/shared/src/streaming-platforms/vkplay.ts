@@ -4,9 +4,9 @@ import axios from 'axios';
 
 const vkPlay: StreamingPlatform = {
   id: PlatformId.VKPlayLive,
-  url: 'https://vkplay.live/%id%',
+  url: 'https://live.vkplay.ru/%id%',
   getInfo: async (channel) => {
-    const apiUrl = `https://api.vkplay.live/v1/blog/${channel.source.channelId}/public_video_stream`;
+    const apiUrl = `https://api.live.vkplay.ru/v1/blog/${channel.source.channelId}/public_video_stream`;
 
     try {
       const response = await axios.get(apiUrl);

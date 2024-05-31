@@ -4,6 +4,8 @@ import { UserStorage } from '@shared/types';
 import { getFollowedIds } from '@shared/utils/followed';
 import { v4 as uuidv4 } from 'uuid';
 
+import streamingPlatforms from './streaming-platforms';
+
 export const initialStorageValue: UserStorage = {
   userId: uuidv4(),
   followed: [],
@@ -78,9 +80,21 @@ export const syncLocalStorage = async (): Promise<UserStorage> => {
   if (storage.followed.length > 0) {
     const { data } = await getChannelsByIds(getFollowedIds(storage.followed, true));
 
-    const actualisedFollowed = storage.followed.filter((item) =>
-      storage.localWhitelist.concat(data).find((channel) => channel.id === item.id)
-    );
+    const actualisedFollowed = storage.followed.filter((item) => {
+      const existingChannel = storage.localWhitelist
+        .concat(data)
+        .find((channel) => channel.id === item.id);
+
+      if (!existingChannel) {
+        return false;
+      }
+
+      const hasSupportedPlatform = streamingPlatforms.find(
+        (platform) => platform.id === existingChannel.source.id
+      );
+
+      return hasSupportedPlatform;
+    });
 
     storage.followed = actualisedFollowed;
   }

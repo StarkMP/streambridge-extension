@@ -5,11 +5,12 @@
     "action": {
       "type": "modifyHeaders",
       "responseHeaders": [
-        { "header": "x-frame-options", "operation": "remove" },
-        { "header": "content-security-policy", "operation": "remove" }
+        { "header": "X-Frame-Options", "operation": "remove" },
+        { "header": "Frame-Options", "operation": "remove" },
+        { "header": "Content-Security-Policy", "operation": "remove" }
       ]
     },
-    "condition": { "urlFilter": "vkplay.live", "resourceTypes": ["main_frame", "sub_frame"] }
+    "condition": { "urlFilter": "live.vkplay.ru", "resourceTypes": ["main_frame", "sub_frame"] }
   },
   {
     "id": 2,
@@ -17,8 +18,9 @@
     "action": {
       "type": "modifyHeaders",
       "responseHeaders": [
-        { "header": "x-frame-options", "operation": "remove" },
-        { "header": "content-security-policy", "operation": "remove" }
+        { "header": "X-Frame-Options", "operation": "remove" },
+        { "header": "Frame-Options", "operation": "remove" },
+        { "header": "Content-Security-Policy", "operation": "remove" }
       ]
     },
     "condition": { "urlFilter": "wasd.tv", "resourceTypes": ["main_frame", "sub_frame"] }
@@ -29,8 +31,9 @@
     "action": {
       "type": "modifyHeaders",
       "responseHeaders": [
-        { "header": "x-frame-options", "operation": "remove" },
-        { "header": "content-security-policy", "operation": "remove" }
+        { "header": "X-Frame-Options", "operation": "remove" },
+        { "header": "Frame-Options", "operation": "remove" },
+        { "header": "Content-Security-Policy", "operation": "remove" }
       ]
     },
     "condition": { "urlFilter": "kick.com", "resourceTypes": ["main_frame", "sub_frame"] }
@@ -41,8 +44,9 @@
     "action": {
       "type": "modifyHeaders",
       "responseHeaders": [
-        { "header": "x-frame-options", "operation": "remove" },
-        { "header": "content-security-policy", "operation": "remove" }
+        { "header": "X-Frame-Options", "operation": "remove" },
+        { "header": "Frame-Options", "operation": "remove" },
+        { "header": "Content-Security-Policy", "operation": "remove" }
       ]
     },
     "condition": { "urlFilter": "trovo.live", "resourceTypes": ["main_frame", "sub_frame"] }
@@ -56,7 +60,7 @@
         { "header": "Access-Control-Allow-Origin", "operation": "set", "value": "*" }
       ]
     },
-    "condition": { "urlFilter": "api.vkplay.live" }
+    "condition": { "urlFilter": "api.live.vkplay.ru" }
   },
   {
     "id": 6,
@@ -97,8 +101,9 @@
     "action": {
       "type": "modifyHeaders",
       "responseHeaders": [
-        { "header": "x-frame-options", "operation": "remove" },
-        { "header": "content-security-policy", "operation": "remove" }
+        { "header": "X-Frame-Options", "operation": "remove" },
+        { "header": "Frame-Options", "operation": "remove" },
+        { "header": "Content-Security-Policy", "operation": "remove" }
       ]
     },
     "condition": { "urlFilter": "youtube.com", "resourceTypes": ["main_frame", "sub_frame"] }

@@ -27,9 +27,9 @@
     "https://www.twitch.tv/",
     "https://kick.com/",
     "https://wasd.tv/",
-    "https://vkplay.live/",
+    "https://live.vkplay.ru/",
     "https://trovo.live/",
-    "https://api.vkplay.live/",
+    "https://api.live.vkplay.ru/",
     "https://api-web.trovo.live/",
     "https://www.youtube.com/"
   ],
@@ -37,7 +37,7 @@
     {
       "matches": [
         "https://www.twitch.tv/*",
-        "https://vkplay.live/*",
+        "https://live.vkplay.ru/*",
         "https://kick.com/*",
         "https://trovo.live/*",
         "https://wasd.tv/*",

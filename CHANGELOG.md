@@ -1,3 +1,13 @@
+## 1.8.20
+
+- Fix channel id field validator in Add Channel page
+- Change VKPlay Live domain name
+- Fix modified headers name case
+- Fix Kick request data error
+- Remove WASD from extension
+- Fix YouTube dark theme styles
+- Add turbo
+
 ## 1.8.13
 
 - Increase following channel limit

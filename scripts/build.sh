@@ -2,10 +2,10 @@
 rm -r ./dist
 cd ./packages/content-script
 npm run build
-mv ./dist ../../
+cp -R ./dist ../../
 cd ../popup
 npm run build
-mv ./dist ../../dist/popup
+cp -R ./dist ../../dist/popup
 cd ../../dist
 
 # Replace version
